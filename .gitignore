@@ -141,3 +141,7 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Payload local upload fallback (only used when no S3 storage is configured)
+/media
+/documents
