@@ -1,0 +1,15 @@
+- Mobile responsive
+- Mobile supported
+- Multi browser supported
+- No overflowing text
+- No ellipsis text
+- Using WebGPU/WebGPL and R3F
+- Using postprocessing
+- Keep performance and FPS high
+- Include futuristic sound effects
+- Ask questions if unclear
+- Color palette: #040404, #EB8C24, #F3EEE4, #747474
+- Theme: Futuristic, editorial, industrial
+- Use animejs
+- Include PayloadCMS + Supabase + Vercel
+- TailwindCSS for styling
