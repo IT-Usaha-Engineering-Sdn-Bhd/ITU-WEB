@@ -10,10 +10,10 @@ export default async function HomePage() {
     <main className="relative flex min-h-screen items-center justify-center">
       <Scene />
       <Reveal>
-        <h1 className="text-center text-4xl font-bold text-[var(--color-bone)]">
+        <h1 className="text-center text-4xl font-bold text-bone">
           Your Trusted Partner in Data Centre
         </h1>
-        <p className="mt-2 text-center text-[var(--color-muted)]">
+        <p className="mt-2 text-center text-muted">
           {media.totalDocs} media item{media.totalDocs === 1 ? '' : 's'} in Payload
         </p>
       </Reveal>

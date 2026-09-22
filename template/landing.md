@@ -1,12 +1,12 @@
 Fullscreen loading page with a 'Learn More' button
-- A 3D-wireframe data-center building architecture with hover motion.
+- A 3D-model server rack line in dark factory with top down point light
 
 After clicking 'Learn More'
 - A 3D-logo (C:\Users\xianz\work\ITU-WEB\company_logo_no_text.jpeg) appears
 - Punchline: "Your Trusted Partner in Data Centre"
 
 Scroll once to next section (scroll-snapping)
-- Left side context, right side 3D-model server rack line.
+- Left side context, right side 3D-half-wireframe-half-model data-center building architecture with hover motion.
 - Left side header: "Who We Are"
 - Left side body: "We are an integrated engineering company specializing in Data Centre and other Mission Critical facility. Since 1997, we have built a strong track record in mechanical and electrical engineering, turnkey contracting, project management, consultancy, commissioning management, design review, and checker services.
 

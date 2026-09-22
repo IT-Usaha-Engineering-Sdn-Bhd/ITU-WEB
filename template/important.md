@@ -18,3 +18,4 @@
 - Top navigation should appear in all pages except loading page and punchline page.
 - Footer should appear in all pages
 - 3D models use .glb
+- Font: Manrope & WorkSans

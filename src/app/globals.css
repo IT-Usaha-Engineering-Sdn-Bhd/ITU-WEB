@@ -6,9 +6,19 @@
   --color-accent: #eb8c24;
   --color-bone: #f3eee4;
   --color-muted: #747474;
+
+  /* Fonts from template/important.md: Manrope (display), Work Sans (body) */
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
   color: var(--color-bone);
   background: var(--color-base);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
