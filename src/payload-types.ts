@@ -87,8 +87,14 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    landing: Landing;
+    settings: Setting;
+  };
+  globalsSelect: {
+    landing: LandingSelect<false> | LandingSelect<true>;
+    settings: SettingsSelect<false> | SettingsSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -376,6 +382,248 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "landing".
+ */
+export interface Landing {
+  id: number;
+  hero: {
+    punchline: string;
+    learnMoreLabel: string;
+  };
+  whoWeAre: {
+    header: string;
+    body: string;
+    ctaLabel: string;
+    ctaHref: string;
+  };
+  facts: {
+    header: string;
+    body: string;
+    stats?:
+      | {
+          value: number;
+          suffix?: string | null;
+          label: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  services: {
+    header: string;
+    body: string;
+    items?:
+      | {
+          title: string;
+          tagline?: string | null;
+          body: string;
+          image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  whyUs: {
+    header: string;
+    cards?:
+      | {
+          icon?: (number | null) | Media;
+          title: string;
+          body: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  certs: {
+    header: string;
+    items?:
+      | {
+          name: string;
+          description?: string | null;
+          certificate?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  clients: {
+    header: string;
+    body: string;
+    logos?:
+      | {
+          logo: number | Media;
+          name?: string | null;
+          url?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  projects: {
+    header: string;
+    body: string;
+    ctaLabel: string;
+    ctaHref: string;
+    backgroundImage?: (number | null) | Media;
+  };
+  ctaBand: {
+    header: string;
+    ctaLabel: string;
+    ctaHref: string;
+  };
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: number;
+  address: string;
+  email: string;
+  phone: string;
+  fax?: string | null;
+  linkedin?: string | null;
+  instagram?: string | null;
+  facebook?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "landing_select".
+ */
+export interface LandingSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        punchline?: T;
+        learnMoreLabel?: T;
+      };
+  whoWeAre?:
+    | T
+    | {
+        header?: T;
+        body?: T;
+        ctaLabel?: T;
+        ctaHref?: T;
+      };
+  facts?:
+    | T
+    | {
+        header?: T;
+        body?: T;
+        stats?:
+          | T
+          | {
+              value?: T;
+              suffix?: T;
+              label?: T;
+              id?: T;
+            };
+      };
+  services?:
+    | T
+    | {
+        header?: T;
+        body?: T;
+        items?:
+          | T
+          | {
+              title?: T;
+              tagline?: T;
+              body?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  whyUs?:
+    | T
+    | {
+        header?: T;
+        cards?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              body?: T;
+              id?: T;
+            };
+      };
+  certs?:
+    | T
+    | {
+        header?: T;
+        items?:
+          | T
+          | {
+              name?: T;
+              description?: T;
+              certificate?: T;
+              id?: T;
+            };
+      };
+  clients?:
+    | T
+    | {
+        header?: T;
+        body?: T;
+        logos?:
+          | T
+          | {
+              logo?: T;
+              name?: T;
+              url?: T;
+              id?: T;
+            };
+      };
+  projects?:
+    | T
+    | {
+        header?: T;
+        body?: T;
+        ctaLabel?: T;
+        ctaHref?: T;
+        backgroundImage?: T;
+      };
+  ctaBand?:
+    | T
+    | {
+        header?: T;
+        ctaLabel?: T;
+        ctaHref?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  address?: T;
+  email?: T;
+  phone?: T;
+  fax?: T;
+  linkedin?: T;
+  instagram?: T;
+  facebook?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

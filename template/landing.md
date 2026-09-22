@@ -1,4 +1,4 @@
-Fullscreen loading page with a 'Learn More' button
+Fullscreen loading page with a 'Continue' button
 - A 3D-model server rack line in dark factory with top down point light
 
 After clicking 'Learn More'

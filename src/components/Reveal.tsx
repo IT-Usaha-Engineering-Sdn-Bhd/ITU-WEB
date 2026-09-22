@@ -1,25 +1,22 @@
 'use client'
-
 import { useEffect, useRef } from 'react'
 import { animate } from 'animejs'
+import { useReducedMotion } from '@/lib/use-reduced-motion'
 
-// Proof-of-wiring for anime.js — fades and lifts children in on mount.
-export function Reveal({ children }: { children: React.ReactNode }) {
+export function Reveal({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null)
-
+  const reduced = useReducedMotion()
   useEffect(() => {
-    if (!ref.current) return
-    animate(ref.current, {
-      opacity: [0, 1],
-      translateY: [16, 0],
-      duration: 800,
-      easing: 'easeOutQuad',
-    })
-  }, [])
-
-  return (
-    <div ref={ref} className="relative z-10 px-4">
-      {children}
-    </div>
-  )
+    const el = ref.current
+    if (!el || reduced) return
+    let animation: ReturnType<typeof animate> | undefined
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      animation = animate(el, { opacity: [0, 1], translateY: [24, 0], duration: 750, ease: 'outCubic' })
+      observer.disconnect()
+    }, { threshold: 0.12 })
+    observer.observe(el)
+    return () => { observer.disconnect(); animation?.revert() }
+  }, [reduced])
+  return <div ref={ref} className={className}>{children}</div>
 }

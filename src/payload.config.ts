@@ -8,6 +8,8 @@ import sharp from 'sharp'
 
 import { Users } from '@/collections/Users'
 import { Media } from '@/collections/Media'
+import { Landing } from '@/globals/Landing'
+import { Settings } from '@/globals/Settings'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -38,6 +40,7 @@ export default buildConfig({
   },
   editor: lexicalEditor(),
   collections: [Users, Media],
+  globals: [Landing, Settings],
   secret: process.env.PAYLOAD_SECRET ?? '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
   db: postgresAdapter({
