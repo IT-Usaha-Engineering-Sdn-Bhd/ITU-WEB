@@ -13,3 +13,8 @@
 - Use animejs
 - Include PayloadCMS + Supabase + Vercel
 - TailwindCSS for styling
+- Include SEO
+- Use icon from phosphor
+- Top navigation should appear in all pages except loading page and punchline page.
+- Footer should appear in all pages
+- 3D models use .glb

@@ -75,4 +75,9 @@ Scroll once to next section (scroll-snapping)
 Scroll once to next section (scroll-snapping)
 - Center header with background image: Our Projects
 - Center body: Explore our portfolio of mission-critical engineering projects across Malaysia. From high-performance Data Centres to complex M&E systems, each project reflects our commitment to quality, safety, and precision.
-- CTA
+- CTA button with chevron right icons:
+  1. View Projects 
+
+Footer
+- Left-side header: Looking for reliable Data Centre and M&E Solutions? We’re ready to help
+- Right-side CTA with chat-bubble icon: Contact Us 
