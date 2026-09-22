@@ -1,0 +1,2 @@
+- All pages will have a subtle, semi-transparent, power/lightning circuit animation.
+- Minimal resource usage
