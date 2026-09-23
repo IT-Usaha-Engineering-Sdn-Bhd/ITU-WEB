@@ -145,3 +145,4 @@ vite.config.ts.timestamp-*
 # Payload local upload fallback (only used when no GCS bucket is configured)
 /media
 /documents
+/private

@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { CaretDown, ChatCircleDots, List, X } from '@phosphor-icons/react'
 import { useStage } from '@/three/stage'
 import { SoundToggle } from './SoundToggle'
-import { services, projects } from '@/lib/navigation'
+import { services } from '@/lib/navigation'
 
 function Dropdown({ label, items }: { label: string; items: { label: string; href: string }[] }) {
   const [open, setOpen] = useState(false)
@@ -58,13 +58,13 @@ export function TopNav() {
   }}>
     <nav className="nav-shell" aria-label="Main navigation">
       <Link href="/" className="brand" aria-label="IT Usaha Engineering home"><span className="brand-mark"><Image src="/assets/logo.png" alt="" width={30} height={41} priority /></span><span className="brand-name">IT USAHA<span>ENGINEERING</span></span></Link>
-      <div className="desktop-navigation"><Link href="/about-us">About Us</Link><Dropdown label="Our Services" items={services} /><Dropdown label="Projects" items={projects} /><Link href="/events">Events</Link><Link href="/career">Career</Link></div>
+      <div className="desktop-navigation"><Link href="/about-us">About Us</Link><Dropdown label="Our Services" items={services} /><Link href="/projects">Projects</Link><Link href="/events">Events</Link><Link href="/career">Career</Link></div>
       <div className="nav-actions"><SoundToggle /><Link href="/contact-us" className="button button-accent nav-contact">Contact Us<ChatCircleDots size={18} /></Link><button ref={toggle} type="button" className="icon-button menu-toggle" onClick={() => setMobileOpen(!mobileOpen)} aria-expanded={mobileOpen} aria-controls="mobile-navigation" aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}>{mobileOpen ? <X size={23} /> : <List size={23} />}</button></div>
     </nav>
     {mobileOpen && <nav id="mobile-navigation" className="mobile-navigation" aria-label="Mobile navigation" data-native-scroll>
       <Link href="/about-us" onClick={() => setMobileOpen(false)}>About Us</Link>
       <details><summary>Our Services<CaretDown size={18} /></summary><div>{services.map((item) => <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}>{item.label}</Link>)}</div></details>
-      <details><summary>Projects<CaretDown size={18} /></summary><div>{projects.map((item) => <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}>{item.label}</Link>)}</div></details>
+      <Link href="/projects" onClick={() => setMobileOpen(false)}>Projects</Link>
       <Link href="/events" onClick={() => setMobileOpen(false)}>Events</Link><Link href="/career" onClick={() => setMobileOpen(false)}>Career</Link><Link href="/contact-us" onClick={() => setMobileOpen(false)} className="button button-accent">Contact Us<ChatCircleDots size={20} /></Link>
     </nav>}
   </header>

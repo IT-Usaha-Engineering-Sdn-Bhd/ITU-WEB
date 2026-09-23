@@ -217,5 +217,31 @@
       "title": "Terms & Conditions",
       "description": "Terms & Conditions for the IT Usaha Engineering website."
     }
+  },
+  "eventsPage": {
+    "heading": "What's Happening at IT Usaha",
+    "highlight": "Usaha",
+    "seo": {
+      "title": "Events",
+      "description": "See what's happening at IT Usaha Engineering."
+    }
+  },
+  "projectsPage": {
+    "heading": "Data Centres and MEP Projects",
+    "highlight": "Projects",
+    "seo": {
+      "title": "Projects",
+      "description": "Data centres and MEP projects delivered by IT Usaha Engineering."
+    }
+  },
+  "careerPage": {
+    "heading": "Begin Your Career at IT Usaha Engineering",
+    "highlight": "Engineering",
+    "applyHeading": "Apply Now",
+    "applyBody": "We’re always looking for passionate and skilled individuals to join our growing team. Submit your application below and take the first step toward building a meaningful career in M&E engineering and critical infrastructure solutions.",
+    "seo": {
+      "title": "Career",
+      "description": "Explore open positions at IT Usaha Engineering."
+    }
   }
 }

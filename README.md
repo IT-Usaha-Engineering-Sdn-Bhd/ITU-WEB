@@ -45,6 +45,28 @@ Contact form submissions are saved in the `enquiries` collection for authenticat
 to review. No email adapter is required. For deployment, run the page seed as an explicit
 one-time job after the migration and before publishing links to the new pages.
 
+## Events, Career and Projects
+
+`/events`, `/career` and `/projects` (plus their `/[slug]` detail pages) use Payload
+collections (`events`, `projects`, `vacancies`, `job-applications`, `resumes`) and three
+page globals (`events-page`, `projects-page`, `career-page`). `bun run seed:pages` also
+seeds the career page's 7 vacancies (from `template/career.md`) and one real project,
+"TM Nxera, Johor" (Ongoing) — both skipped on rerun once they exist.
+
+Career applications post to `POST /api/career-applications` (multipart form data, PDF résumé
+up to 5MB). Applications and résumés are private: only authenticated staff can read or
+download them, matching the `enquiries` pattern above.
+
+**Private résumé bucket.** Résumés need their own GCS bucket, separate from public media:
+
+- `GCS_RESUME_BUCKET` is required whenever `GCS_BUCKET` is set (the config throws otherwise).
+- Create the bucket with uniform bucket-level access and public access prevention **on** —
+  never grant `allUsers`/`allAuthenticatedUsers`. Downloads are only ever served through
+  Payload's own access-controlled `/api/resumes/file/*` route.
+- Grant the Cloud Run service account (the same one used for the media bucket) `roles/storage.objectAdmin`
+  on this bucket, and set `GCS_RESUME_BUCKET` on both the Cloud Run service and the
+  `itu-web-migrate` job alongside `GCS_BUCKET`.
+
 ## Build brief
 
 The next build's requirements live in `template/important.md` and `template/landing.md`.

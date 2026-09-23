@@ -1,9 +1,5 @@
-import type { Field, GlobalConfig } from 'payload'
-
-const seo: Field = { name: 'seo', type: 'group', fields: [
-  { name: 'title', type: 'text' }, { name: 'description', type: 'textarea' },
-  { name: 'ogImage', type: 'upload', relationTo: 'media' },
-] }
+import type { GlobalConfig } from 'payload'
+import { seo } from '@/collections/fields'
 
 const media = (name: string, label?: string) => ({ name, type: 'upload', relationTo: 'media', label }) as const
 const text = (name: string, required = true) => ({ name, type: 'text', required }) as const
@@ -33,4 +29,19 @@ export const PrivacyPolicy: GlobalConfig = {
 
 export const TermsAndConditions: GlobalConfig = {
   slug: 'terms-and-conditions', access: { read: () => true }, admin: { group: 'Pages' }, fields: policyFields,
+}
+
+export const EventsPage: GlobalConfig = {
+  slug: 'events-page', access: { read: () => true }, admin: { group: 'Pages' },
+  fields: [text('heading'), text('highlight'), media('heroImage'), seo],
+}
+
+export const ProjectsPage: GlobalConfig = {
+  slug: 'projects-page', access: { read: () => true }, admin: { group: 'Pages' },
+  fields: [text('heading'), text('highlight'), media('heroImage'), seo],
+}
+
+export const CareerPage: GlobalConfig = {
+  slug: 'career-page', access: { read: () => true }, admin: { group: 'Pages' },
+  fields: [text('heading'), text('highlight'), media('heroImage'), text('applyHeading'), area('applyBody'), seo],
 }

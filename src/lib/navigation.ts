@@ -5,10 +5,6 @@ export const services = [
   { label: 'High Tension & Low Voltage Electrical Supply, Fire Protection Services, ACMV, BMS & Security System', href: '/services/high-tension' },
   { label: 'DFMA (Design & Fabrication of Modular Assemblies)', href: '/services/dfma' },
 ]
-export const projects = [
-  { label: 'Completed Projects', href: '/projects?status=completed' },
-  { label: 'Ongoing Projects', href: '/projects?status=ongoing' },
-]
 export const navigation = [
   { label: 'About Us', href: '/about-us' },
   { label: 'Projects', href: '/projects' },

@@ -4,6 +4,7 @@ import * as migration_20260922_170500_whyus_icon_upload from './20260922_170500_
 import * as migration_20260922_171500_certs_certificate_rename from './20260922_171500_certs_certificate_rename';
 import * as migration_20260922_180000_continue_label from './20260922_180000_continue_label';
 import * as migration_20260923_040329_pages_enquiries from './20260923_040329_pages_enquiries';
+import * as migration_20260923_051200_events_career_projects from './20260923_051200_events_career_projects';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20260923_040329_pages_enquiries.up,
     down: migration_20260923_040329_pages_enquiries.down,
-    name: '20260923_040329_pages_enquiries'
+    name: '20260923_040329_pages_enquiries',
+  },
+  {
+    up: migration_20260923_051200_events_career_projects.up,
+    down: migration_20260923_051200_events_career_projects.down,
+    name: '20260923_051200_events_career_projects'
   },
 ];

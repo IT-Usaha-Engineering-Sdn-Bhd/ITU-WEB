@@ -70,6 +70,11 @@ export interface Config {
     users: User;
     media: Media;
     enquiries: Enquiry;
+    events: Event;
+    projects: Project;
+    vacancies: Vacancy;
+    'job-applications': JobApplication;
+    resumes: Resume;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +85,11 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     enquiries: EnquiriesSelect<false> | EnquiriesSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    vacancies: VacanciesSelect<false> | VacanciesSelect<true>;
+    'job-applications': JobApplicationsSelect<false> | JobApplicationsSelect<true>;
+    resumes: ResumesSelect<false> | ResumesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -96,6 +106,9 @@ export interface Config {
     'contact-us': ContactUs;
     'privacy-policy': PrivacyPolicy;
     'terms-and-conditions': TermsAndCondition;
+    'events-page': EventsPage;
+    'projects-page': ProjectsPage;
+    'career-page': CareerPage;
   };
   globalsSelect: {
     landing: LandingSelect<false> | LandingSelect<true>;
@@ -104,6 +117,9 @@ export interface Config {
     'contact-us': ContactUsSelect<false> | ContactUsSelect<true>;
     'privacy-policy': PrivacyPolicySelect<false> | PrivacyPolicySelect<true>;
     'terms-and-conditions': TermsAndConditionsSelect<false> | TermsAndConditionsSelect<true>;
+    'events-page': EventsPageSelect<false> | EventsPageSelect<true>;
+    'projects-page': ProjectsPageSelect<false> | ProjectsPageSelect<true>;
+    'career-page': CareerPageSelect<false> | CareerPageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -222,6 +238,168 @@ export interface Enquiry {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  /**
+   * Auto-filled from the title when left blank.
+   */
+  slug: string;
+  category:
+    'company-award-ceremony' | 'annual-dinner' | 'team-building' | 'recreational' | 'company-trip' | 'csr-activities';
+  eventDate: string;
+  cover?: (number | null) | Media;
+  gallery?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Any standard YouTube URL (watch, youtu.be, shorts).
+   */
+  youtubeUrl?: string | null;
+  published?: boolean | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: number;
+  title: string;
+  /**
+   * Auto-filled from the title when left blank.
+   */
+  slug: string;
+  status: 'completed' | 'ongoing';
+  /**
+   * Lower numbers show first.
+   */
+  order?: number | null;
+  cover?: (number | null) | Media;
+  client?: string | null;
+  /**
+   * Shown as "Data Center Consultant" (one) or "Data Center Consultants" (multiple).
+   */
+  consultants?:
+    | {
+        name: string;
+        id?: string | null;
+      }[]
+    | null;
+  scope?: string | null;
+  commencementDate?: string | null;
+  completionDate?: string | null;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  published?: boolean | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vacancies".
+ */
+export interface Vacancy {
+  id: number;
+  title: string;
+  /**
+   * Stable identifier — do not change once applications reference it.
+   */
+  key: string;
+  order?: number | null;
+  open?: boolean | null;
+  sections?:
+    | {
+        /**
+         * Subsection heading, e.g. "Human Resources".
+         */
+        heading?: string | null;
+        /**
+         * e.g. "Responsibilities" or "Requirements".
+         */
+        label: string;
+        intro?: string | null;
+        items?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "job-applications".
+ */
+export interface JobApplication {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  vacancy: number | Vacancy;
+  /**
+   * Snapshot of the vacancy title at submission time.
+   */
+  vacancyTitle: string;
+  introduction: string;
+  resume: number | Resume;
+  status: 'new' | 'in-review' | 'closed';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resumes".
+ */
+export interface Resume {
+  id: number;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -255,6 +433,26 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'enquiries';
         value: number | Enquiry;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'projects';
+        value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'vacancies';
+        value: number | Vacancy;
+      } | null)
+    | ({
+        relationTo: 'job-applications';
+        value: number | JobApplication;
+      } | null)
+    | ({
+        relationTo: 'resumes';
+        value: number | Resume;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -387,6 +585,125 @@ export interface EnquiriesSelect<T extends boolean = true> {
   status?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  category?: T;
+  eventDate?: T;
+  cover?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  youtubeUrl?: T;
+  published?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  status?: T;
+  order?: T;
+  cover?: T;
+  client?: T;
+  consultants?:
+    | T
+    | {
+        name?: T;
+        id?: T;
+      };
+  scope?: T;
+  commencementDate?: T;
+  completionDate?: T;
+  body?: T;
+  published?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vacancies_select".
+ */
+export interface VacanciesSelect<T extends boolean = true> {
+  title?: T;
+  key?: T;
+  order?: T;
+  open?: T;
+  sections?:
+    | T
+    | {
+        heading?: T;
+        label?: T;
+        intro?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "job-applications_select".
+ */
+export interface JobApplicationsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  phone?: T;
+  vacancy?: T;
+  vacancyTitle?: T;
+  introduction?: T;
+  resume?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "resumes_select".
+ */
+export interface ResumesSelect<T extends boolean = true> {
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -661,6 +978,59 @@ export interface TermsAndCondition {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events-page".
+ */
+export interface EventsPage {
+  id: number;
+  heading: string;
+  highlight: string;
+  heroImage?: (number | null) | Media;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects-page".
+ */
+export interface ProjectsPage {
+  id: number;
+  heading: string;
+  highlight: string;
+  heroImage?: (number | null) | Media;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "career-page".
+ */
+export interface CareerPage {
+  id: number;
+  heading: string;
+  highlight: string;
+  heroImage?: (number | null) | Media;
+  applyHeading: string;
+  applyBody: string;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "landing_select".
  */
 export interface LandingSelect<T extends boolean = true> {
@@ -907,6 +1277,65 @@ export interface TermsAndConditionsSelect<T extends boolean = true> {
         body?: T;
         id?: T;
       };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events-page_select".
+ */
+export interface EventsPageSelect<T extends boolean = true> {
+  heading?: T;
+  highlight?: T;
+  heroImage?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects-page_select".
+ */
+export interface ProjectsPageSelect<T extends boolean = true> {
+  heading?: T;
+  highlight?: T;
+  heroImage?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "career-page_select".
+ */
+export interface CareerPageSelect<T extends boolean = true> {
+  heading?: T;
+  highlight?: T;
+  heroImage?: T;
+  applyHeading?: T;
+  applyBody?: T;
   seo?:
     | T
     | {
