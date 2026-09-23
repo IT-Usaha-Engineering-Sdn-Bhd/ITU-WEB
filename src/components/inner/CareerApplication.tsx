@@ -12,13 +12,11 @@ function PositionSelect({
   options,
   value,
   onChange,
-  invalid,
   describedBy,
 }: {
   options: Vacancy[]
   value: string
   onChange: (key: string) => void
-  invalid: boolean
   describedBy?: string
 }) {
   const [open, setOpen] = useState(false)
@@ -94,7 +92,6 @@ function PositionSelect({
         aria-expanded={open}
         aria-controls={id}
         aria-labelledby={`career-vacancy-label ${id}`}
-        aria-invalid={invalid}
         aria-describedby={describedBy}
         onClick={() => setOpen(!open)}
         onKeyDown={onTriggerKeyDown}
@@ -321,7 +318,6 @@ export function CareerApplication({
                   options={openVacancies}
                   value={vacancyKey}
                   onChange={setVacancyKey}
-                  invalid={Boolean(errors.vacancy)}
                   describedBy={errors.vacancy ? 'career-error-vacancy' : undefined}
                 />
                 {errors.vacancy && (
