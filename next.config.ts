@@ -3,6 +3,7 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  poweredByHeader: false,
   // Media is served same-origin through /api/media/file/* (Payload's own proxy route), so
   // next/image needs no remotePatterns entry regardless of storage backend.
   images: {

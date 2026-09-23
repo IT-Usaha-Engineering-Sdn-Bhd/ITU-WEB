@@ -6,6 +6,9 @@ export const Users: CollectionConfig = {
   admin: { useAsTitle: 'email' },
   access: {
     // Only admins may create/update/delete other users; anyone authenticated can read.
+    // (create defaults to "any logged-in user" if left unset — an editor could otherwise
+    // self-register a new admin account.)
+    create: ({ req }) => Boolean(req.user?.roles?.includes('admin')),
     update: ({ req }) => Boolean(req.user?.roles?.includes('admin')),
     delete: ({ req }) => Boolean(req.user?.roles?.includes('admin')),
   },
@@ -20,6 +23,7 @@ export const Users: CollectionConfig = {
         { label: 'Editor', value: 'editor' },
       ],
       access: {
+        create: ({ req }) => Boolean(req.user?.roles?.includes('admin')),
         update: ({ req }) => Boolean(req.user?.roles?.includes('admin')),
       },
     },

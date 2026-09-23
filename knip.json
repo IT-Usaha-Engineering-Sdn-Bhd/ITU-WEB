@@ -1,0 +1,6 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": ["src/scripts/*.ts", "src/migrations/index.ts", "src/**/*.test.mjs"],
+  "project": ["src/**/*.{ts,tsx,js,mjs}"],
+  "ignoreDependencies": ["tailwindcss", "eslint-config-next"]
+}

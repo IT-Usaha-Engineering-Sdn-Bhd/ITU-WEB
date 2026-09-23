@@ -1,5 +1,5 @@
-// Subtle, semi-transparent circuit-trace backdrop for every page. Pure CSS/SVG — no WebGL,
-// no JS animation loop — so it runs everywhere, including when the 3D canvas is idle or absent.
+// Subtle, semi-transparent circuit-trace backdrop, mounted per-section (see the landing
+// section components that render it). Pure CSS/SVG — no WebGL, no JS animation loop.
 export function Backdrop() {
   return (
     <svg

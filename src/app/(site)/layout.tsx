@@ -3,7 +3,6 @@ import { Manrope, Work_Sans } from 'next/font/google'
 import '../globals.css'
 import { StageProvider } from '@/three/stage'
 import { Scene } from '@/three/Scene'
-import { Backdrop } from '@/components/Backdrop'
 import { TopNav } from '@/components/TopNav'
 import { Footer } from '@/components/Footer'
 import { getSettings } from '@/lib/site-content'
@@ -52,7 +51,6 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd).replace(/</g, '\\u003c') }}
         />
         <StageProvider>
-          <Backdrop />
           <Scene />
           <TopNav />
           {children}

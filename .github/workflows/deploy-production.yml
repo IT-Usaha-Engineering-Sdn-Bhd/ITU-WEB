@@ -30,8 +30,9 @@ jobs:
           bun-version: latest
 
       - run: bun install --frozen-lockfile
-      - run: bunx tsc --noEmit
+      - run: bun run typecheck
       - run: bun run lint
+      - run: bun run knip
 
       - id: auth
         uses: google-github-actions/auth@v2

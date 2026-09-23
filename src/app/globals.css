@@ -16,6 +16,10 @@
 }
 html {
   scroll-padding-top: var(--nav-height);
+  scrollbar-width: none; /* Firefox */
+}
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
 }
 body {
   margin: 0;
@@ -900,11 +904,16 @@ section:focus {
   z-index: 1;
   pointer-events: none;
 }
+/* Sections that mount <Backdrop /> need their own stacking context so the trace's
+   negative z-index lands above the section's background but below its content. */
+.landing-section:has(> .circuit-backdrop) {
+  isolation: isolate;
+}
 .circuit-backdrop {
-  position: fixed;
+  position: absolute;
   inset: 0;
-  z-index: 0;
-  opacity: 0.025;
+  z-index: -1;
+  opacity: 0.2;
   width: 100%;
   height: 100%;
   pointer-events: none;
