@@ -10,7 +10,9 @@ import {
   Thermometer,
   Wrench,
 } from '@phosphor-icons/react/dist/ssr'
-import { getServiceFacilitiesManagement, serviceMetadata } from '@/lib/inner-pages'
+import { getServiceFacilitiesManagement } from '@/lib/inner-pages'
+import { getSettings } from '@/lib/site-content'
+import { pageMetadata } from '@/lib/seo'
 import { HeroBanner } from '@/components/inner/HeroBanner'
 import { SplitSection } from '@/components/services/SplitSection'
 import { IconList } from '@/components/services/IconList'
@@ -21,23 +23,28 @@ const maintenanceIcons = [ShieldCheck, Thermometer, ShieldCheck, GearSix, Lightn
 const path = '/services/facilities-management'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await getServiceFacilitiesManagement()
-  return serviceMetadata(data, 'Facilities Management', path)
+  const [data, settings] = await Promise.all([getServiceFacilitiesManagement(), getSettings()])
+  return pageMetadata(data, 'Facilities Management', path, settings.siteName)
 }
 
 export default async function FacilitiesManagementPage() {
-  const data = await getServiceFacilitiesManagement()
+  const [data, settings] = await Promise.all([getServiceFacilitiesManagement(), getSettings()])
 
   return (
     <main id="main-content" className="inner-page">
       <section className="section-shell inner-hero">
-        <p className="eyebrow">Our Services</p>
+        <p className="eyebrow">{data.eyebrow}</p>
         <h1 className="section-heading">
           {data.heading.split(data.highlight)[0]}
           <span className="text-accent">{data.highlight}</span>
         </h1>
       </section>
-      <HeroBanner image={data.heroImage} label="Facilities Management" />
+      <HeroBanner
+        image={data.heroImage}
+        label={data.bannerLabel}
+        kicker={settings.heroBannerKicker}
+        wordmark={settings.heroBannerWordmark}
+      />
 
       <section className="section-shell service-intro">
         <p className="section-body">{data.intro}</p>
@@ -83,7 +90,7 @@ export default async function FacilitiesManagementPage() {
         </SplitSection>
       </section>
 
-      <ImageCards heading="Why Choose Us?" items={data.why ?? []} icon={Medal} />
+      <ImageCards heading={data.whyHeading} items={data.why ?? []} icon={Medal} />
     </main>
   )
 }

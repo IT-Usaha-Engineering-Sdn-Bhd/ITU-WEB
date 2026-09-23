@@ -8,16 +8,44 @@ type Errors = Partial<
   Record<'name' | 'email' | 'phone' | 'vacancy' | 'introduction' | 'resume', string>
 >
 
+type Labels = {
+  nameLabel: string
+  emailLabel: string
+  phoneLabel: string
+  vacancyLabel: string
+  selectPlaceholder: string
+  introductionLabel: string
+  resumeLabel: string
+  closedLabel: string
+  applyButtonLabel: string
+  noOpeningsMessage: string
+  privacyLine: string
+  successMessage: string
+  errorFallback: string
+  submitLabel: string
+  submittingLabel: string
+  nameRequired: string
+  emailInvalid: string
+  phoneRequired: string
+  vacancyRequired: string
+  introductionRequired: string
+  resumeRequired: string
+  resumeMustBePdf: string
+  resumeTooLarge: string
+}
+
 function PositionSelect({
   options,
   value,
   onChange,
   describedBy,
+  placeholder,
 }: {
   options: Vacancy[]
   value: string
   onChange: (key: string) => void
   describedBy?: string
+  placeholder: string
 }) {
   const [open, setOpen] = useState(false)
   const id = useId()
@@ -97,7 +125,7 @@ function PositionSelect({
         onKeyDown={onTriggerKeyDown}
       >
         <span id={id} className={selected ? undefined : 'position-select-placeholder'}>
-          {selected ? selected.title : 'Select a position'}
+          {selected ? selected.title : placeholder}
         </span>
         <CaretDown size={16} aria-hidden="true" className={open ? 'rotate-180' : ''} />
       </button>
@@ -128,10 +156,12 @@ export function CareerApplication({
   vacancies,
   applyHeading,
   applyBody,
+  labels,
 }: {
   vacancies: Vacancy[]
   applyHeading: string
   applyBody: string
+  labels: Labels
 }) {
   const openVacancies = vacancies.filter((v) => v.open)
   const [vacancyKey, setVacancyKey] = useState('')
@@ -155,15 +185,15 @@ export function CareerApplication({
     const vacancy = String(data.get('vacancy') || '').trim()
     const introduction = String(data.get('introduction') || '').trim()
     const resume = data.get('resume')
-    if (!name) next.name = 'Enter your name.'
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) next.email = 'Enter a valid email address.'
-    if (!phone) next.phone = 'Enter a contact number.'
-    if (!vacancy) next.vacancy = 'Select a position.'
-    if (!introduction) next.introduction = 'Tell us a little about yourself.'
-    if (!(resume instanceof File) || resume.size === 0) next.resume = 'Attach your résumé.'
+    if (!name) next.name = labels.nameRequired
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) next.email = labels.emailInvalid
+    if (!phone) next.phone = labels.phoneRequired
+    if (!vacancy) next.vacancy = labels.vacancyRequired
+    if (!introduction) next.introduction = labels.introductionRequired
+    if (!(resume instanceof File) || resume.size === 0) next.resume = labels.resumeRequired
     else if (resume.type !== 'application/pdf' || !resume.name.toLowerCase().endsWith('.pdf'))
-      next.resume = 'Résumé must be a PDF.'
-    else if (resume.size > 5 * 1024 * 1024) next.resume = 'Résumé must be under 5MB.'
+      next.resume = labels.resumeMustBePdf
+    else if (resume.size > 5 * 1024 * 1024) next.resume = labels.resumeTooLarge
     return next
   }
 
@@ -180,17 +210,12 @@ export function CareerApplication({
     try {
       const response = await fetch('/api/career-applications', { method: 'POST', body: data })
       const result = await response.json()
-      if (!response.ok)
-        throw new Error(result.error || 'Your application could not be sent. Please try again.')
+      if (!response.ok) throw new Error(result.error || labels.errorFallback)
       form.reset()
       setVacancyKey('')
       setState('success')
     } catch (cause) {
-      setFormError(
-        cause instanceof Error
-          ? cause.message
-          : 'Your application could not be sent. Please try again.',
-      )
+      setFormError(cause instanceof Error ? cause.message : labels.errorFallback)
       setState('error')
     }
   }
@@ -212,7 +237,9 @@ export function CareerApplication({
                 onClick={() => setOpenIds((prev) => ({ ...prev, [key]: !prev[key] }))}
               >
                 <span>{vacancy.title}</span>
-                {!vacancy.open && <span className="vacancy-closed-badge">Closed</span>}
+                {!vacancy.open && (
+                  <span className="vacancy-closed-badge">{labels.closedLabel}</span>
+                )}
                 <CaretDown size={18} aria-hidden="true" />
               </button>
               <div className="vacancy-panel" id={panelId} role="region" inert={!isOpen}>
@@ -238,7 +265,7 @@ export function CareerApplication({
                         className="button button-outline"
                         onClick={() => selectVacancy(vacancy.key)}
                       >
-                        Apply for this position
+                        {labels.applyButtonLabel}
                       </button>
                     )}
                   </div>
@@ -255,14 +282,13 @@ export function CareerApplication({
         </h2>
         <p className="section-body">{applyBody}</p>
         {openVacancies.length === 0 ? (
-          <p className="section-body">
-            There are no open positions right now. Please check back soon.
-          </p>
+          <p className="section-body">{labels.noOpeningsMessage}</p>
         ) : (
           <form onSubmit={submit} aria-busy={state === 'pending'} noValidate>
             <div className="form-two-col">
               <label>
-                Name<span aria-hidden="true"> *</span>
+                {labels.nameLabel}
+                <span aria-hidden="true"> *</span>
                 <input
                   name="name"
                   required
@@ -278,7 +304,8 @@ export function CareerApplication({
                 )}
               </label>
               <label>
-                Email Address<span aria-hidden="true"> *</span>
+                {labels.emailLabel}
+                <span aria-hidden="true"> *</span>
                 <input
                   name="email"
                   type="email"
@@ -295,7 +322,8 @@ export function CareerApplication({
                 )}
               </label>
               <label>
-                Contact No.<span aria-hidden="true"> *</span>
+                {labels.phoneLabel}
+                <span aria-hidden="true"> *</span>
                 <input
                   name="phone"
                   type="tel"
@@ -312,13 +340,14 @@ export function CareerApplication({
                 )}
               </label>
               <div className="form-field">
-                <span id="career-vacancy-label">Position Applying For</span>
+                <span id="career-vacancy-label">{labels.vacancyLabel}</span>
                 <span aria-hidden="true"> *</span>
                 <PositionSelect
                   options={openVacancies}
                   value={vacancyKey}
                   onChange={setVacancyKey}
                   describedBy={errors.vacancy ? 'career-error-vacancy' : undefined}
+                  placeholder={labels.selectPlaceholder}
                 />
                 {errors.vacancy && (
                   <span className="field-error" id="career-error-vacancy" role="alert">
@@ -328,7 +357,8 @@ export function CareerApplication({
               </div>
             </div>
             <label>
-              Brief Introduction<span aria-hidden="true"> *</span>
+              {labels.introductionLabel}
+              <span aria-hidden="true"> *</span>
               <textarea
                 name="introduction"
                 required
@@ -344,7 +374,8 @@ export function CareerApplication({
               )}
             </label>
             <label>
-              Upload Résumé (PDF, up to 5MB)<span aria-hidden="true"> *</span>
+              {labels.resumeLabel}
+              <span aria-hidden="true"> *</span>
               <input
                 name="resume"
                 type="file"
@@ -366,12 +397,11 @@ export function CareerApplication({
               </label>
             </div>
             <p className="form-privacy">
-              Your details are handled according to our{' '}
-              <Link href="/privacy-policy">Privacy Policy</Link>.
+              {labels.privacyLine} <Link href="/privacy-policy">Privacy Policy</Link>.
             </p>
             {state === 'success' && (
               <p role="status" className="form-success">
-                Thank you. Your application has been received.
+                {labels.successMessage}
               </p>
             )}
             {state === 'error' && (
@@ -380,7 +410,7 @@ export function CareerApplication({
               </p>
             )}
             <button className="button button-accent" type="submit" disabled={state === 'pending'}>
-              {state === 'pending' ? 'Submitting…' : 'Submit Now'}
+              {state === 'pending' ? labels.submittingLabel : labels.submitLabel}
               <ArrowUpRight size={18} />
             </button>
           </form>

@@ -1,6 +1,9 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { getPayloadClient } from '@/lib/payload'
 import { validateContact } from '@/lib/contact-validation'
+import { readBodyCapped } from '@/lib/read-body'
+
+const MAX_BODY_BYTES = 32768
 
 export async function POST(request: NextRequest) {
   const origin = request.headers.get('origin')
@@ -8,14 +11,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid origin.' }, { status: 403 })
   if (!request.headers.get('content-type')?.startsWith('application/json'))
     return NextResponse.json({ error: 'Expected JSON.' }, { status: 415 })
-  if (Number(request.headers.get('content-length') || 0) > 32768)
+  if (Number(request.headers.get('content-length') || 0) > MAX_BODY_BYTES)
     return NextResponse.json({ error: 'Request too large.' }, { status: 413 })
   let value: unknown
   try {
-    const body = await request.text()
-    if (new TextEncoder().encode(body).length > 32768)
-      return NextResponse.json({ error: 'Request too large.' }, { status: 413 })
-    value = JSON.parse(body)
+    const body = await readBodyCapped(request, MAX_BODY_BYTES)
+    if (!body) return NextResponse.json({ error: 'Request too large.' }, { status: 413 })
+    value = JSON.parse(new TextDecoder().decode(body))
   } catch {
     return NextResponse.json({ error: 'Invalid JSON.' }, { status: 400 })
   }

@@ -7,10 +7,12 @@ export function Carousel<T>({
   items,
   renderItem,
   ariaLabel,
+  emptyLabel = 'Content will be added soon.',
 }: {
   items: T[]
   renderItem: (item: T, index: number) => React.ReactNode
   ariaLabel: string
+  emptyLabel?: string
 }) {
   const [index, setIndex] = useState(0)
   const [hovered, setHovered] = useState(false)
@@ -30,7 +32,7 @@ export function Carousel<T>({
   const go = (delta: number) => {
     setIndex((current + delta + items.length) % items.length)
   }
-  if (!items.length) return <p className="empty-note">Content will be added soon.</p>
+  if (!items.length) return <p className="empty-note">{emptyLabel}</p>
   return (
     <div
       role="region"

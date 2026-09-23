@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getEvent } from '@/lib/listings'
-import { mediaUrl } from '@/lib/media'
+import { getSettings } from '@/lib/site-content'
+import { pageMetadata } from '@/lib/seo'
 import { EVENT_CATEGORIES, formatMonthYear, youtubeEmbedUrl } from '@/lib/listing-utils'
 import { EntryImage } from '@/components/inner/EntryImage'
 
@@ -11,15 +12,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const event = await getEvent(slug)
+  const [event, settings] = await Promise.all([getEvent(slug), getSettings()])
   if (!event) return {}
-  const image = mediaUrl(event.seo?.ogImage) ?? mediaUrl(event.cover)
-  return {
-    title: event.seo?.title || event.title,
-    description: event.seo?.description,
-    alternates: { canonical: `/events/${slug}` },
-    openGraph: { images: image ? [{ url: image }] : undefined },
-  }
+  return pageMetadata(event, event.title, `/events/${slug}`, settings.siteName)
 }
 
 export default async function EventDetailPage({ params }: { params: Promise<{ slug: string }> }) {

@@ -3,7 +3,13 @@ import { useEffect, useRef, useState } from 'react'
 import { useStage } from '@/three/stage'
 import { playSfx } from '@/lib/sfx'
 
-export function LoadingStage() {
+export function LoadingStage({
+  welcomeLabel,
+  commissionLabel,
+}: {
+  welcomeLabel: string
+  commissionLabel: string
+}) {
   const { stage, setStage, sceneReady, sceneFailed } = useStage()
   const [timedOut, setTimedOut] = useState(false)
   const button = useRef<HTMLButtonElement>(null)
@@ -17,12 +23,7 @@ export function LoadingStage() {
   if (stage !== 'loading') return null
   const ready = sceneReady || sceneFailed || timedOut
   return (
-    <div
-      className="intro-screen"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Welcome to IT Usaha Engineering"
-    >
+    <div className="intro-screen" role="dialog" aria-modal="true" aria-label={welcomeLabel}>
       <button
         ref={button}
         type="button"
@@ -34,7 +35,7 @@ export function LoadingStage() {
         }}
         className="button button-accent-outline"
       >
-        COMMISSION
+        {commissionLabel}
       </button>
     </div>
   )

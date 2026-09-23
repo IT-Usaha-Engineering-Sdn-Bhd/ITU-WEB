@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { getPayloadClient } from '@/lib/payload'
 import { findOpenVacancy } from '@/lib/listings'
 import { validateApplication, isPdf } from '@/lib/career-validation'
+import { readBodyCapped } from '@/lib/read-body'
 
 const MAX_BODY_BYTES = 6 * 1024 * 1024
 
@@ -16,25 +17,8 @@ export async function POST(request: NextRequest) {
 
   let form: FormData
   try {
-    // Guard against a missing/understated content-length header by counting bytes as they arrive.
-    const reader = request.body?.getReader()
-    if (!reader) throw new Error('empty body')
-    const chunks: Uint8Array[] = []
-    let total = 0
-    for (;;) {
-      const { done, value } = await reader.read()
-      if (done) break
-      total += value.byteLength
-      if (total > MAX_BODY_BYTES)
-        return NextResponse.json({ error: 'Request too large.' }, { status: 413 })
-      chunks.push(value)
-    }
-    const body = new Uint8Array(total)
-    let offset = 0
-    for (const chunk of chunks) {
-      body.set(chunk, offset)
-      offset += chunk.byteLength
-    }
+    const body = await readBodyCapped(request, MAX_BODY_BYTES)
+    if (!body) return NextResponse.json({ error: 'Request too large.' }, { status: 413 })
     form = await new Response(body, {
       headers: { 'content-type': request.headers.get('content-type')! },
     }).formData()

@@ -38,6 +38,11 @@ export const seo: Field = {
 // Shared field-builder shorthand, used across the Pages and Our Services globals.
 export const media = (name: string, label?: string) =>
   ({ name, type: 'upload', relationTo: 'media', label }) as const
-export const text = (name: string, required = true) => ({ name, type: 'text', required }) as const
-export const area = (name: string, required = true) =>
-  ({ name, type: 'textarea', required }) as const
+export const text = (name: string, required = true, defaultValue?: string) =>
+  ({ name, type: 'text', required, defaultValue }) as const
+export const area = (name: string, required = true, defaultValue?: string) =>
+  ({ name, type: 'textarea', required, defaultValue }) as const
+// A page-chrome label: required with a code-side default, so its Payload type is a plain
+// non-null string and adding the column to an existing table backfills instead of failing.
+export const copy = (name: string, defaultValue: string) =>
+  ({ name, type: 'text', required: true, defaultValue }) as const

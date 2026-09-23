@@ -7,8 +7,7 @@ type Section = {
   items?: { text: string }[] | null
 }
 
-function linkedText(value: string) {
-  const email = 'itusaha@itusaha.com'
+function linkedText(value: string, email: string) {
   const index = value.indexOf(email)
   return index < 0 ? (
     value
@@ -23,14 +22,28 @@ function linkedText(value: string) {
   )
 }
 
-export function LegalPage({ heading, sections }: { heading: string; sections: Section[] }) {
+export function LegalPage({
+  heading,
+  sections,
+  email,
+  eyebrow,
+  onThisPage,
+  contactLine,
+}: {
+  heading: string
+  sections: Section[]
+  email: string
+  eyebrow: string
+  onThisPage: string
+  contactLine: string
+}) {
   return (
     <main id="main-content" className="inner-page legal-page section-shell">
-      <p className="eyebrow">Company policies</p>
+      <p className="eyebrow">{eyebrow}</p>
       <h1 className="section-heading">{heading}</h1>
       <div className="legal-grid">
-        <aside aria-label="On this page">
-          <p>On this page</p>
+        <aside aria-label={onThisPage}>
+          <p>{onThisPage}</p>
           <ol>
             {sections.map((section, index) => (
               <li key={index}>
@@ -47,12 +60,12 @@ export function LegalPage({ heading, sections }: { heading: string; sections: Se
               <h2>
                 {index + 1}. {section.title}
               </h2>
-              {section.intro && <p>{linkedText(section.intro)}</p>}
-              {section.body && <p>{linkedText(section.body)}</p>}
+              {section.intro && <p>{linkedText(section.intro, email)}</p>}
+              {section.body && <p>{linkedText(section.body, email)}</p>}
               {section.items?.length ? (
                 <ul>
                   {section.items.map((item, i) => (
-                    <li key={i}>{linkedText(item.text)}</li>
+                    <li key={i}>{linkedText(item.text, email)}</li>
                   ))}
                 </ul>
               ) : null}
@@ -61,7 +74,7 @@ export function LegalPage({ heading, sections }: { heading: string; sections: Se
         </div>
       </div>
       <p className="legal-contact">
-        Questions about these pages? <Link href="/contact-us">Contact us</Link>.
+        {contactLine} <Link href="/contact-us">Contact us</Link>
       </p>
     </main>
   )

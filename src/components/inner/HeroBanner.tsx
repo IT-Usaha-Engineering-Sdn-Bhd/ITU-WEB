@@ -2,7 +2,17 @@ import Image from 'next/image'
 import type { Media } from '@/payload-types'
 import { mediaAlt, mediaUrl } from '@/lib/media'
 
-export function HeroBanner({ image, label }: { image?: number | Media | null; label: string }) {
+export function HeroBanner({
+  image,
+  label,
+  kicker,
+  wordmark,
+}: {
+  image?: number | Media | null
+  label: string
+  kicker: string
+  wordmark: string
+}) {
   const url = mediaUrl(image)
 
   return (
@@ -23,10 +33,10 @@ export function HeroBanner({ image, label }: { image?: number | Media | null; la
           role="img"
         >
           <span className="inner-hero-placeholder-mark" aria-hidden="true">
-            ITU
+            {kicker}
           </span>
           <span className="inner-hero-placeholder-caption" aria-hidden="true">
-            IT USAHA ENGINEERING <span>/</span> {label}
+            {wordmark} <span>/</span> {label}
           </span>
         </div>
       )}

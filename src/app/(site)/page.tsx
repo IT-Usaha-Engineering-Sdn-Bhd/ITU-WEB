@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import { getLanding } from '@/lib/site-content'
+import { getLanding, getSettings } from '@/lib/site-content'
 import { mediaUrl } from '@/lib/media'
+import { pageMetadata } from '@/lib/seo'
 import { LoadingStage } from '@/components/landing/LoadingStage'
 import { Hero } from '@/components/landing/Hero'
 import { SnapContainer } from '@/components/landing/SnapContainer'
@@ -14,29 +15,26 @@ import { Projects } from '@/components/landing/Projects'
 import { CtaBand } from '@/components/landing/CtaBand'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const landing = await getLanding()
-  const ogImage = mediaUrl(landing.seo?.ogImage)
-
-  return {
-    title: landing.seo?.title || undefined,
-    description: landing.seo?.description || undefined,
-    alternates: { canonical: '/' },
-    openGraph: {
-      title: landing.seo?.title || undefined,
-      description: landing.seo?.description || undefined,
-      images: ogImage ? [{ url: ogImage }] : undefined,
-    },
-  }
+  const [landing, settings] = await Promise.all([getLanding(), getSettings()])
+  return pageMetadata(landing, settings.seoTitle, '/', settings.siteName)
 }
 
 export default async function HomePage() {
-  const landing = await getLanding()
+  const [landing, settings] = await Promise.all([getLanding(), getSettings()])
+  const logoUrl = mediaUrl(settings.logo) ?? '/assets/logo.png'
 
   return (
     <main id="main-content" className="relative">
-      <LoadingStage />
+      <LoadingStage
+        welcomeLabel={landing.hero.welcomeLabel}
+        commissionLabel={landing.hero.commissionLabel}
+      />
       <SnapContainer>
-        <Hero punchline={landing.hero.punchline} />
+        <Hero
+          punchline={landing.hero.punchline}
+          exploreLabel={landing.hero.learnMoreLabel}
+          logoUrl={logoUrl}
+        />
         <WhoWeAre data={landing.whoWeAre} />
         <Facts data={landing.facts} />
         <Services data={landing.services} />

@@ -6,7 +6,8 @@ import { usePathname } from 'next/navigation'
 import { CaretDown, ChatCircleDots, List, X } from '@phosphor-icons/react'
 import { useStage } from '@/three/stage'
 import { SoundToggle } from './SoundToggle'
-import { services } from '@/lib/navigation'
+
+type NavLink = { label: string; href: string }
 
 function Dropdown({ label, items }: { label: string; items: { label: string; href: string }[] }) {
   const [open, setOpen] = useState(false)
@@ -60,7 +61,25 @@ function Dropdown({ label, items }: { label: string; items: { label: string; hre
     </div>
   )
 }
-export function TopNav() {
+export function TopNav({
+  logoUrl,
+  wordmarkTop,
+  wordmarkBottom,
+  navLinks,
+  servicesMenuLabel,
+  serviceLinks,
+  contactCtaLabel,
+  contactCtaHref,
+}: {
+  logoUrl: string
+  wordmarkTop: string
+  wordmarkBottom: string
+  navLinks: NavLink[]
+  servicesMenuLabel: string
+  serviceLinks: NavLink[]
+  contactCtaLabel: string
+  contactCtaHref: string
+}) {
   const { stage, activeSection } = useStage()
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -88,6 +107,9 @@ export function TopNav() {
   // on the loading screen or the hero section.
   const hidden =
     pathname === '/' && (stage !== 'scroll' || activeSection === null || activeSection === 'hero')
+  // Contact Us gets its own accent CTA button — drop it from the plain link list so it
+  // doesn't appear twice.
+  const inlineLinks = navLinks.filter((link) => link.href !== contactCtaHref)
   return (
     <header
       ref={header}
@@ -119,25 +141,27 @@ export function TopNav() {
       }}
     >
       <nav className="nav-shell" aria-label="Main navigation">
-        <Link href="/" className="brand" aria-label="IT Usaha Engineering home">
+        <Link href="/" className="brand" aria-label={`${wordmarkTop} ${wordmarkBottom} home`}>
           <span className="brand-mark">
-            <Image src="/assets/logo.png" alt="" width={30} height={41} priority />
+            <Image src={logoUrl} alt="" width={30} height={41} priority />
           </span>
           <span className="brand-name">
-            IT USAHA<span>ENGINEERING</span>
+            {wordmarkTop}
+            <span>{wordmarkBottom}</span>
           </span>
         </Link>
         <div className="desktop-navigation">
-          <Link href="/about-us">About Us</Link>
-          <Dropdown label="Our Services" items={services} />
-          <Link href="/projects">Projects</Link>
-          <Link href="/events">Events</Link>
-          <Link href="/career">Career</Link>
+          {inlineLinks.map((link) => (
+            <Link key={link.href} href={link.href}>
+              {link.label}
+            </Link>
+          ))}
+          <Dropdown label={servicesMenuLabel} items={serviceLinks} />
         </div>
         <div className="nav-actions">
           <SoundToggle />
-          <Link href="/contact-us" className="button button-accent nav-contact">
-            Contact Us
+          <Link href={contactCtaHref} className="button button-accent nav-contact">
+            {contactCtaLabel}
             <ChatCircleDots size={18} />
           </Link>
           <button
@@ -160,37 +184,30 @@ export function TopNav() {
           aria-label="Mobile navigation"
           data-native-scroll
         >
-          <Link href="/about-us" onClick={() => setMobileOpen(false)}>
-            About Us
-          </Link>
+          {inlineLinks.map((link) => (
+            <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)}>
+              {link.label}
+            </Link>
+          ))}
           <details>
             <summary>
-              Our Services
+              {servicesMenuLabel}
               <CaretDown size={18} />
             </summary>
             <div>
-              {services.map((item) => (
+              {serviceLinks.map((item) => (
                 <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}>
                   {item.label}
                 </Link>
               ))}
             </div>
           </details>
-          <Link href="/projects" onClick={() => setMobileOpen(false)}>
-            Projects
-          </Link>
-          <Link href="/events" onClick={() => setMobileOpen(false)}>
-            Events
-          </Link>
-          <Link href="/career" onClick={() => setMobileOpen(false)}>
-            Career
-          </Link>
           <Link
-            href="/contact-us"
+            href={contactCtaHref}
             onClick={() => setMobileOpen(false)}
             className="button button-accent"
           >
-            Contact Us
+            {contactCtaLabel}
             <ChatCircleDots size={20} />
           </Link>
         </nav>

@@ -1,20 +1,24 @@
 import type { Metadata } from 'next'
 import { getPrivacyPolicy } from '@/lib/inner-pages'
+import { getSettings } from '@/lib/site-content'
+import { pageMetadata } from '@/lib/seo'
 import { LegalPage } from '@/components/inner/LegalPage'
-import { mediaUrl } from '@/lib/media'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await getPrivacyPolicy()
-  const image = mediaUrl(data.seo?.ogImage)
-  return {
-    title: data.seo?.title || data.heading,
-    description: data.seo?.description,
-    alternates: { canonical: '/privacy-policy' },
-    openGraph: { images: image ? [{ url: image }] : undefined },
-  }
+  const [data, settings] = await Promise.all([getPrivacyPolicy(), getSettings()])
+  return pageMetadata(data, data.heading, '/privacy-policy', settings.siteName)
 }
 
 export default async function PrivacyPolicyPage() {
-  const data = await getPrivacyPolicy()
-  return <LegalPage heading={data.heading} sections={data.sections ?? []} />
+  const [data, settings] = await Promise.all([getPrivacyPolicy(), getSettings()])
+  return (
+    <LegalPage
+      heading={data.heading}
+      sections={data.sections ?? []}
+      email={settings.email}
+      eyebrow={settings.legalEyebrow}
+      onThisPage={settings.legalOnThisPage}
+      contactLine={settings.legalContactLine}
+    />
+  )
 }

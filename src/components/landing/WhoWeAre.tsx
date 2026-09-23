@@ -13,7 +13,7 @@ export function WhoWeAre({ data }: { data: Landing['whoWeAre'] }) {
     >
       <div className="section-shell who-grid">
         <Reveal className="who-copy">
-          <p className="eyebrow">Built on expertise. Driven by trust.</p>
+          <p className="eyebrow">{data.eyebrow}</p>
           <h2 className="section-heading">{data.header}</h2>
           <div className="section-body who-body">
             {data.body.split('\n\n').map((paragraph, i) => (
@@ -31,8 +31,8 @@ export function WhoWeAre({ data }: { data: Landing['whoWeAre'] }) {
           aria-label="Data centre architectural model"
         >
           <div className="model-caption">
-            <span>DATA CENTRE</span>
-            <span>Structure / Systems</span>
+            <span>{data.modelCaptionTitle}</span>
+            <span>{data.modelCaptionSubtitle}</span>
           </div>
         </div>
       </div>

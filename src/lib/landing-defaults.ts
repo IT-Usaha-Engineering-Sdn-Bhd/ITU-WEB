@@ -3,15 +3,21 @@ import type { Landing } from '@/payload-types'
 export const landingDefaults: Omit<Landing, 'id' | 'updatedAt' | 'createdAt' | 'globalType'> = {
   hero: {
     punchline: 'Your Trusted Partner in Data Centre',
-    learnMoreLabel: 'Continue',
+    learnMoreLabel: 'Explore our expertise',
+    welcomeLabel: 'Welcome to IT Usaha Engineering',
+    commissionLabel: 'COMMISSION',
   },
   whoWeAre: {
+    eyebrow: 'Built on expertise. Driven by trust.',
     header: 'Who We Are',
     body: 'We are an integrated engineering company specializing in Data Centre and other Mission Critical facility. Since 1997, we have built a strong track record in mechanical and electrical engineering, turnkey contracting, project management, consultancy, commissioning management, design review, and checker services.\n\nSupported by a highly dedicated and experienced team of management professionals, engineers, supervisors, technicians, and skilled workers, we possess the expertise and capability to deliver comprehensive, end-to-end engineering solutions to our valued partners and clients.',
     ctaLabel: 'About Us',
     ctaHref: '/about-us',
+    modelCaptionTitle: 'DATA CENTRE',
+    modelCaptionSubtitle: 'Structure / Systems',
   },
   facts: {
+    eyebrow: 'A track record that delivers',
     header: 'Credential Facts',
     body: "With decades of expertise, IT Usaha Engineering stands as a reliable leader in Malaysia's Data Centre and MEP industry.",
     stats: [
@@ -21,8 +27,10 @@ export const landingDefaults: Omit<Landing, 'id' | 'updatedAt' | 'createdAt' | '
     ],
   },
   services: {
+    eyebrow: 'Expertise, connected.',
     header: 'Comprehensive M&E Solutions for Critical Infrastructure',
     body: 'IT Usaha Engineering offers a full spectrum of Mechanical & Electrical (M&E) services, from preliminary design up to HT and LV, BMS, security system, and facilities management.',
+    placeholderLabel: 'Service imagery coming soon',
     items: [
       {
         title: 'Facilities Management',
@@ -49,6 +57,7 @@ export const landingDefaults: Omit<Landing, 'id' | 'updatedAt' | 'createdAt' | '
     ],
   },
   whyUs: {
+    eyebrow: 'Confidence at every stage',
     header: 'Why Choose Us',
     cards: [
       {
@@ -86,7 +95,10 @@ export const landingDefaults: Omit<Landing, 'id' | 'updatedAt' | 'createdAt' | '
     ],
   },
   certs: {
+    eyebrow: 'Quality without compromise',
     header: 'Engineered to Meet Industry Standards',
+    slideEyebrow: 'Industry standards',
+    placeholderLabel: 'Certificate image coming soon',
     items: [
       { name: 'ISO 45001', description: 'Occupational Health & Safety Management System' },
       { name: 'ISO 50001', description: 'Energy Management System' },
@@ -96,11 +108,14 @@ export const landingDefaults: Omit<Landing, 'id' | 'updatedAt' | 'createdAt' | '
     ],
   },
   clients: {
+    eyebrow: 'Partnerships built to last',
     header: 'Our Clients',
     body: 'Since 1997, IT Usaha Engineering is committed to providing top-quality electrical and mechanical solutions, and has gained trustworthiness by renowned clients over the years.',
+    placeholderLabel: 'Client logo coming soon',
     logos: [],
   },
   projects: {
+    eyebrow: 'Precision, put into practice',
     header: 'Our Projects',
     body: 'Explore our portfolio of mission-critical engineering projects across Malaysia. From high-performance Data Centres to complex M&E systems, each project reflects our commitment to quality, safety, and precision.',
     ctaLabel: 'View Projects',

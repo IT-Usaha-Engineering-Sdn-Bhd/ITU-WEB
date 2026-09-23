@@ -764,14 +764,20 @@ export interface Landing {
   hero: {
     punchline: string;
     learnMoreLabel: string;
+    welcomeLabel: string;
+    commissionLabel: string;
   };
   whoWeAre: {
+    eyebrow: string;
     header: string;
     body: string;
     ctaLabel: string;
     ctaHref: string;
+    modelCaptionTitle: string;
+    modelCaptionSubtitle: string;
   };
   facts: {
+    eyebrow: string;
     header: string;
     body: string;
     stats?:
@@ -784,19 +790,23 @@ export interface Landing {
       | null;
   };
   services: {
+    eyebrow: string;
     header: string;
     body: string;
+    placeholderLabel: string;
     items?:
       | {
           title: string;
           tagline?: string | null;
           body: string;
           image?: (number | null) | Media;
+          icon?: (number | null) | Media;
           id?: string | null;
         }[]
       | null;
   };
   whyUs: {
+    eyebrow: string;
     header: string;
     cards?:
       | {
@@ -808,7 +818,10 @@ export interface Landing {
       | null;
   };
   certs: {
+    eyebrow: string;
     header: string;
+    slideEyebrow: string;
+    placeholderLabel: string;
     items?:
       | {
           name: string;
@@ -819,8 +832,10 @@ export interface Landing {
       | null;
   };
   clients: {
+    eyebrow: string;
     header: string;
     body: string;
+    placeholderLabel: string;
     logos?:
       | {
           logo: number | Media;
@@ -831,6 +846,7 @@ export interface Landing {
       | null;
   };
   projects: {
+    eyebrow: string;
     header: string;
     body: string;
     ctaLabel: string;
@@ -863,6 +879,58 @@ export interface Setting {
   linkedin?: string | null;
   instagram?: string | null;
   facebook?: string | null;
+  siteName: string;
+  legalName: string;
+  logo?: (number | null) | Media;
+  wordmarkTop: string;
+  wordmarkBottom: string;
+  seoTitle: string;
+  seoDescription: string;
+  ogImage?: (number | null) | Media;
+  navLinks?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  servicesMenuLabel: string;
+  serviceLinks?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  footerServiceLinks?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  contactCtaLabel: string;
+  contactCtaHref: string;
+  footerTagline: string;
+  footerNavHeading: string;
+  footerServicesHeading: string;
+  footerPoliciesHeading: string;
+  footerContactHeading: string;
+  policyLinks?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  copyright: string;
+  disclaimer: string;
+  legalEyebrow: string;
+  legalOnThisPage: string;
+  legalContactLine: string;
+  heroBannerKicker: string;
+  heroBannerWordmark: string;
+  carouselEmptyLabel: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -875,10 +943,17 @@ export interface AboutUs {
   headline: string;
   highlight: string;
   heroImage?: (number | null) | Media;
+  heroEyebrow: string;
+  bannerLabel: string;
   backgroundHeading: string;
   background: string;
+  visionEyebrow: string;
+  visionHeading: string;
   vision: string;
+  missionEyebrow: string;
+  missionHeading: string;
   mission: string;
+  leadershipEyebrow: string;
   leadershipHeading: string;
   leadershipIntro: string;
   leaders?:
@@ -890,6 +965,7 @@ export interface AboutUs {
         id?: string | null;
       }[]
     | null;
+  milestonesEyebrow: string;
   milestonesHeading: string;
   milestonesIntro: string;
   milestones?:
@@ -915,11 +991,28 @@ export interface AboutUs {
 export interface ContactUs {
   id: number;
   headline: string;
+  heroEyebrow: string;
+  bannerLabel: string;
+  officeEyebrow: string;
   companyName: string;
   companyNumber: string;
+  formEyebrow: string;
   formTitle: string;
   formDescription: string;
   heroImage?: (number | null) | Media;
+  form: {
+    nameLabel: string;
+    emailLabel: string;
+    phoneLabel: string;
+    companyNameLabel: string;
+    companyAddressLabel: string;
+    messageLabel: string;
+    privacyLine: string;
+    successMessage: string;
+    errorFallback: string;
+    submitLabel: string;
+    submittingLabel: string;
+  };
   seo?: {
     title?: string | null;
     description?: string | null;
@@ -995,6 +1088,11 @@ export interface EventsPage {
   heading: string;
   highlight: string;
   heroImage?: (number | null) | Media;
+  eyebrow: string;
+  bannerLabel: string;
+  emptyTitle: string;
+  emptyMeta: string;
+  viewLabel: string;
   seo?: {
     title?: string | null;
     description?: string | null;
@@ -1012,6 +1110,25 @@ export interface ProjectsPage {
   heading: string;
   highlight: string;
   heroImage?: (number | null) | Media;
+  eyebrow: string;
+  bannerLabel: string;
+  emptyTitle: string;
+  emptyMeta: string;
+  detailsLabel: string;
+  completedLabel: string;
+  ongoingLabel: string;
+  clientLabel: string;
+  consultantLabel: string;
+  consultantsLabel: string;
+  scopeLabel: string;
+  commencementLabel: string;
+  completionLabel: string;
+  presentLabel: string;
+  detailCta: {
+    heading: string;
+    ctaLabel: string;
+    ctaHref: string;
+  };
   seo?: {
     title?: string | null;
     description?: string | null;
@@ -1029,8 +1146,36 @@ export interface CareerPage {
   heading: string;
   highlight: string;
   heroImage?: (number | null) | Media;
+  eyebrow: string;
+  bannerLabel: string;
+  positionsHeading: string;
   applyHeading: string;
   applyBody: string;
+  form: {
+    nameLabel: string;
+    emailLabel: string;
+    phoneLabel: string;
+    vacancyLabel: string;
+    selectPlaceholder: string;
+    introductionLabel: string;
+    resumeLabel: string;
+    closedLabel: string;
+    applyButtonLabel: string;
+    noOpeningsMessage: string;
+    privacyLine: string;
+    successMessage: string;
+    errorFallback: string;
+    submitLabel: string;
+    submittingLabel: string;
+    nameRequired: string;
+    emailInvalid: string;
+    phoneRequired: string;
+    vacancyRequired: string;
+    introductionRequired: string;
+    resumeRequired: string;
+    resumeMustBePdf: string;
+    resumeTooLarge: string;
+  };
   seo?: {
     title?: string | null;
     description?: string | null;
@@ -1048,6 +1193,8 @@ export interface ServiceDataCentre {
   heading: string;
   highlight: string;
   heroImage?: (number | null) | Media;
+  eyebrow: string;
+  bannerLabel: string;
   intro: string;
   turnkey: {
     title: string;
@@ -1081,6 +1228,7 @@ export interface ServiceDataCentre {
         }[]
       | null;
   };
+  equipmentPlaceholderCaption: string;
   whyHeading: string;
   why?:
     | {
@@ -1107,6 +1255,8 @@ export interface ServiceHighTension {
   heading: string;
   highlight: string;
   heroImage?: (number | null) | Media;
+  eyebrow: string;
+  bannerLabel: string;
   intro: string;
   power?:
     | {
@@ -1187,6 +1337,8 @@ export interface ServiceProjectManagement {
   heading: string;
   highlight: string;
   heroImage?: (number | null) | Media;
+  eyebrow: string;
+  bannerLabel: string;
   servicesHeading: string;
   services?:
     | {
@@ -1195,6 +1347,7 @@ export interface ServiceProjectManagement {
         id?: string | null;
       }[]
     | null;
+  whyHeading: string;
   why?:
     | {
         title: string;
@@ -1220,6 +1373,8 @@ export interface ServiceFacilitiesManagement {
   heading: string;
   highlight: string;
   heroImage?: (number | null) | Media;
+  eyebrow: string;
+  bannerLabel: string;
   intro: string;
   support: {
     title: string;
@@ -1271,6 +1426,8 @@ export interface ServiceDfma {
   heading: string;
   highlight: string;
   heroImage?: (number | null) | Media;
+  eyebrow: string;
+  bannerLabel: string;
   facts?:
     | {
         label: string;
@@ -1306,6 +1463,7 @@ export interface ServiceDfma {
     title: string;
     image?: (number | null) | Media;
   };
+  whyHeading: string;
   why?:
     | {
         title: string;
@@ -1332,18 +1490,24 @@ export interface LandingSelect<T extends boolean = true> {
     | {
         punchline?: T;
         learnMoreLabel?: T;
+        welcomeLabel?: T;
+        commissionLabel?: T;
       };
   whoWeAre?:
     | T
     | {
+        eyebrow?: T;
         header?: T;
         body?: T;
         ctaLabel?: T;
         ctaHref?: T;
+        modelCaptionTitle?: T;
+        modelCaptionSubtitle?: T;
       };
   facts?:
     | T
     | {
+        eyebrow?: T;
         header?: T;
         body?: T;
         stats?:
@@ -1358,8 +1522,10 @@ export interface LandingSelect<T extends boolean = true> {
   services?:
     | T
     | {
+        eyebrow?: T;
         header?: T;
         body?: T;
+        placeholderLabel?: T;
         items?:
           | T
           | {
@@ -1367,12 +1533,14 @@ export interface LandingSelect<T extends boolean = true> {
               tagline?: T;
               body?: T;
               image?: T;
+              icon?: T;
               id?: T;
             };
       };
   whyUs?:
     | T
     | {
+        eyebrow?: T;
         header?: T;
         cards?:
           | T
@@ -1386,7 +1554,10 @@ export interface LandingSelect<T extends boolean = true> {
   certs?:
     | T
     | {
+        eyebrow?: T;
         header?: T;
+        slideEyebrow?: T;
+        placeholderLabel?: T;
         items?:
           | T
           | {
@@ -1399,8 +1570,10 @@ export interface LandingSelect<T extends boolean = true> {
   clients?:
     | T
     | {
+        eyebrow?: T;
         header?: T;
         body?: T;
+        placeholderLabel?: T;
         logos?:
           | T
           | {
@@ -1413,6 +1586,7 @@ export interface LandingSelect<T extends boolean = true> {
   projects?:
     | T
     | {
+        eyebrow?: T;
         header?: T;
         body?: T;
         ctaLabel?: T;
@@ -1449,6 +1623,58 @@ export interface SettingsSelect<T extends boolean = true> {
   linkedin?: T;
   instagram?: T;
   facebook?: T;
+  siteName?: T;
+  legalName?: T;
+  logo?: T;
+  wordmarkTop?: T;
+  wordmarkBottom?: T;
+  seoTitle?: T;
+  seoDescription?: T;
+  ogImage?: T;
+  navLinks?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  servicesMenuLabel?: T;
+  serviceLinks?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  footerServiceLinks?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  contactCtaLabel?: T;
+  contactCtaHref?: T;
+  footerTagline?: T;
+  footerNavHeading?: T;
+  footerServicesHeading?: T;
+  footerPoliciesHeading?: T;
+  footerContactHeading?: T;
+  policyLinks?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  copyright?: T;
+  disclaimer?: T;
+  legalEyebrow?: T;
+  legalOnThisPage?: T;
+  legalContactLine?: T;
+  heroBannerKicker?: T;
+  heroBannerWordmark?: T;
+  carouselEmptyLabel?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1461,10 +1687,17 @@ export interface AboutUsSelect<T extends boolean = true> {
   headline?: T;
   highlight?: T;
   heroImage?: T;
+  heroEyebrow?: T;
+  bannerLabel?: T;
   backgroundHeading?: T;
   background?: T;
+  visionEyebrow?: T;
+  visionHeading?: T;
   vision?: T;
+  missionEyebrow?: T;
+  missionHeading?: T;
   mission?: T;
+  leadershipEyebrow?: T;
   leadershipHeading?: T;
   leadershipIntro?: T;
   leaders?:
@@ -1476,6 +1709,7 @@ export interface AboutUsSelect<T extends boolean = true> {
         portrait?: T;
         id?: T;
       };
+  milestonesEyebrow?: T;
   milestonesHeading?: T;
   milestonesIntro?: T;
   milestones?:
@@ -1503,11 +1737,30 @@ export interface AboutUsSelect<T extends boolean = true> {
  */
 export interface ContactUsSelect<T extends boolean = true> {
   headline?: T;
+  heroEyebrow?: T;
+  bannerLabel?: T;
+  officeEyebrow?: T;
   companyName?: T;
   companyNumber?: T;
+  formEyebrow?: T;
   formTitle?: T;
   formDescription?: T;
   heroImage?: T;
+  form?:
+    | T
+    | {
+        nameLabel?: T;
+        emailLabel?: T;
+        phoneLabel?: T;
+        companyNameLabel?: T;
+        companyAddressLabel?: T;
+        messageLabel?: T;
+        privacyLine?: T;
+        successMessage?: T;
+        errorFallback?: T;
+        submitLabel?: T;
+        submittingLabel?: T;
+      };
   seo?:
     | T
     | {
@@ -1589,6 +1842,11 @@ export interface EventsPageSelect<T extends boolean = true> {
   heading?: T;
   highlight?: T;
   heroImage?: T;
+  eyebrow?: T;
+  bannerLabel?: T;
+  emptyTitle?: T;
+  emptyMeta?: T;
+  viewLabel?: T;
   seo?:
     | T
     | {
@@ -1608,6 +1866,27 @@ export interface ProjectsPageSelect<T extends boolean = true> {
   heading?: T;
   highlight?: T;
   heroImage?: T;
+  eyebrow?: T;
+  bannerLabel?: T;
+  emptyTitle?: T;
+  emptyMeta?: T;
+  detailsLabel?: T;
+  completedLabel?: T;
+  ongoingLabel?: T;
+  clientLabel?: T;
+  consultantLabel?: T;
+  consultantsLabel?: T;
+  scopeLabel?: T;
+  commencementLabel?: T;
+  completionLabel?: T;
+  presentLabel?: T;
+  detailCta?:
+    | T
+    | {
+        heading?: T;
+        ctaLabel?: T;
+        ctaHref?: T;
+      };
   seo?:
     | T
     | {
@@ -1627,8 +1906,38 @@ export interface CareerPageSelect<T extends boolean = true> {
   heading?: T;
   highlight?: T;
   heroImage?: T;
+  eyebrow?: T;
+  bannerLabel?: T;
+  positionsHeading?: T;
   applyHeading?: T;
   applyBody?: T;
+  form?:
+    | T
+    | {
+        nameLabel?: T;
+        emailLabel?: T;
+        phoneLabel?: T;
+        vacancyLabel?: T;
+        selectPlaceholder?: T;
+        introductionLabel?: T;
+        resumeLabel?: T;
+        closedLabel?: T;
+        applyButtonLabel?: T;
+        noOpeningsMessage?: T;
+        privacyLine?: T;
+        successMessage?: T;
+        errorFallback?: T;
+        submitLabel?: T;
+        submittingLabel?: T;
+        nameRequired?: T;
+        emailInvalid?: T;
+        phoneRequired?: T;
+        vacancyRequired?: T;
+        introductionRequired?: T;
+        resumeRequired?: T;
+        resumeMustBePdf?: T;
+        resumeTooLarge?: T;
+      };
   seo?:
     | T
     | {
@@ -1648,6 +1957,8 @@ export interface ServiceDataCentreSelect<T extends boolean = true> {
   heading?: T;
   highlight?: T;
   heroImage?: T;
+  eyebrow?: T;
+  bannerLabel?: T;
   intro?: T;
   turnkey?:
     | T
@@ -1687,6 +1998,7 @@ export interface ServiceDataCentreSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  equipmentPlaceholderCaption?: T;
   whyHeading?: T;
   why?:
     | T
@@ -1715,6 +2027,8 @@ export interface ServiceHighTensionSelect<T extends boolean = true> {
   heading?: T;
   highlight?: T;
   heroImage?: T;
+  eyebrow?: T;
+  bannerLabel?: T;
   intro?: T;
   power?:
     | T
@@ -1803,6 +2117,8 @@ export interface ServiceProjectManagementSelect<T extends boolean = true> {
   heading?: T;
   highlight?: T;
   heroImage?: T;
+  eyebrow?: T;
+  bannerLabel?: T;
   servicesHeading?: T;
   services?:
     | T
@@ -1811,6 +2127,7 @@ export interface ServiceProjectManagementSelect<T extends boolean = true> {
         icon?: T;
         id?: T;
       };
+  whyHeading?: T;
   why?:
     | T
     | {
@@ -1838,6 +2155,8 @@ export interface ServiceFacilitiesManagementSelect<T extends boolean = true> {
   heading?: T;
   highlight?: T;
   heroImage?: T;
+  eyebrow?: T;
+  bannerLabel?: T;
   intro?: T;
   support?:
     | T
@@ -1895,6 +2214,8 @@ export interface ServiceDfmaSelect<T extends boolean = true> {
   heading?: T;
   highlight?: T;
   heroImage?: T;
+  eyebrow?: T;
+  bannerLabel?: T;
   facts?:
     | T
     | {
@@ -1936,6 +2257,7 @@ export interface ServiceDfmaSelect<T extends boolean = true> {
         title?: T;
         image?: T;
       };
+  whyHeading?: T;
   why?:
     | T
     | {

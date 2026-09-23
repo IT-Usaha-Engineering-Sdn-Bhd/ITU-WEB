@@ -19,7 +19,7 @@ export function WhyUs({ data }: { data: Landing['whyUs'] }) {
     <section id="why-us" data-section="why-us" className="landing-section why-section">
       <div className="section-shell">
         <Reveal className="section-intro centered">
-          <p className="eyebrow">Confidence at every stage</p>
+          <p className="eyebrow">{data.eyebrow}</p>
           <h2 className="section-heading">{data.header}</h2>
         </Reveal>
         <div className="why-grid">

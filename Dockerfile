@@ -16,5 +16,8 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npx next build
 
+RUN chown -R node:node /app
+USER node
+
 ENV NODE_ENV=production
 CMD ["npx", "next", "start"]

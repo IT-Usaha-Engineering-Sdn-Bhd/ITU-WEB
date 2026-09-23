@@ -1,5 +1,5 @@
 import type { Field, GlobalConfig } from 'payload'
-import { area, media, seo, text } from '@/collections/fields'
+import { area, copy, media, seo, text } from '@/collections/fields'
 
 const group = 'Our Services'
 const bullets = (name: string): Field => ({
@@ -26,6 +26,8 @@ export const ServiceDataCentre: GlobalConfig = {
     text('heading'),
     text('highlight'),
     media('heroImage'),
+    copy('eyebrow', 'Our Services'),
+    copy('bannerLabel', 'Data Centre & Critical System'),
     area('intro'),
     {
       name: 'turnkey',
@@ -48,6 +50,10 @@ export const ServiceDataCentre: GlobalConfig = {
         { name: 'equipment', type: 'array', fields: [media('image'), text('caption', false)] },
       ],
     },
+    // Top-level, not nested in `testing` — a new field inside an already-populated group would
+    // read back as undefined until re-saved, since the top-level fallback only fills in gaps
+    // at the object's own root (see withDefaults in inner-pages.ts).
+    copy('equipmentPlaceholderCaption', 'Equipment details coming soon'),
     text('whyHeading'),
     cards('why'),
     seo,
@@ -70,6 +76,8 @@ export const ServiceHighTension: GlobalConfig = {
     text('heading'),
     text('highlight'),
     media('heroImage'),
+    copy('eyebrow', 'Our Services'),
+    copy('bannerLabel', 'High Tension & Electrical Services'),
     area('intro'),
     { name: 'power', type: 'array', fields: sectionFields },
     { name: 'divider1', type: 'group', fields: [text('heading'), area('body')] },
@@ -93,8 +101,11 @@ export const ServiceProjectManagement: GlobalConfig = {
     text('heading'),
     text('highlight'),
     media('heroImage'),
+    copy('eyebrow', 'Our Services'),
+    copy('bannerLabel', 'Project Management'),
     text('servicesHeading'),
     { name: 'services', type: 'array', fields: [text('title'), media('icon')] },
+    copy('whyHeading', 'Why Choose Us?'),
     cards('why'),
     seo,
   ],
@@ -108,6 +119,8 @@ export const ServiceFacilitiesManagement: GlobalConfig = {
     text('heading'),
     text('highlight'),
     media('heroImage'),
+    copy('eyebrow', 'Our Services'),
+    copy('bannerLabel', 'Facilities Management'),
     area('intro'),
     {
       name: 'support',
@@ -133,6 +146,8 @@ export const ServiceDfma: GlobalConfig = {
     text('heading'),
     text('highlight'),
     media('heroImage'),
+    copy('eyebrow', 'Our Services'),
+    copy('bannerLabel', 'DFMA'),
     { name: 'facts', type: 'array', fields: [text('label'), text('value')] },
     {
       name: 'capabilities',
@@ -141,6 +156,7 @@ export const ServiceDfma: GlobalConfig = {
     },
     { name: 'benefits', type: 'group', fields: [text('title'), bullets('items'), media('image')] },
     { name: 'visual', type: 'group', fields: [text('title'), media('image')] },
+    copy('whyHeading', 'Why Choose Us?'),
     cards('why'),
     seo,
   ],

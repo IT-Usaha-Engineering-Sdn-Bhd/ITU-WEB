@@ -89,16 +89,13 @@ export function dateRange(
   status: ProjectStatus,
   commencementDate?: string | null,
   completionDate?: string | null,
+  presentLabel = 'Present',
 ): string {
   const start = formatMonthYear(commencementDate)
   const end = completionDate
     ? formatMonthYear(completionDate)
     : status === 'ongoing'
-      ? 'Present'
+      ? presentLabel
       : ''
   return [start, end].filter(Boolean).join(' – ')
-}
-
-export function consultantLabel(count: number): string {
-  return count > 1 ? 'Data Center Consultants' : 'Data Center Consultant'
 }

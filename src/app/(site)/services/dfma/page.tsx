@@ -7,7 +7,9 @@ import {
   Stack,
   Truck,
 } from '@phosphor-icons/react/dist/ssr'
-import { getServiceDfma, serviceMetadata } from '@/lib/inner-pages'
+import { getServiceDfma } from '@/lib/inner-pages'
+import { getSettings } from '@/lib/site-content'
+import { pageMetadata } from '@/lib/seo'
 import { mediaUrl } from '@/lib/media'
 import { HeroBanner } from '@/components/inner/HeroBanner'
 import { SplitSection } from '@/components/services/SplitSection'
@@ -22,24 +24,29 @@ const benefitIcons = [ClockCountdown, Stack, Blueprint]
 const path = '/services/dfma'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await getServiceDfma()
-  return serviceMetadata(data, 'DFMA', path)
+  const [data, settings] = await Promise.all([getServiceDfma(), getSettings()])
+  return pageMetadata(data, 'DFMA', path, settings.siteName)
 }
 
 export default async function DfmaPage() {
-  const data = await getServiceDfma()
+  const [data, settings] = await Promise.all([getServiceDfma(), getSettings()])
   const visualUrl = mediaUrl(data.visual.image)
 
   return (
     <main id="main-content" className="inner-page">
       <section className="section-shell inner-hero">
-        <p className="eyebrow">Our Services</p>
+        <p className="eyebrow">{data.eyebrow}</p>
         <h1 className="section-heading">
           {data.heading.split(data.highlight)[0]}
           <span className="text-accent">{data.highlight}</span>
         </h1>
       </section>
-      <HeroBanner image={data.heroImage} label="DFMA" />
+      <HeroBanner
+        image={data.heroImage}
+        label={data.bannerLabel}
+        kicker={settings.heroBannerKicker}
+        wordmark={settings.heroBannerWordmark}
+      />
 
       <section className="section-shell service-content">
         <Reveal className="service-facts">
@@ -91,7 +98,7 @@ export default async function DfmaPage() {
           )}
         </Reveal>
       </section>
-      <ImageCards heading="Why Choose Us?" items={data.why ?? []} icon={Cube} />
+      <ImageCards heading={data.whyHeading} items={data.why ?? []} icon={Cube} />
     </main>
   )
 }

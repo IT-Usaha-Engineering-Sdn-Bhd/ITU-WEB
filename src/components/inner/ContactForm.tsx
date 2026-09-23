@@ -3,14 +3,37 @@ import Link from 'next/link'
 import { useState, type FormEvent } from 'react'
 import { ArrowUpRight } from '@phosphor-icons/react'
 
-const fields = [
-  { name: 'name', label: 'Name', required: true, maxLength: 120 },
-  { name: 'email', label: 'Email Address', required: true, maxLength: 254, type: 'email' },
-  { name: 'phone', label: 'Contact No.', required: true, maxLength: 40, type: 'tel' },
-  { name: 'companyName', label: 'Company Name', required: false, maxLength: 200 },
-] as const
+type Labels = {
+  nameLabel: string
+  emailLabel: string
+  phoneLabel: string
+  companyNameLabel: string
+  companyAddressLabel: string
+  messageLabel: string
+  privacyLine: string
+  successMessage: string
+  errorFallback: string
+  submitLabel: string
+  submittingLabel: string
+}
 
-export function ContactForm({ title, description }: { title: string; description: string }) {
+export function ContactForm({
+  eyebrow,
+  title,
+  description,
+  labels,
+}: {
+  eyebrow: string
+  title: string
+  description: string
+  labels: Labels
+}) {
+  const fields = [
+    { name: 'name', label: labels.nameLabel, required: true, maxLength: 120 },
+    { name: 'email', label: labels.emailLabel, required: true, maxLength: 254, type: 'email' },
+    { name: 'phone', label: labels.phoneLabel, required: true, maxLength: 40, type: 'tel' },
+    { name: 'companyName', label: labels.companyNameLabel, required: false, maxLength: 200 },
+  ] as const
   const [state, setState] = useState<'idle' | 'pending' | 'success' | 'error'>('idle')
   const [error, setError] = useState('')
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -27,22 +50,17 @@ export function ContactForm({ title, description }: { title: string; description
         body: JSON.stringify(values),
       })
       const result = await response.json()
-      if (!response.ok)
-        throw new Error(result.error || 'Your message could not be sent. Please try again.')
+      if (!response.ok) throw new Error(result.error || labels.errorFallback)
       form.reset()
       setState('success')
     } catch (cause) {
-      setError(
-        cause instanceof Error
-          ? cause.message
-          : 'Your message could not be sent. Please try again.',
-      )
+      setError(cause instanceof Error ? cause.message : labels.errorFallback)
       setState('error')
     }
   }
   return (
     <div className="contact-form-panel">
-      <p className="eyebrow">Start a conversation</p>
+      <p className="eyebrow">{eyebrow}</p>
       <h2>{title}</h2>
       <p className="section-body">{description}</p>
       <form onSubmit={submit} aria-busy={state === 'pending'}>
@@ -70,11 +88,11 @@ export function ContactForm({ title, description }: { title: string; description
           ))}
         </div>
         <label>
-          Company Address
+          {labels.companyAddressLabel}
           <textarea name="companyAddress" maxLength={1000} rows={2} autoComplete="street-address" />
         </label>
         <label>
-          Message <span aria-hidden="true">*</span>
+          {labels.messageLabel} <span aria-hidden="true">*</span>
           <textarea name="message" maxLength={5000} rows={5} required />
         </label>
         <div className="form-trap" aria-hidden="true">
@@ -84,12 +102,11 @@ export function ContactForm({ title, description }: { title: string; description
           </label>
         </div>
         <p className="form-privacy">
-          Your details are handled according to our{' '}
-          <Link href="/privacy-policy">Privacy Policy</Link>.
+          {labels.privacyLine} <Link href="/privacy-policy">Privacy Policy</Link>.
         </p>
         {state === 'success' && (
           <p role="status" className="form-success">
-            Thank you. Your enquiry has been received.
+            {labels.successMessage}
           </p>
         )}
         {state === 'error' && (
@@ -98,7 +115,7 @@ export function ContactForm({ title, description }: { title: string; description
           </p>
         )}
         <button className="button button-accent" type="submit" disabled={state === 'pending'}>
-          {state === 'pending' ? 'Submitting…' : 'Submit Now'}
+          {state === 'pending' ? labels.submittingLabel : labels.submitLabel}
           <ArrowUpRight size={18} />
         </button>
       </form>

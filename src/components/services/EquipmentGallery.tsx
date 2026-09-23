@@ -11,13 +11,13 @@ import { ServiceImage } from './ServiceImage'
 export function EquipmentGallery({
   galleryTitle,
   equipment,
+  placeholderCaption,
 }: {
   galleryTitle: string
   equipment: { image?: number | Media | null; caption?: string | null }[]
+  placeholderCaption: string
 }) {
-  const items = equipment.length
-    ? equipment
-    : [{ image: null, caption: 'Equipment details coming soon' }]
+  const items = equipment.length ? equipment : [{ image: null, caption: placeholderCaption }]
   return (
     <Carousel
       ariaLabel={galleryTitle}

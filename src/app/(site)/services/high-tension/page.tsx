@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import { GearSix, Lightning, ShieldCheck, Thermometer } from '@phosphor-icons/react/dist/ssr'
 import type { Icon } from '@phosphor-icons/react'
-import { getServiceHighTension, serviceMetadata } from '@/lib/inner-pages'
+import { getServiceHighTension } from '@/lib/inner-pages'
+import { getSettings } from '@/lib/site-content'
+import { pageMetadata } from '@/lib/seo'
 import { HeroBanner } from '@/components/inner/HeroBanner'
 import { SplitSection } from '@/components/services/SplitSection'
 import { IconList } from '@/components/services/IconList'
@@ -15,8 +17,8 @@ const protectionIcons: Icon[] = [ShieldCheck, Lightning, Lightning]
 const path = '/services/high-tension'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const data = await getServiceHighTension()
-  return serviceMetadata(data, 'High Tension & Electrical Services', path)
+  const [data, settings] = await Promise.all([getServiceHighTension(), getSettings()])
+  return pageMetadata(data, 'High Tension & Electrical Services', path, settings.siteName)
 }
 
 function Group({
@@ -52,18 +54,23 @@ function Group({
 }
 
 export default async function HighTensionPage() {
-  const data = await getServiceHighTension()
+  const [data, settings] = await Promise.all([getServiceHighTension(), getSettings()])
 
   return (
     <main id="main-content" className="inner-page">
       <section className="section-shell inner-hero">
-        <p className="eyebrow">Our Services</p>
+        <p className="eyebrow">{data.eyebrow}</p>
         <h1 className="section-heading">
           {data.heading.split(data.highlight)[0]}
           <span className="text-accent">{data.highlight}</span>
         </h1>
       </section>
-      <HeroBanner image={data.heroImage} label="High Tension & Electrical Services" />
+      <HeroBanner
+        image={data.heroImage}
+        label={data.bannerLabel}
+        kicker={settings.heroBannerKicker}
+        wordmark={settings.heroBannerWordmark}
+      />
 
       <section className="section-shell service-intro">
         <p className="section-body">{data.intro}</p>
@@ -82,7 +89,7 @@ export default async function HighTensionPage() {
       </section>
 
       <ImageCards
-        heading="Why Choose Us?"
+        heading={data.feature.eyebrow}
         items={[{ title: data.feature.title, body: data.feature.body, image: data.feature.image }]}
         icon={ShieldCheck}
       />

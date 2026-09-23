@@ -4,7 +4,15 @@ import { ArrowDown } from '@phosphor-icons/react'
 import { useStage } from '@/three/stage'
 import { SoundToggle } from '@/components/SoundToggle'
 
-export function Hero({ punchline }: { punchline: string }) {
+export function Hero({
+  punchline,
+  exploreLabel,
+  logoUrl,
+}: {
+  punchline: string
+  exploreLabel: string
+  logoUrl: string
+}) {
   const { sceneFailed, sceneReady } = useStage()
   const scrollToWhoWeAre = () =>
     document.getElementById('who-we-are')?.scrollIntoView({
@@ -17,7 +25,7 @@ export function Hero({ punchline }: { punchline: string }) {
       <div id="hero-viewport" className="absolute inset-0" aria-hidden="true" />
       {(sceneFailed || !sceneReady) && (
         <div className="logo-poster" aria-hidden="true">
-          <Image src="/assets/logo.png" alt="" width={100} height={138} />
+          <Image src={logoUrl} alt="" width={100} height={138} />
         </div>
       )}
       <div className="hero-top">
@@ -28,7 +36,7 @@ export function Hero({ punchline }: { punchline: string }) {
           {punchline}
         </h1>
         <button type="button" className="text-button" onClick={scrollToWhoWeAre}>
-          Explore our expertise <ArrowDown size={20} />
+          {exploreLabel} <ArrowDown size={20} />
         </button>
       </div>
     </section>

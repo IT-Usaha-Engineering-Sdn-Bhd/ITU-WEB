@@ -1,7 +1,6 @@
 import { strict as assert } from 'node:assert'
 import { test } from 'node:test'
 import {
-  consultantLabel,
   dateRange,
   formatMonthYear,
   parseCategory,
@@ -64,10 +63,8 @@ test('dateRange shows Present for ongoing projects with no completion date', () 
   )
   assert.equal(dateRange('ongoing', '2025-09-01T00:00:00.000Z', null), 'Sept 2025 – Present')
   assert.equal(dateRange('completed', '2025-09-01T00:00:00.000Z', null), 'Sept 2025')
-})
-
-test('consultantLabel pluralizes only for more than one', () => {
-  assert.equal(consultantLabel(0), 'Data Center Consultant')
-  assert.equal(consultantLabel(1), 'Data Center Consultant')
-  assert.equal(consultantLabel(2), 'Data Center Consultants')
+  assert.equal(
+    dateRange('ongoing', '2025-09-01T00:00:00.000Z', null, 'Ongoing'),
+    'Sept 2025 – Ongoing',
+  )
 })

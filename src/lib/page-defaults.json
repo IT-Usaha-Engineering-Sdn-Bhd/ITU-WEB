@@ -2,10 +2,17 @@
   "aboutUs": {
     "headline": "Leading M&E Engineering Company with Decades of Excellence",
     "highlight": "Decades of Excellence",
+    "heroEyebrow": "About IT Usaha",
+    "bannerLabel": "About Us",
     "backgroundHeading": "Our Background",
     "background": "IT Usaha Engineering Sdn Bhd is a leading engineering firm in Malaysia, specializing in Data Centre infrastructure and mission-critical electrical systems. With decades of industry experience and a proven track record of delivering more than 30 Data Centres nationwide, we support some of the most demanding clients in the digital ecosystem.\n\n  Our services cover the full project lifecycle, from initial design and engineering to construction, testing, and facilities management. Backed by a highly skilled team of engineers, project managers, and technical staff, we offer expertise in mechanical and electrical (M&E) works, HT and LV systems, BMS, Security System, ELV installations, BIM modeling, CFD simulation, and ETAP – Energy Management Solution Software. Known for our strong safety performance, strong financial footing, and strategic partnerships with global technology providers, we deliver infrastructure that meets international standards for reliability, scalability, and efficiency.",
+    "visionEyebrow": "01 / Vision",
+    "visionHeading": "Our Vision",
     "vision": "To be the No.1 MEP engineering solutions provider, recognized for our commitment to quality, sustainability, and client satisfaction in the Data Centre industry",
+    "missionEyebrow": "02 / Mission",
+    "missionHeading": "Our Mission",
     "mission": "To design and implement cutting-edge MEP solutions that power the seamless operation of critical data centre environments by optimizing energy efficiency, uncompromising reliability, and long-term sustainability.",
+    "leadershipEyebrow": "People",
     "leadershipHeading": "Our Leadership",
     "leadershipIntro": "Meet the driving forces behind IT Usaha that made us what we are today, and continue to lead the team towards higher standards and performance.",
     "leaders": [
@@ -25,6 +32,7 @@
         "bio": "Since 2001, our Executive Director has overseen the overall management and development of IT Usaha, ensuring smooth operations and effective coordination across all departments. He is instrumental in building strong teams, streamlining processes, and maintaining high standards of performance. His commitment to quality and structured management practices supports the company’s alignment with ISO 9001:2015 standards."
       }
     ],
+    "milestonesEyebrow": "Our journey",
     "milestonesHeading": "Company Milestones",
     "milestonesIntro": "Since 1997, every project and achievement has marked a step forward in our journey. Discover the key milestones that highlight our evolution from a local electrical contractor to a leading M&E solutions provider for mission-critical infrastructure.",
     "milestones": [
@@ -92,10 +100,27 @@
   },
   "contactUs": {
     "headline": "Let's Discuss Your Project",
+    "heroEyebrow": "Get in touch",
+    "bannerLabel": "Contact Us",
+    "officeEyebrow": "Our office",
     "companyName": "IT Usaha Engineering Sdn Bhd",
     "companyNumber": "Company No.: 199701017053 (432550-U)",
+    "formEyebrow": "Start a conversation",
     "formTitle": "Contact Us",
     "formDescription": "Have a Data Centre or critical system project in mind? Reach out to our team of experts for a consultation. We’re ready to deliver tailored engineering solutions that meet your goals—on time and on budget.",
+    "form": {
+      "nameLabel": "Name",
+      "emailLabel": "Email Address",
+      "phoneLabel": "Contact No.",
+      "companyNameLabel": "Company Name",
+      "companyAddressLabel": "Company Address",
+      "messageLabel": "Message",
+      "privacyLine": "Your details are handled according to our",
+      "successMessage": "Thank you. Your enquiry has been received.",
+      "errorFallback": "Your message could not be sent. Please try again.",
+      "submitLabel": "Submit Now",
+      "submittingLabel": "Submitting…"
+    },
     "seo": {
       "title": "Contact Us",
       "description": "Discuss your data centre or critical system project with IT Usaha Engineering."
@@ -221,6 +246,11 @@
   "eventsPage": {
     "heading": "What's Happening at IT Usaha",
     "highlight": "Usaha",
+    "eyebrow": "Events",
+    "bannerLabel": "Events",
+    "emptyTitle": "More events in this category are on the way",
+    "emptyMeta": "Coming soon",
+    "viewLabel": "View Event",
     "seo": {
       "title": "Events",
       "description": "See what's happening at IT Usaha Engineering."
@@ -229,6 +259,25 @@
   "projectsPage": {
     "heading": "Data Centres and MEP Projects",
     "highlight": "Projects",
+    "eyebrow": "Projects",
+    "bannerLabel": "Projects",
+    "emptyTitle": "More projects in this status are on the way",
+    "emptyMeta": "Coming soon",
+    "detailsLabel": "Project Details",
+    "completedLabel": "Completed",
+    "ongoingLabel": "Ongoing",
+    "clientLabel": "Client",
+    "consultantLabel": "Data Center Consultant",
+    "consultantsLabel": "Data Center Consultants",
+    "scopeLabel": "Scope of Works",
+    "commencementLabel": "Commencement Date",
+    "completionLabel": "Completion Date",
+    "presentLabel": "Present",
+    "detailCta": {
+      "heading": "Have a project in mind? We’re here to help you plan, build, and maintain it with confidence",
+      "ctaLabel": "Contact Us",
+      "ctaHref": "/contact-us"
+    },
     "seo": {
       "title": "Projects",
       "description": "Data centres and MEP projects delivered by IT Usaha Engineering."
@@ -237,8 +286,36 @@
   "careerPage": {
     "heading": "Begin Your Career at IT Usaha Engineering",
     "highlight": "Engineering",
+    "eyebrow": "Career",
+    "bannerLabel": "Career",
+    "positionsHeading": "Available Positions",
     "applyHeading": "Apply Now",
     "applyBody": "We’re always looking for passionate and skilled individuals to join our growing team. Submit your application below and take the first step toward building a meaningful career in M&E engineering and critical infrastructure solutions.",
+    "form": {
+      "nameLabel": "Name",
+      "emailLabel": "Email Address",
+      "phoneLabel": "Contact No.",
+      "vacancyLabel": "Position Applying For",
+      "selectPlaceholder": "Select a position",
+      "introductionLabel": "Brief Introduction",
+      "resumeLabel": "Upload Résumé (PDF, up to 5MB)",
+      "closedLabel": "Closed",
+      "applyButtonLabel": "Apply for this position",
+      "noOpeningsMessage": "There are no open positions right now. Please check back soon.",
+      "privacyLine": "Your details are handled according to our",
+      "successMessage": "Thank you. Your application has been received.",
+      "errorFallback": "Your application could not be sent. Please try again.",
+      "submitLabel": "Submit Now",
+      "submittingLabel": "Submitting…",
+      "nameRequired": "Enter your name.",
+      "emailInvalid": "Enter a valid email address.",
+      "phoneRequired": "Enter a contact number.",
+      "vacancyRequired": "Select a position.",
+      "introductionRequired": "Tell us a little about yourself.",
+      "resumeRequired": "Attach your résumé.",
+      "resumeMustBePdf": "Résumé must be a PDF.",
+      "resumeTooLarge": "Résumé must be under 5MB."
+    },
     "seo": {
       "title": "Career",
       "description": "Explore open positions at IT Usaha Engineering."
@@ -247,6 +324,8 @@
   "serviceDataCentre": {
     "heading": "Data Centre & Critical System",
     "highlight": "System",
+    "eyebrow": "Our Services",
+    "bannerLabel": "Data Centre & Critical System",
     "intro": "Since 1997, ITU has completed many Data Centre projects nationwide, we don’t just build data centres but we run them. With decades of industry experience and more than 100 completed projects nationwide, we are both a trusted MEP and data centre contractor, supporting some of Malaysia’s most demanding digital workloads.",
     "turnkey": {
       "title": "Turnkey Design, Build & Operate Services",
@@ -278,6 +357,7 @@
       "galleryTitle": "Commissioning Equipment",
       "equipment": []
     },
+    "equipmentPlaceholderCaption": "Equipment details coming soon",
     "whyHeading": "Why Choose Us?",
     "why": [
       {
@@ -297,6 +377,8 @@
   "serviceHighTension": {
     "heading": "High Tension & Low Voltage Electric Power and High Tension Switchgear & Transformer",
     "highlight": "Transformer",
+    "eyebrow": "Our Services",
+    "bannerLabel": "High Tension & Electrical Services",
     "intro": "We deliver safe, reliable, and code-compliant high tension (HT) and low voltage (LV) electrical systems to support commercial, industrial, and data centre operations. From substation setup to transformer and switchgear installation, our team ensures consistent, stable power distribution for even the most demanding facilities.",
     "power": [
       {
@@ -454,6 +536,8 @@
   "serviceProjectManagement": {
     "heading": "Project Management",
     "highlight": "Management",
+    "eyebrow": "Our Services",
+    "bannerLabel": "Project Management",
     "servicesHeading": "Our PMC Services",
     "services": [
       {
@@ -493,6 +577,7 @@
         "title": "Quality Control"
       }
     ],
+    "whyHeading": "Why Choose Us?",
     "seo": {
       "title": "Project Management",
       "description": "End-to-end project management consultancy (PMC) services by IT Usaha Engineering."
@@ -501,6 +586,8 @@
   "serviceFacilitiesManagement": {
     "heading": "Facilities Management Services",
     "highlight": "Services",
+    "eyebrow": "Our Services",
+    "bannerLabel": "Facilities Management",
     "intro": "We don’t just build data centres — we stay with them for the long run. IT Usaha offers 24/7/365 Facilities Management (FM) services tailored exclusively for mission-critical data centre environments. Our expert team ensures continuous uptime, operational efficiency, and long-term reliability all while aligning with international standards.",
     "support": {
       "title": "24/7/365 Support & Maintenance",
@@ -566,6 +653,8 @@
   "serviceDfma": {
     "heading": "DFMA (Design & Fabrication of Modular Assemblies)",
     "highlight": "Modular Assemblies",
+    "eyebrow": "Our Services",
+    "bannerLabel": "DFMA",
     "facts": [
       {
         "label": "Floor size",
@@ -614,6 +703,7 @@
     "visual": {
       "title": "Modular Assembly"
     },
+    "whyHeading": "Why Choose Us?",
     "seo": {
       "title": "DFMA",
       "description": "Design & Fabrication of Modular Assemblies (DFMA) services by IT Usaha Engineering."

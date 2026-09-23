@@ -62,6 +62,9 @@ export default buildConfig({
     user: Users.slug,
     meta: { titleSuffix: '— ITU CMS' },
   },
+  // Payload's CSRF allowlist defaults to empty, which makes its cookie-auth fallback accept
+  // the admin cookie from any Origin — this pins it to the site's own origin.
+  csrf: process.env.SERVER_URL ? [process.env.SERVER_URL] : [],
   editor: lexicalEditor(),
   collections: [Users, Media, Enquiries, Events, Projects, Vacancies, JobApplications, Resumes],
   globals: [

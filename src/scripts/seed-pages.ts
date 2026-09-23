@@ -30,13 +30,21 @@ export function parseAbout(value: string) {
   return {
     headline,
     highlight: match(value, /- Span highlighted text: (.+)/),
+    heroEyebrow: 'About IT Usaha',
+    bannerLabel: 'About Us',
     backgroundHeading: match(value, /- Left side header: (.+)/),
     background,
+    visionEyebrow: '01 / Vision',
+    visionHeading: 'Our Vision',
     vision: match(value, /- Our Vision: (.+)/),
+    missionEyebrow: '02 / Mission',
+    missionHeading: 'Our Mission',
     mission: match(value, /- Our Mission: (.+)/),
+    leadershipEyebrow: 'People',
     leadershipHeading: 'Our Leadership',
     leadershipIntro: match(value, /Center body: (Meet[^\n]+)/),
     leaders,
+    milestonesEyebrow: 'Our journey',
     milestonesHeading: 'Company Milestones',
     milestonesIntro: match(value, /Center body: (Since 1997[^\n]+)/),
     milestones,
@@ -50,10 +58,27 @@ export function parseAbout(value: string) {
 export function parseContact(value: string) {
   return {
     headline: match(value, /Left align header: (.+)/),
+    heroEyebrow: 'Get in touch',
+    bannerLabel: 'Contact Us',
+    officeEyebrow: 'Our office',
     companyName: match(value, /Left side header: (.+)/),
     companyNumber: match(value, /Left side body: (Company No\.: .+)/),
+    formEyebrow: 'Start a conversation',
     formTitle: match(value, /- Form title: (.+)/),
     formDescription: match(value, /- Form description: (.+)/),
+    form: {
+      nameLabel: 'Name',
+      emailLabel: 'Email Address',
+      phoneLabel: 'Contact No.',
+      companyNameLabel: 'Company Name',
+      companyAddressLabel: 'Company Address',
+      messageLabel: 'Message',
+      privacyLine: 'Your details are handled according to our',
+      successMessage: 'Thank you. Your enquiry has been received.',
+      errorFallback: 'Your message could not be sent. Please try again.',
+      submitLabel: 'Submit Now',
+      submittingLabel: 'Submitting…',
+    },
     seo: {
       title: 'Contact Us',
       description: 'Discuss your data centre or critical system project with IT Usaha Engineering.',
@@ -130,10 +155,13 @@ export function parseDataCentre(value: string) {
   return {
     heading,
     highlight: lastWordHighlight(heading),
+    eyebrow: 'Our Services',
+    bannerLabel: 'Data Centre & Critical System',
     intro,
     turnkey,
     critical,
     testing,
+    equipmentPlaceholderCaption: 'Equipment details coming soon',
     whyHeading: match(value, /Center header: (Why Choose Us\?)/),
     why,
     seo: {
@@ -198,6 +226,8 @@ export function parseHighTension(raw: string) {
   return {
     heading,
     highlight: lastWordHighlight(heading),
+    eyebrow: 'Our Services',
+    bannerLabel: 'High Tension & Electrical Services',
     intro,
     power,
     divider1: {
@@ -239,8 +269,11 @@ export function parseProjectManagement(raw: string) {
   return {
     heading,
     highlight: lastWordHighlight(heading),
+    eyebrow: 'Our Services',
+    bannerLabel: 'Project Management',
     servicesHeading: match(raw, /Center title: (.+)/),
     services,
+    whyHeading: 'Why Choose Us?',
     seo: {
       title: 'Project Management',
       description:
@@ -288,6 +321,8 @@ export function parseFacilities(raw: string) {
   return {
     heading,
     highlight: lastWordHighlight(heading),
+    eyebrow: 'Our Services',
+    bannerLabel: 'Facilities Management',
     intro,
     support,
     maintenance,
@@ -330,6 +365,8 @@ export function parseDfma(raw: string) {
   return {
     heading,
     highlight: 'Modular Assemblies',
+    eyebrow: 'Our Services',
+    bannerLabel: 'DFMA',
     facts,
     capabilities: {
       title: match(raw, /Right side title: (Key Capabilities)/),
@@ -337,6 +374,7 @@ export function parseDfma(raw: string) {
     },
     benefits: { title: match(raw, /Left side title: (Benefits)/), items: benefitItems },
     visual: { title: 'Modular Assembly' },
+    whyHeading: 'Why Choose Us?',
     seo: {
       title: 'DFMA',
       description:
@@ -350,6 +388,11 @@ export function parseEventsPage(value: string) {
   return {
     heading,
     highlight: lastWordHighlight(heading),
+    eyebrow: 'Events',
+    bannerLabel: 'Events',
+    emptyTitle: 'More events in this category are on the way',
+    emptyMeta: 'Coming soon',
+    viewLabel: 'View Event',
     seo: { title: 'Events', description: "See what's happening at IT Usaha Engineering." },
   }
 }
@@ -359,6 +402,26 @@ export function parseProjectsPage(value: string) {
   return {
     heading,
     highlight: lastWordHighlight(heading),
+    eyebrow: 'Projects',
+    bannerLabel: 'Projects',
+    emptyTitle: 'More projects in this status are on the way',
+    emptyMeta: 'Coming soon',
+    detailsLabel: 'Project Details',
+    completedLabel: 'Completed',
+    ongoingLabel: 'Ongoing',
+    clientLabel: 'Client',
+    consultantLabel: 'Data Center Consultant',
+    consultantsLabel: 'Data Center Consultants',
+    scopeLabel: 'Scope of Works',
+    commencementLabel: 'Commencement Date',
+    completionLabel: 'Completion Date',
+    presentLabel: 'Present',
+    detailCta: {
+      heading:
+        'Have a project in mind? We’re here to help you plan, build, and maintain it with confidence',
+      ctaLabel: 'Contact Us',
+      ctaHref: '/contact-us',
+    },
     seo: {
       title: 'Projects',
       description: 'Data centres and MEP projects delivered by IT Usaha Engineering.',
@@ -414,8 +477,36 @@ export function parseCareer(value: string) {
   return {
     heading,
     highlight: lastWordHighlight(heading),
+    eyebrow: 'Career',
+    bannerLabel: 'Career',
+    positionsHeading: 'Available Positions',
     applyHeading: match(value, /Left side header: (Apply Now)/),
     applyBody: match(value, /Left side body: (.+)/),
+    form: {
+      nameLabel: 'Name',
+      emailLabel: 'Email Address',
+      phoneLabel: 'Contact No.',
+      vacancyLabel: 'Position Applying For',
+      selectPlaceholder: 'Select a position',
+      introductionLabel: 'Brief Introduction',
+      resumeLabel: 'Upload Résumé (PDF, up to 5MB)',
+      closedLabel: 'Closed',
+      applyButtonLabel: 'Apply for this position',
+      noOpeningsMessage: 'There are no open positions right now. Please check back soon.',
+      privacyLine: 'Your details are handled according to our',
+      successMessage: 'Thank you. Your application has been received.',
+      errorFallback: 'Your application could not be sent. Please try again.',
+      submitLabel: 'Submit Now',
+      submittingLabel: 'Submitting…',
+      nameRequired: 'Enter your name.',
+      emailInvalid: 'Enter a valid email address.',
+      phoneRequired: 'Enter a contact number.',
+      vacancyRequired: 'Select a position.',
+      introductionRequired: 'Tell us a little about yourself.',
+      resumeRequired: 'Attach your résumé.',
+      resumeMustBePdf: 'Résumé must be a PDF.',
+      resumeTooLarge: 'Résumé must be under 5MB.',
+    },
     seo: { title: 'Career', description: 'Explore open positions at IT Usaha Engineering.' },
     vacancies,
   }
@@ -534,8 +625,9 @@ async function main() {
   if (process.argv.includes('--write-defaults')) {
     // Vacancies are seeded as their own collection documents, not part of the career-page
     // global — keep them out of the page-defaults fallback file.
-    const { heading, highlight, applyHeading, applyBody, seo } = defaults.careerPage
-    const careerPage = { heading, highlight, applyHeading, applyBody, seo }
+    const careerPage = Object.fromEntries(
+      Object.entries(defaults.careerPage).filter(([key]) => key !== 'vacancies'),
+    )
     writeFileSync(
       path.join(root, 'src/lib/page-defaults.json'),
       `${JSON.stringify({ ...defaults, careerPage }, null, 2)}\n`,

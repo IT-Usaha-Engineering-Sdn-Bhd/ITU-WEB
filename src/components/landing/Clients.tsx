@@ -12,7 +12,7 @@ export function Clients({ data }: { data: Landing['clients'] }) {
       <Backdrop />
       <div className="section-shell">
         <Reveal className="section-intro centered">
-          <p className="eyebrow">Partnerships built to last</p>
+          <p className="eyebrow">{data.eyebrow}</p>
           <h2 className="section-heading">{data.header}</h2>
           <p className="section-body">{data.body}</p>
         </Reveal>
@@ -47,7 +47,7 @@ export function Clients({ data }: { data: Landing['clients'] }) {
             : Array.from({ length: 6 }, (_, i) => (
                 <div className="client-tile client-placeholder" key={i}>
                   <Buildings size={28} weight="light" />
-                  <span>Client logo coming soon</span>
+                  <span>{data.placeholderLabel}</span>
                 </div>
               ))}
         </div>

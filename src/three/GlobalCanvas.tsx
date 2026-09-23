@@ -1,5 +1,5 @@
 'use client'
-import { Component, Suspense, useEffect, useState, type ReactNode } from 'react'
+import { Component, Suspense, useEffect, useLayoutEffect, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { Canvas, useThree } from '@react-three/fiber'
@@ -54,8 +54,17 @@ export function GlobalCanvas() {
   const { stage, sceneFailed, setSceneFailed, setSceneReady } = useStage()
   const pathname = usePathname()
   const reduced = useReducedMotion()
+  // One DOM node for the whole component's lifetime — it's relocated (intro overlay vs. the
+  // active viewport div) with plain DOM calls below, never unmounted and recreated, so the
+  // <Canvas> portaled into it keeps the same WebGL context across every section change.
+  const [container] = useState(() => {
+    const el = document.createElement('div')
+    el.setAttribute('aria-hidden', 'true')
+    return el
+  })
   const [host, setHost] = useState<HTMLElement | null>(null)
   const [active, setActive] = useState<Viewport | null>(null)
+  const [hadHost, setHadHost] = useState(false)
   const [visible, setVisible] = useState(true)
   const [lowQuality, setLowQuality] = useState(false)
   useEffect(() => {
@@ -99,7 +108,26 @@ export function GlobalCanvas() {
       setHost(null)
     }
   }, [stage, pathname])
-  const trackingKey = stage === 'loading' ? 'loading' : active
+  const intro = stage === 'loading'
+  useEffect(() => {
+    if (host) setHadHost(true)
+  }, [host])
+  // Relocate the persistent container: the intro overlay lives directly on <body>; once
+  // scrolling starts it moves into whichever viewport div is currently active. When no
+  // viewport is active (briefly, between sections, or on a non-3D section) it's left parked
+  // in its last host rather than removed — removing it is what used to force a remount.
+  useLayoutEffect(() => {
+    if (pathname !== '/') return
+    if (intro) {
+      container.className = 'global-canvas is-intro'
+      if (container.parentElement !== document.body) document.body.appendChild(container)
+    } else if (host && container.parentElement !== host) {
+      container.className = 'absolute inset-0'
+      host.appendChild(container)
+    }
+  }, [intro, host, pathname, container])
+  useEffect(() => () => container.remove(), [container])
+  const trackingKey = intro ? 'loading' : active
   // Monotonic: a viewport that has ever loaded stays loaded, since useGLTF caches the parsed
   // model — a remount (e.g. scrolling away from the hero and back) never truly re-suspends, so
   // its fallback poster shouldn't reappear each time the way a single "last loaded key" would.
@@ -110,8 +138,9 @@ export function GlobalCanvas() {
     return () => clearTimeout(timer)
   }, [trackingKey, everReady, sceneFailed, setSceneFailed])
   if (pathname !== '/') return null
-  const intro = stage === 'loading'
-  if (!intro && (!host || !active)) return null
+  // Nothing to show yet: no intro overlay, and no viewport has ever activated (so the
+  // container has nowhere to live).
+  if (!intro && !hadHost) return null
   const fallback =
     active === 'hero' ? (
       <div className="absolute inset-0" aria-hidden="true">
@@ -140,7 +169,13 @@ export function GlobalCanvas() {
     <SceneBoundary onFailure={() => setSceneFailed(true)}>
       <Canvas
         dpr={lowQuality ? 1 : [1, 2]}
-        frameloop={!visible ? 'never' : active === 'hero' && !reduced ? 'always' : 'demand'}
+        frameloop={
+          !visible || (!intro && !active)
+            ? 'never'
+            : active === 'hero' && !reduced
+              ? 'always'
+              : 'demand'
+        }
         gl={{ antialias: !lowQuality, alpha: true, localClippingEnabled: true }}
         shadows={!lowQuality}
         fallback={fallback}
@@ -174,17 +209,11 @@ export function GlobalCanvas() {
     </SceneBoundary>
   )
   const showFallback = !sceneFailed && trackingKey !== null && !everReady.has(trackingKey)
-  return intro ? (
-    <div className="global-canvas is-intro" aria-hidden="true">
+  return createPortal(
+    <>
       {scene}
-    </div>
-  ) : (
-    createPortal(
-      <div className="absolute inset-0" aria-hidden="true">
-        {scene}
-        {showFallback && fallback}
-      </div>,
-      host!,
-    )
+      {showFallback && fallback}
+    </>,
+    container,
   )
 }

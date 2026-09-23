@@ -15,7 +15,7 @@ export function Services({ data }: { data: Landing['services'] }) {
       <div className="section-shell">
         <Reveal className="services-intro">
           <div>
-            <p className="eyebrow">Expertise, connected.</p>
+            <p className="eyebrow">{data.eyebrow}</p>
             <h2 className="section-heading">{data.header}</h2>
           </div>
           <p className="section-body">{data.body}</p>
@@ -25,6 +25,7 @@ export function Services({ data }: { data: Landing['services'] }) {
           items={data.items ?? []}
           renderItem={(item, index) => {
             const url = mediaUrl(item.image)
+            const iconUrl = mediaUrl(item.icon)
             const Icon = icons[index % icons.length]
             return (
               <div className="service-slide">
@@ -40,9 +41,19 @@ export function Services({ data }: { data: Landing['services'] }) {
                   ) : (
                     <div className="service-placeholder">
                       <div className="technical-orbit">
-                        <Icon weight="thin" />
+                        {iconUrl ? (
+                          <Image
+                            src={iconUrl}
+                            alt=""
+                            width={48}
+                            height={48}
+                            className="object-contain"
+                          />
+                        ) : (
+                          <Icon weight="thin" />
+                        )}
                       </div>
-                      <span>Service imagery coming soon</span>
+                      <span>{data.placeholderLabel}</span>
                     </div>
                   )}
                 </div>

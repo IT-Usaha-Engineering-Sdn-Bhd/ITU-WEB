@@ -4,8 +4,10 @@ import { notFound } from 'next/navigation'
 import { ChatCircleDots } from '@phosphor-icons/react/dist/ssr'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { getProject } from '@/lib/listings'
-import { mediaUrl } from '@/lib/media'
-import { consultantLabel, formatMonthYear } from '@/lib/listing-utils'
+import { getProjectsPage } from '@/lib/inner-pages'
+import { getSettings } from '@/lib/site-content'
+import { pageMetadata } from '@/lib/seo'
+import { formatMonthYear } from '@/lib/listing-utils'
 import { EntryImage } from '@/components/inner/EntryImage'
 
 export async function generateMetadata({
@@ -14,20 +16,14 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-  const project = await getProject(slug)
+  const [project, settings] = await Promise.all([getProject(slug), getSettings()])
   if (!project) return {}
-  const image = mediaUrl(project.seo?.ogImage) ?? mediaUrl(project.cover)
-  return {
-    title: project.seo?.title || project.title,
-    description: project.seo?.description,
-    alternates: { canonical: `/projects/${slug}` },
-    openGraph: { images: image ? [{ url: image }] : undefined },
-  }
+  return pageMetadata(project, project.title, `/projects/${slug}`, settings.siteName)
 }
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const project = await getProject(slug)
+  const [project, page] = await Promise.all([getProject(slug), getProjectsPage()])
   if (!project) notFound()
   const consultants = project.consultants ?? []
 
@@ -36,18 +32,20 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       <section className="section-shell project-info-grid">
         <EntryImage image={project.cover} label={project.title} kind="card" priority />
         <div className="project-info">
-          <p className="eyebrow">{project.status === 'completed' ? 'Completed' : 'Ongoing'}</p>
+          <p className="eyebrow">
+            {project.status === 'completed' ? page.completedLabel : page.ongoingLabel}
+          </p>
           <h1 className="section-heading">{project.title}</h1>
           <dl>
             {project.client && (
               <div>
-                <dt>Client</dt>
+                <dt>{page.clientLabel}</dt>
                 <dd>{project.client}</dd>
               </div>
             )}
             {consultants.length > 0 && (
               <div>
-                <dt>{consultantLabel(consultants.length)}</dt>
+                <dt>{consultants.length > 1 ? page.consultantsLabel : page.consultantLabel}</dt>
                 <dd>
                   {consultants.map((c) => (
                     <span key={c.id}>{c.name}</span>
@@ -57,18 +55,20 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             )}
             {project.scope && (
               <div>
-                <dt>Scope of Works</dt>
+                <dt>{page.scopeLabel}</dt>
                 <dd>{project.scope}</dd>
               </div>
             )}
             <div>
-              <dt>Commencement Date</dt>
+              <dt>{page.commencementLabel}</dt>
               <dd>{formatMonthYear(project.commencementDate)}</dd>
             </div>
             <div>
-              <dt>Completion Date</dt>
+              <dt>{page.completionLabel}</dt>
               <dd>
-                {project.completionDate ? formatMonthYear(project.completionDate) : 'Present'}
+                {project.completionDate
+                  ? formatMonthYear(project.completionDate)
+                  : page.presentLabel}
               </dd>
             </div>
           </dl>
@@ -81,12 +81,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       )}
       <section className="cta-section">
         <div className="section-shell cta-grid">
-          <h2>
-            Have a project in mind? We&rsquo;re here to help you plan, build, and maintain it with
-            confidence
-          </h2>
-          <Link href="/contact-us" className="button button-dark">
-            Contact Us
+          <h2>{page.detailCta.heading}</h2>
+          <Link href={page.detailCta.ctaHref} className="button button-dark">
+            {page.detailCta.ctaLabel}
             <ChatCircleDots size={24} weight="light" />
           </Link>
         </div>

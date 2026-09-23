@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 export const Users: CollectionConfig = {
   slug: 'users',
-  auth: true,
+  auth: { cookies: { secure: process.env.NODE_ENV === 'production' } },
   admin: { useAsTitle: 'email' },
   access: {
     // Only admins may create/update/delete other users; anyone authenticated can read.

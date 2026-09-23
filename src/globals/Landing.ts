@@ -13,23 +13,59 @@ export const Landing: GlobalConfig = {
       type: 'group',
       fields: [
         { name: 'punchline', type: 'text', required: true },
-        { name: 'learnMoreLabel', type: 'text', required: true, defaultValue: 'Continue' },
+        {
+          name: 'learnMoreLabel',
+          type: 'text',
+          required: true,
+          defaultValue: 'Explore our expertise',
+        },
+        {
+          name: 'welcomeLabel',
+          type: 'text',
+          required: true,
+          defaultValue: 'Welcome to IT Usaha Engineering',
+        },
+        { name: 'commissionLabel', type: 'text', required: true, defaultValue: 'COMMISSION' },
       ],
     },
     {
       name: 'whoWeAre',
       type: 'group',
       fields: [
+        {
+          name: 'eyebrow',
+          type: 'text',
+          required: true,
+          defaultValue: 'Built on expertise. Driven by trust.',
+        },
         { name: 'header', type: 'text', required: true },
         { name: 'body', type: 'textarea', required: true },
         { name: 'ctaLabel', type: 'text', required: true },
         { name: 'ctaHref', type: 'text', required: true },
+        {
+          name: 'modelCaptionTitle',
+          type: 'text',
+          required: true,
+          defaultValue: 'DATA CENTRE',
+        },
+        {
+          name: 'modelCaptionSubtitle',
+          type: 'text',
+          required: true,
+          defaultValue: 'Structure / Systems',
+        },
       ],
     },
     {
       name: 'facts',
       type: 'group',
       fields: [
+        {
+          name: 'eyebrow',
+          type: 'text',
+          required: true,
+          defaultValue: 'A track record that delivers',
+        },
         { name: 'header', type: 'text', required: true },
         { name: 'body', type: 'textarea', required: true },
         {
@@ -48,8 +84,15 @@ export const Landing: GlobalConfig = {
       name: 'services',
       type: 'group',
       fields: [
+        { name: 'eyebrow', type: 'text', required: true, defaultValue: 'Expertise, connected.' },
         { name: 'header', type: 'text', required: true },
         { name: 'body', type: 'textarea', required: true },
+        {
+          name: 'placeholderLabel',
+          type: 'text',
+          required: true,
+          defaultValue: 'Service imagery coming soon',
+        },
         {
           name: 'items',
           type: 'array',
@@ -59,6 +102,7 @@ export const Landing: GlobalConfig = {
             { name: 'tagline', type: 'text' },
             { name: 'body', type: 'textarea', required: true },
             media('image'),
+            media('icon'),
           ],
         },
       ],
@@ -67,6 +111,12 @@ export const Landing: GlobalConfig = {
       name: 'whyUs',
       type: 'group',
       fields: [
+        {
+          name: 'eyebrow',
+          type: 'text',
+          required: true,
+          defaultValue: 'Confidence at every stage',
+        },
         { name: 'header', type: 'text', required: true },
         {
           name: 'cards',
@@ -85,7 +135,20 @@ export const Landing: GlobalConfig = {
       name: 'certs',
       type: 'group',
       fields: [
+        {
+          name: 'eyebrow',
+          type: 'text',
+          required: true,
+          defaultValue: 'Quality without compromise',
+        },
         { name: 'header', type: 'text', required: true },
+        { name: 'slideEyebrow', type: 'text', required: true, defaultValue: 'Industry standards' },
+        {
+          name: 'placeholderLabel',
+          type: 'text',
+          required: true,
+          defaultValue: 'Certificate image coming soon',
+        },
         {
           name: 'items',
           type: 'array',
@@ -102,8 +165,20 @@ export const Landing: GlobalConfig = {
       name: 'clients',
       type: 'group',
       fields: [
+        {
+          name: 'eyebrow',
+          type: 'text',
+          required: true,
+          defaultValue: 'Partnerships built to last',
+        },
         { name: 'header', type: 'text', required: true },
         { name: 'body', type: 'textarea', required: true },
+        {
+          name: 'placeholderLabel',
+          type: 'text',
+          required: true,
+          defaultValue: 'Client logo coming soon',
+        },
         {
           name: 'logos',
           type: 'array',
@@ -119,6 +194,12 @@ export const Landing: GlobalConfig = {
       name: 'projects',
       type: 'group',
       fields: [
+        {
+          name: 'eyebrow',
+          type: 'text',
+          required: true,
+          defaultValue: 'Precision, put into practice',
+        },
         { name: 'header', type: 'text', required: true },
         { name: 'body', type: 'textarea', required: true },
         { name: 'ctaLabel', type: 'text', required: true },

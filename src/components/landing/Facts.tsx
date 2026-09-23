@@ -9,7 +9,7 @@ export function Facts({ data }: { data: Landing['facts'] }) {
       <Backdrop />
       <div className="section-shell">
         <Reveal className="section-intro centered">
-          <p className="eyebrow">A track record that delivers</p>
+          <p className="eyebrow">{data.eyebrow}</p>
           <h2 className="section-heading">{data.header}</h2>
           <p className="section-body">{data.body}</p>
         </Reveal>
