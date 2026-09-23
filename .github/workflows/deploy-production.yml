@@ -42,8 +42,11 @@ jobs:
 
       - uses: google-github-actions/setup-gcloud@v2
 
-      - name: Build image (Cloud Build)
-        run: gcloud builds submit --project "$PROJECT_ID" --tag "$IMAGE"
+      - name: Build and push image
+        run: |
+          gcloud auth configure-docker asia-southeast1-docker.pkg.dev --quiet
+          docker build -t "$IMAGE" .
+          docker push "$IMAGE"
 
       - name: Run migrations
         run: |
