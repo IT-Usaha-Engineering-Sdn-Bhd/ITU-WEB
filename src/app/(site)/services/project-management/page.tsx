@@ -10,6 +10,7 @@ import {
 import { getServiceProjectManagement, serviceMetadata } from '@/lib/inner-pages'
 import { HeroBanner } from '@/components/inner/HeroBanner'
 import { IconList } from '@/components/services/IconList'
+import { ImageCards } from '@/components/services/ImageCards'
 import { Reveal } from '@/components/Reveal'
 
 const icons = [Blueprint, FileText, CurrencyCircleDollar, Handshake, Ruler, ChartLine]
@@ -34,12 +35,13 @@ export default async function ProjectManagementPage() {
       </section>
       <HeroBanner image={data.heroImage} label="Project Management" />
 
-      <section className="section-shell">
+      <section className="section-shell service-content">
         <Reveal className="section-intro centered">
           <h2 className="section-heading">{data.servicesHeading}</h2>
         </Reveal>
         <IconList icons={icons} variant="grid" items={data.services ?? []} />
       </section>
+      <ImageCards heading="Why Choose Us?" items={data.why ?? []} icon={Ruler} />
     </main>
   )
 }

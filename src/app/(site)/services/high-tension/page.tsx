@@ -6,7 +6,7 @@ import { HeroBanner } from '@/components/inner/HeroBanner'
 import { SplitSection } from '@/components/services/SplitSection'
 import { IconList } from '@/components/services/IconList'
 import { Divider } from '@/components/services/Divider'
-import { Reveal } from '@/components/Reveal'
+import { ImageCards } from '@/components/services/ImageCards'
 
 const bulletIcons = [Lightning, GearSix, ShieldCheck]
 const powerIcons: Icon[] = [Lightning, GearSix, ShieldCheck]
@@ -42,7 +42,7 @@ function Group({
           {(section.items?.length ?? 0) > 0 && (
             <IconList
               icons={bulletIcons}
-              items={(section.items ?? []).map((item) => ({ title: item.text }))}
+              items={(section.items ?? []).map((item) => ({ title: item.text, icon: item.icon }))}
             />
           )}
         </SplitSection>
@@ -81,15 +81,11 @@ export default async function HighTensionPage() {
         <Group sections={data.protection ?? []} icons={protectionIcons} />
       </section>
 
-      <section className="section-shell">
-        <Reveal className="section-intro centered">
-          <p className="eyebrow">{data.feature.eyebrow}</p>
-        </Reveal>
-        <SplitSection image={data.feature.image} imageLabel={data.feature.title} icon={ShieldCheck}>
-          <h2 className="section-heading">{data.feature.title}</h2>
-          <p className="section-body">{data.feature.body}</p>
-        </SplitSection>
-      </section>
+      <ImageCards
+        heading="Why Choose Us?"
+        items={[{ title: data.feature.title, body: data.feature.body, image: data.feature.image }]}
+        icon={ShieldCheck}
+      />
     </main>
   )
 }

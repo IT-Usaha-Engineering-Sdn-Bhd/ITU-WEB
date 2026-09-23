@@ -2117,9 +2117,14 @@ section:focus {
 /* Services */
 .service-intro {
   max-width: 820px;
+  padding-top: clamp(56px, 7vw, 96px);
+  padding-bottom: clamp(16px, 2vw, 32px);
 }
 .service-intro .section-body {
   margin: 0;
+}
+.service-content {
+  padding-top: clamp(56px, 7vw, 96px);
 }
 .service-split {
   display: grid;
@@ -2131,6 +2136,9 @@ section:focus {
 }
 .service-split:first-child {
   padding-top: clamp(60px, 8vw, 110px);
+}
+.service-intro + .section-shell > .service-split:first-child {
+  padding-top: clamp(40px, 5vw, 64px);
 }
 .service-split:last-child {
   border-bottom: none;
@@ -2185,6 +2193,13 @@ section:focus {
   color: var(--color-accent);
   margin-top: 2px;
 }
+.service-list-icon {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  margin-top: 2px;
+}
 .service-grid {
   margin-top: 26px;
   display: grid;
@@ -2200,9 +2215,16 @@ section:focus {
   background: var(--color-base);
   padding: clamp(20px, 2.4vw, 30px);
 }
-.service-grid svg {
+.service-grid svg,
+.service-grid-icon {
   color: var(--color-accent);
   margin-bottom: 16px;
+}
+.service-grid-icon {
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 .service-grid h3 {
   font-size: 1rem;
@@ -2267,18 +2289,21 @@ section:focus {
   padding-block: clamp(40px, 5vw, 70px);
   border-bottom: 1px solid var(--line);
 }
+.service-content > .service-facts:first-child {
+  padding-top: 0;
+}
 .service-fact .eyebrow {
   margin-bottom: 12px;
 }
 .service-fact .section-heading {
   font-size: clamp(1.6rem, 2.4vw, 2.4rem);
 }
-.service-visual {
+.service-assembly-visual {
   padding-block: clamp(60px, 7vw, 100px);
   border-top: 1px solid var(--line);
   text-align: center;
 }
-.service-visual .section-heading {
+.service-assembly-visual .section-heading {
   margin-bottom: 32px;
 }
 .modular-diagram {

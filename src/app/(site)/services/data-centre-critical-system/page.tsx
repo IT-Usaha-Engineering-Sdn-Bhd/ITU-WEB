@@ -6,7 +6,6 @@ import { SplitSection } from '@/components/services/SplitSection'
 import { IconList } from '@/components/services/IconList'
 import { ImageCards } from '@/components/services/ImageCards'
 import { EquipmentGallery } from '@/components/services/EquipmentGallery'
-import { Reveal } from '@/components/Reveal'
 
 const bulletIcons = [ShieldCheck]
 const path = '/services/data-centre-critical-system'
@@ -57,7 +56,10 @@ export default async function DataCentrePage() {
           <p className="section-body">{data.critical.body}</p>
           <IconList
             icons={bulletIcons}
-            items={(data.critical.items ?? []).map((item) => ({ title: item.text }))}
+            items={(data.critical.items ?? []).map((item) => ({
+              title: item.text,
+              icon: item.icon,
+            }))}
           />
         </SplitSection>
 
@@ -70,17 +72,16 @@ export default async function DataCentrePage() {
           <h2 className="section-heading">{data.testing.title}</h2>
           <p className="section-body">{data.testing.body}</p>
           <h3 className="service-subtitle">{data.testing.galleryTitle}</h3>
+          <div className="service-equipment">
+            <EquipmentGallery
+              galleryTitle={data.testing.galleryTitle}
+              equipment={data.testing.equipment ?? []}
+            />
+          </div>
         </SplitSection>
-
-        <Reveal className="service-equipment">
-          <EquipmentGallery
-            galleryTitle={data.testing.galleryTitle}
-            equipment={data.testing.equipment ?? []}
-          />
-        </Reveal>
       </section>
 
-      <ImageCards heading={data.whyHeading} items={data.why ?? []} icon={Buildings} />
+      <ImageCards heading="Why Choose Us?" items={data.why ?? []} icon={Buildings} />
     </main>
   )
 }

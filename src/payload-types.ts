@@ -1062,6 +1062,7 @@ export interface ServiceDataCentre {
     items?:
       | {
           text: string;
+          icon?: (number | null) | Media;
           id?: string | null;
         }[]
       | null;
@@ -1114,6 +1115,7 @@ export interface ServiceHighTension {
         items?:
           | {
               text: string;
+              icon?: (number | null) | Media;
               id?: string | null;
             }[]
           | null;
@@ -1133,6 +1135,7 @@ export interface ServiceHighTension {
         items?:
           | {
               text: string;
+              icon?: (number | null) | Media;
               id?: string | null;
             }[]
           | null;
@@ -1152,6 +1155,7 @@ export interface ServiceHighTension {
         items?:
           | {
               text: string;
+              icon?: (number | null) | Media;
               id?: string | null;
             }[]
           | null;
@@ -1187,6 +1191,15 @@ export interface ServiceProjectManagement {
   services?:
     | {
         title: string;
+        icon?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  why?:
+    | {
+        title: string;
+        body: string;
+        image?: (number | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -1214,6 +1227,7 @@ export interface ServiceFacilitiesManagement {
     items?:
       | {
           text: string;
+          icon?: (number | null) | Media;
           id?: string | null;
         }[]
       | null;
@@ -1225,6 +1239,7 @@ export interface ServiceFacilitiesManagement {
     items?:
       | {
           text: string;
+          icon?: (number | null) | Media;
           id?: string | null;
         }[]
       | null;
@@ -1271,6 +1286,7 @@ export interface ServiceDfma {
           title: string;
           body: string;
           image?: (number | null) | Media;
+          icon?: (number | null) | Media;
           id?: string | null;
         }[]
       | null;
@@ -1280,6 +1296,7 @@ export interface ServiceDfma {
     items?:
       | {
           text: string;
+          icon?: (number | null) | Media;
           id?: string | null;
         }[]
       | null;
@@ -1289,6 +1306,14 @@ export interface ServiceDfma {
     title: string;
     image?: (number | null) | Media;
   };
+  why?:
+    | {
+        title: string;
+        body: string;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
   seo?: {
     title?: string | null;
     description?: string | null;
@@ -1642,6 +1667,7 @@ export interface ServiceDataCentreSelect<T extends boolean = true> {
           | T
           | {
               text?: T;
+              icon?: T;
               id?: T;
             };
         image?: T;
@@ -1699,6 +1725,7 @@ export interface ServiceHighTensionSelect<T extends boolean = true> {
           | T
           | {
               text?: T;
+              icon?: T;
               id?: T;
             };
         note?: T;
@@ -1720,6 +1747,7 @@ export interface ServiceHighTensionSelect<T extends boolean = true> {
           | T
           | {
               text?: T;
+              icon?: T;
               id?: T;
             };
         note?: T;
@@ -1741,6 +1769,7 @@ export interface ServiceHighTensionSelect<T extends boolean = true> {
           | T
           | {
               text?: T;
+              icon?: T;
               id?: T;
             };
         note?: T;
@@ -1779,6 +1808,15 @@ export interface ServiceProjectManagementSelect<T extends boolean = true> {
     | T
     | {
         title?: T;
+        icon?: T;
+        id?: T;
+      };
+  why?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        image?: T;
         id?: T;
       };
   seo?:
@@ -1810,6 +1848,7 @@ export interface ServiceFacilitiesManagementSelect<T extends boolean = true> {
           | T
           | {
               text?: T;
+              icon?: T;
               id?: T;
             };
         image?: T;
@@ -1823,6 +1862,7 @@ export interface ServiceFacilitiesManagementSelect<T extends boolean = true> {
           | T
           | {
               text?: T;
+              icon?: T;
               id?: T;
             };
         image?: T;
@@ -1873,6 +1913,7 @@ export interface ServiceDfmaSelect<T extends boolean = true> {
               title?: T;
               body?: T;
               image?: T;
+              icon?: T;
               id?: T;
             };
       };
@@ -1884,6 +1925,7 @@ export interface ServiceDfmaSelect<T extends boolean = true> {
           | T
           | {
               text?: T;
+              icon?: T;
               id?: T;
             };
         image?: T;
@@ -1893,6 +1935,14 @@ export interface ServiceDfmaSelect<T extends boolean = true> {
     | {
         title?: T;
         image?: T;
+      };
+  why?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        image?: T;
+        id?: T;
       };
   seo?:
     | T

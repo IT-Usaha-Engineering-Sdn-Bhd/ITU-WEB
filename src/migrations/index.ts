@@ -6,6 +6,8 @@ import * as migration_20260922_180000_continue_label from './20260922_180000_con
 import * as migration_20260923_040329_pages_enquiries from './20260923_040329_pages_enquiries';
 import * as migration_20260923_051200_events_career_projects from './20260923_051200_events_career_projects';
 import * as migration_20260923_075152_services_pages from './20260923_075152_services_pages';
+import * as migration_20260923_100000_service_item_icons from './20260923_100000_service_item_icons';
+import * as migration_20260923_110000_service_why_choose_us from './20260923_110000_service_why_choose_us';
 
 export const migrations = [
   {
@@ -47,5 +49,15 @@ export const migrations = [
     up: migration_20260923_075152_services_pages.up,
     down: migration_20260923_075152_services_pages.down,
     name: '20260923_075152_services_pages'
+  },
+  {
+    up: migration_20260923_100000_service_item_icons.up,
+    down: migration_20260923_100000_service_item_icons.down,
+    name: '20260923_100000_service_item_icons',
+  },
+  {
+    up: migration_20260923_110000_service_why_choose_us.up,
+    down: migration_20260923_110000_service_why_choose_us.down,
+    name: '20260923_110000_service_why_choose_us',
   },
 ];

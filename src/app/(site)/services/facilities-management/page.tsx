@@ -57,7 +57,10 @@ export default async function FacilitiesManagementPage() {
             icons={supportIcons}
             variant="grid"
             compact
-            items={(data.support.items ?? []).map((item) => ({ title: item.text }))}
+            items={(data.support.items ?? []).map((item) => ({
+              title: item.text,
+              icon: item.icon,
+            }))}
           />
         </SplitSection>
 
@@ -72,12 +75,15 @@ export default async function FacilitiesManagementPage() {
             icons={maintenanceIcons}
             variant="grid"
             compact
-            items={(data.maintenance.items ?? []).map((item) => ({ title: item.text }))}
+            items={(data.maintenance.items ?? []).map((item) => ({
+              title: item.text,
+              icon: item.icon,
+            }))}
           />
         </SplitSection>
       </section>
 
-      <ImageCards heading={data.whyHeading} items={data.why ?? []} icon={Medal} />
+      <ImageCards heading="Why Choose Us?" items={data.why ?? []} icon={Medal} />
     </main>
   )
 }

@@ -2,11 +2,20 @@ import type { Field, GlobalConfig } from 'payload'
 import { area, media, seo, text } from '@/collections/fields'
 
 const group = 'Our Services'
-const bullets = (name: string): Field => ({ name, type: 'array', fields: [text('text')] })
+const bullets = (name: string): Field => ({
+  name,
+  type: 'array',
+  fields: [text('text'), media('icon')],
+})
 const cards = (name: string): Field => ({
   name,
   type: 'array',
   fields: [text('title'), area('body'), media('image')],
+})
+const iconCards = (name: string): Field => ({
+  name,
+  type: 'array',
+  fields: [text('title'), area('body'), media('image'), media('icon')],
 })
 
 export const ServiceDataCentre: GlobalConfig = {
@@ -85,7 +94,8 @@ export const ServiceProjectManagement: GlobalConfig = {
     text('highlight'),
     media('heroImage'),
     text('servicesHeading'),
-    { name: 'services', type: 'array', fields: [text('title')] },
+    { name: 'services', type: 'array', fields: [text('title'), media('icon')] },
+    cards('why'),
     seo,
   ],
 }
@@ -127,10 +137,11 @@ export const ServiceDfma: GlobalConfig = {
     {
       name: 'capabilities',
       type: 'group',
-      fields: [text('title'), media('image'), cards('cards')],
+      fields: [text('title'), media('image'), iconCards('cards')],
     },
     { name: 'benefits', type: 'group', fields: [text('title'), bullets('items'), media('image')] },
     { name: 'visual', type: 'group', fields: [text('title'), media('image')] },
+    cards('why'),
     seo,
   ],
 }

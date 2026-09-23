@@ -12,6 +12,7 @@ import { mediaUrl } from '@/lib/media'
 import { HeroBanner } from '@/components/inner/HeroBanner'
 import { SplitSection } from '@/components/services/SplitSection'
 import { IconList } from '@/components/services/IconList'
+import { ImageCards } from '@/components/services/ImageCards'
 import { ServiceImage } from '@/components/services/ServiceImage'
 import { ModularDiagram } from '@/components/services/ModularDiagram'
 import { Reveal } from '@/components/Reveal'
@@ -40,7 +41,7 @@ export default async function DfmaPage() {
       </section>
       <HeroBanner image={data.heroImage} label="DFMA" />
 
-      <section className="section-shell">
+      <section className="section-shell service-content">
         <Reveal className="service-facts">
           {(data.facts ?? []).map((fact) => (
             <div key={fact.label} className="service-fact">
@@ -65,6 +66,7 @@ export default async function DfmaPage() {
             items={(data.capabilities.cards ?? []).map((card) => ({
               title: card.title,
               body: card.body,
+              icon: card.icon,
             }))}
           />
         </SplitSection>
@@ -73,11 +75,14 @@ export default async function DfmaPage() {
           <h2 className="section-heading">{data.benefits.title}</h2>
           <IconList
             icons={benefitIcons}
-            items={(data.benefits.items ?? []).map((item) => ({ title: item.text }))}
+            items={(data.benefits.items ?? []).map((item) => ({
+              title: item.text,
+              icon: item.icon,
+            }))}
           />
         </SplitSection>
 
-        <Reveal className="service-visual">
+        <Reveal className="service-assembly-visual">
           <h2 className="section-heading">{data.visual.title}</h2>
           {visualUrl ? (
             <ServiceImage image={data.visual.image} label={data.visual.title} icon={Cube} />
@@ -86,6 +91,7 @@ export default async function DfmaPage() {
           )}
         </Reveal>
       </section>
+      <ImageCards heading="Why Choose Us?" items={data.why ?? []} icon={Cube} />
     </main>
   )
 }
