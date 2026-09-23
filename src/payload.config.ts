@@ -10,6 +10,8 @@ import { Users } from '@/collections/Users'
 import { Media } from '@/collections/Media'
 import { Landing } from '@/globals/Landing'
 import { Settings } from '@/globals/Settings'
+import { AboutUs, ContactUs, PrivacyPolicy, TermsAndConditions } from '@/globals/InnerPages'
+import { Enquiries } from '@/collections/Enquiries'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,8 +35,8 @@ export default buildConfig({
     meta: { titleSuffix: '— ITU CMS' },
   },
   editor: lexicalEditor(),
-  collections: [Users, Media],
-  globals: [Landing, Settings],
+  collections: [Users, Media, Enquiries],
+  globals: [Landing, Settings, AboutUs, ContactUs, PrivacyPolicy, TermsAndConditions],
   secret: process.env.PAYLOAD_SECRET ?? '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
   db: postgresAdapter({

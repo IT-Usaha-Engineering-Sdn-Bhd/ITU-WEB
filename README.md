@@ -33,6 +33,18 @@ Docker image + Cloud Run, migrations run as a separate Cloud Run Job (`payload m
 doesn't run during `next build` anymore). Locally: `docker compose up`. For GCP setup and the
 full `gcloud` command list, see the deploy plan.
 
+## About, Contact and policy pages
+
+The `/about-us`, `/contact-us`, `/privacy-policy` and `/tnc` routes use Payload globals.
+After applying migrations, run `bun run seed:pages` once to populate them from the four
+matching Markdown files in `template/`. The seed skips pages that already contain content,
+so rerunning it preserves CMS edits. Banner, portrait and milestone images are optional
+uploads in Payload; the text seed leaves them empty and the pages show styled placeholders.
+
+Contact form submissions are saved in the `enquiries` collection for authenticated staff
+to review. No email adapter is required. For deployment, run the page seed as an explicit
+one-time job after the migration and before publishing links to the new pages.
+
 ## Build brief
 
 The next build's requirements live in `template/important.md` and `template/landing.md`.
