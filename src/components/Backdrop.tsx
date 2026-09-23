@@ -41,6 +41,8 @@ function randomTrace(): { d: string; corners: [number, number][] } {
 // section components that render it). Pure CSS/SVG — no WebGL, no JS animation loop. A fresh
 // random layout is generated on every mount, so each section (and each page load) gets its
 // own trace pattern instead of the same fixed artwork everywhere.
+// Server-only: its random output means rendering it inside a client component (which renders
+// once on the server, once on hydration) produces a structural mismatch and a hydration error.
 export function Backdrop() {
   const traces = Array.from({ length: TRACE_COUNT }, randomTrace)
   const nodes = traces.flatMap((trace) => trace.corners.filter(() => Math.random() < 0.5))

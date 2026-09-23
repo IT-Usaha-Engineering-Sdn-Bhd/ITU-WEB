@@ -47,7 +47,7 @@ review. No email adapter is required.
 
 The `/about-us`, `/contact-us`, `/privacy-policy` and `/tnc` routes use Payload globals. After
 applying migrations, run `bun run seed:pages` once to populate them from the four matching
-Markdown files in `template/`. The seed skips pages that already contain content, so rerunning
+Markdown files in `template/backend/`. The seed skips pages that already contain content, so rerunning
 it preserves CMS edits. Banner, portrait and milestone images are optional uploads in Payload;
 the text seed leaves them empty and the pages show styled placeholders.
 
@@ -56,7 +56,7 @@ the text seed leaves them empty and the pages show styled placeholders.
 `/events`, `/career` and `/projects` (plus their `/[slug]` detail pages) use Payload collections
 (`events`, `projects`, `vacancies`, `job-applications`, `resumes`) and three page globals
 (`events-page`, `projects-page`, `career-page`). `bun run seed:pages` also seeds the career
-page's 7 vacancies (from `template/career.md`) and one real project, "TM Nxera, Johor"
+page's 7 vacancies (from `template/backend/career.md`) and one real project, "TM Nxera, Johor"
 (Ongoing) — both skipped on rerun once they exist.
 
 Career applications post to `POST /api/career-applications` (multipart form data, PDF résumé up
@@ -78,7 +78,7 @@ them, matching the `enquiries` pattern above.
 The five `/services/*` routes (linked from the "Our Services" nav dropdown, itself editable in
 Settings) use Payload globals grouped under "Our Services" in the admin: `service-data-centre`,
 `service-high-tension`, `service-project-management`, `service-facilities-management` and
-`service-dfma`. `bun run seed:pages` seeds their text from the matching template in `template/`;
+`service-dfma`. `bun run seed:pages` seeds their text from the matching template in `template/backend/`;
 rerunning it preserves any CMS edits, same as the other page seeds.
 
 Every banner, section and card image is an optional upload. An empty one renders a styled
@@ -238,8 +238,9 @@ gh variable set GCP_DEPLOY_SA --body "$DEPLOY_SA" --repo IT-Usaha-Engineering-Sd
 ### 8. First image
 
 ```bash
-gcloud builds submit --project=prod-web-itu \
-  --tag=asia-southeast1-docker.pkg.dev/prod-web-itu/itu-web/app:initial
+gcloud auth configure-docker asia-southeast1-docker.pkg.dev --quiet
+docker build -t asia-southeast1-docker.pkg.dev/prod-web-itu/itu-web/app:initial .
+docker push asia-southeast1-docker.pkg.dev/prod-web-itu/itu-web/app:initial
 ```
 
 ### 9. Migration job
@@ -385,6 +386,25 @@ prompts for this on first run. From then on, pushing to the `production` branch 
 `.github/workflows/deploy-production.yml`, which builds a new image, runs the migration job, and
 redeploys the service — no manual `gcloud` needed for routine deploys.
 
+### Connecting to the production database
+
+Cloud SQL has no public IP, so use the [Cloud SQL Auth
+Proxy](https://cloud.google.com/sql/docs/postgres/sql-proxy) with your own `gcloud` credentials
+(needs `roles/cloudsql.client` on `prod-web-itu`):
+
+```bash
+# port 5435 — 5432 is a native Postgres install, 5434 is this repo's docker-compose db
+cloud-sql-proxy --port=5435 prod-web-itu:asia-southeast1:itu-web-db
+# then, in another shell:
+psql "postgresql://payload:$DB_PASSWORD@127.0.0.1:5435/payload"
+
+# or, to (re)run the seed scripts against production:
+export DATABASE_URI="postgresql://payload:$DB_PASSWORD@127.0.0.1:5435/payload"
+export PAYLOAD_SECRET=$(gcloud secrets versions access latest --secret=PAYLOAD_SECRET)
+bun run seed && bun run seed:pages
+```
+
 ## Build brief
 
-The next build's requirements live in `template/important.md` and `template/landing.md`.
+The next build's requirements live in `template/frontend/important.md` and
+`template/frontend/landing.md`.

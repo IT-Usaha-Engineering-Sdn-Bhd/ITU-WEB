@@ -230,10 +230,15 @@ section:focus {
   inset: 0 0 auto;
   height: var(--nav-height);
   z-index: 30;
-  background: rgb(243 238 228 / 0.2);
+  background: rgb(255 255 255 / 0.7);
+  color: var(--color-base);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   transition: opacity 0.45s ease;
+}
+.site-header .icon-button {
+  color: inherit;
+  border-color: rgb(4 4 4 / 0.2);
 }
 .site-header[data-hidden='true'] {
   opacity: 0;
@@ -282,8 +287,14 @@ section:focus {
   gap: 27px;
   font-size: 0.95rem;
 }
+.desktop-navigation > a,
+.nav-dropdown > button {
+  padding: 6px 10px;
+  border-radius: 4px;
+}
 .desktop-navigation > a:hover,
 .nav-dropdown > button:hover {
+  background: var(--color-base);
   color: var(--color-accent);
 }
 .nav-dropdown {
@@ -306,6 +317,7 @@ section:focus {
   border: 1px solid var(--line);
   padding: 12px;
   background: #10100f;
+  color: var(--color-bone);
   box-shadow: 0 18px 40px #0008;
 }
 .dropdown-panel a {
@@ -958,6 +970,7 @@ section:focus {
     right: 0;
     flex-direction: column;
     background: #0b0b0a;
+    color: var(--color-bone);
     padding: 24px 40px 40px;
     max-height: calc(100dvh - var(--nav-height));
     overflow-y: auto;

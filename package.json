@@ -8,6 +8,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "docker:up": "docker compose up",
+    "docker:down": "docker compose down",
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

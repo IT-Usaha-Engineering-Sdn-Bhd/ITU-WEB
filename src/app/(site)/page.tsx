@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { getLanding, getSettings } from '@/lib/site-content'
 import { mediaUrl } from '@/lib/media'
 import { pageMetadata } from '@/lib/seo'
+import { Backdrop } from '@/components/Backdrop'
 import { LoadingStage } from '@/components/landing/LoadingStage'
 import { Hero } from '@/components/landing/Hero'
 import { SnapContainer } from '@/components/landing/SnapContainer'
@@ -37,7 +38,7 @@ export default async function HomePage() {
         />
         <WhoWeAre data={landing.whoWeAre} />
         <Facts data={landing.facts} />
-        <Services data={landing.services} />
+        <Services data={landing.services} backdrop={<Backdrop />} />
         <WhyUs data={landing.whyUs} />
         <Certifications data={landing.certs} />
         <Clients data={landing.clients} />

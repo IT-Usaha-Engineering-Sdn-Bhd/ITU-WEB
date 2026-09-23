@@ -1,4 +1,4 @@
-// Seeds text content only, verbatim from template/landing.md — icons and images are picked by
+// Seeds text content only, verbatim from template/frontend/landing.md — icons and images are picked by
 // hand in the Payload admin afterwards.
 import 'dotenv/config'
 import { getPayloadClient } from '@/lib/payload'

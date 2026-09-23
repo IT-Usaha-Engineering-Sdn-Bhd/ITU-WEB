@@ -1,17 +1,17 @@
 'use client'
+import type { ReactNode } from 'react'
 import Image from 'next/image'
 import { Cube, Buildings, Lightning, HardHat, GearSix } from '@phosphor-icons/react'
 import { Reveal } from '@/components/Reveal'
 import { Carousel } from '@/components/Carousel'
-import { Backdrop } from '@/components/Backdrop'
 import { mediaAlt, mediaUrl } from '@/lib/media'
 import type { Landing } from '@/payload-types'
 
 const icons = [GearSix, Buildings, HardHat, Lightning, Cube]
-export function Services({ data }: { data: Landing['services'] }) {
+export function Services({ data, backdrop }: { data: Landing['services']; backdrop: ReactNode }) {
   return (
     <section id="services" data-section="services" className="landing-section services-section">
-      <Backdrop />
+      {backdrop}
       <div className="section-shell">
         <Reveal className="services-intro">
           <div>

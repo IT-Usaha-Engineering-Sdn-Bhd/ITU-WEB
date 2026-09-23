@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const source = (name: string) =>
-  readFileSync(path.join(root, 'template', name), 'utf8')
+  readFileSync(path.join(root, 'template', 'backend', name), 'utf8')
     .replace(/\r\n/g, '\n')
     .trim()
 const match = (value: string, pattern: RegExp) => {
