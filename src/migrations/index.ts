@@ -5,6 +5,7 @@ import * as migration_20260922_171500_certs_certificate_rename from './20260922_
 import * as migration_20260922_180000_continue_label from './20260922_180000_continue_label';
 import * as migration_20260923_040329_pages_enquiries from './20260923_040329_pages_enquiries';
 import * as migration_20260923_051200_events_career_projects from './20260923_051200_events_career_projects';
+import * as migration_20260923_075152_services_pages from './20260923_075152_services_pages';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20260923_051200_events_career_projects.up,
     down: migration_20260923_051200_events_career_projects.down,
-    name: '20260923_051200_events_career_projects'
+    name: '20260923_051200_events_career_projects',
+  },
+  {
+    up: migration_20260923_075152_services_pages.up,
+    down: migration_20260923_075152_services_pages.down,
+    name: '20260923_075152_services_pages'
   },
 ];

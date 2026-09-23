@@ -7,7 +7,10 @@ const PAGE_SIZE = 12
 export async function getEvents({ category, page }: { category: EventCategory; page: number }) {
   const payload = await getPayloadClient()
   return payload.find({
-    collection: 'events', depth: 1, limit: PAGE_SIZE, page,
+    collection: 'events',
+    depth: 1,
+    limit: PAGE_SIZE,
+    page,
     where: { published: { equals: true }, category: { equals: category } },
     sort: '-eventDate',
   })
@@ -16,7 +19,9 @@ export async function getEvents({ category, page }: { category: EventCategory; p
 export const getEvent = cache(async (slug: string) => {
   const payload = await getPayloadClient()
   const result = await payload.find({
-    collection: 'events', depth: 1, limit: 1,
+    collection: 'events',
+    depth: 1,
+    limit: 1,
     where: { slug: { equals: slug }, published: { equals: true } },
   })
   return result.docs[0] ?? null
@@ -25,7 +30,10 @@ export const getEvent = cache(async (slug: string) => {
 export async function getProjects({ status, page }: { status: ProjectStatus; page: number }) {
   const payload = await getPayloadClient()
   return payload.find({
-    collection: 'projects', depth: 1, limit: PAGE_SIZE, page,
+    collection: 'projects',
+    depth: 1,
+    limit: PAGE_SIZE,
+    page,
     where: { published: { equals: true }, status: { equals: status } },
     sort: ['order', '-commencementDate'],
   })
@@ -34,7 +42,9 @@ export async function getProjects({ status, page }: { status: ProjectStatus; pag
 export const getProject = cache(async (slug: string) => {
   const payload = await getPayloadClient()
   const result = await payload.find({
-    collection: 'projects', depth: 1, limit: 1,
+    collection: 'projects',
+    depth: 1,
+    limit: 1,
     where: { slug: { equals: slug }, published: { equals: true } },
   })
   return result.docs[0] ?? null
@@ -44,12 +54,22 @@ export const getProject = cache(async (slug: string) => {
 // what's been filled. The application form itself only offers the open ones.
 export const getVacancies = cache(async () => {
   const payload = await getPayloadClient()
-  const result = await payload.find({ collection: 'vacancies', depth: 0, limit: 100, sort: 'order' })
+  const result = await payload.find({
+    collection: 'vacancies',
+    depth: 0,
+    limit: 100,
+    sort: 'order',
+  })
   return result.docs
 })
 
 export async function findOpenVacancy(key: string) {
   const payload = await getPayloadClient()
-  const result = await payload.find({ collection: 'vacancies', depth: 0, limit: 1, where: { key: { equals: key }, open: { equals: true } } })
+  const result = await payload.find({
+    collection: 'vacancies',
+    depth: 0,
+    limit: 1,
+    where: { key: { equals: key }, open: { equals: true } },
+  })
   return result.docs[0] ?? null
 }

@@ -107,7 +107,11 @@ export const Landing: GlobalConfig = {
         {
           name: 'logos',
           type: 'array',
-          fields: [media('logo', true), { name: 'name', type: 'text' }, { name: 'url', type: 'text' }],
+          fields: [
+            media('logo', true),
+            { name: 'name', type: 'text' },
+            { name: 'url', type: 'text' },
+          ],
         },
       ],
     },

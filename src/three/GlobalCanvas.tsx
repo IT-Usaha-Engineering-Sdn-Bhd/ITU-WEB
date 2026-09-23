@@ -14,16 +14,31 @@ import { DataCentreScene } from './scenes/DataCentreScene'
 import { ProjectsBackdrop } from './scenes/ProjectsBackdrop'
 
 type Viewport = 'hero' | 'building' | 'projects'
-const VIEWPORT_IDS: Record<Viewport, string> = { hero: 'hero-viewport', building: 'building-viewport', projects: 'projects-viewport' }
+const VIEWPORT_IDS: Record<Viewport, string> = {
+  hero: 'hero-viewport',
+  building: 'building-viewport',
+  projects: 'projects-viewport',
+}
 
-class SceneBoundary extends Component<{ children: ReactNode; onFailure: () => void }, { failed: boolean }> {
+class SceneBoundary extends Component<
+  { children: ReactNode; onFailure: () => void },
+  { failed: boolean }
+> {
   state = { failed: false }
-  static getDerivedStateFromError() { return { failed: true } }
-  componentDidCatch() { this.props.onFailure() }
-  render() { return this.state.failed ? null : this.props.children }
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
+  componentDidCatch() {
+    this.props.onFailure()
+  }
+  render() {
+    return this.state.failed ? null : this.props.children
+  }
 }
 function Ready({ onReady }: { onReady: () => void }) {
-  useEffect(() => { onReady() }, [onReady])
+  useEffect(() => {
+    onReady()
+  }, [onReady])
   return null
 }
 function ContextHealth({ onFailure }: { onFailure: () => void }) {
@@ -61,20 +76,28 @@ export function GlobalCanvas() {
     if (!elements.length) return
     const byElement = new Map<Element, Viewport>(elements.map(([key, element]) => [element, key]))
     const ratios: Partial<Record<Viewport, number>> = {}
-    const observer = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        const key = byElement.get(entry.target)
-        if (key) ratios[key] = entry.isIntersecting ? entry.intersectionRatio : 0
-      }
-      let best: Viewport | null = null
-      for (const key of Object.keys(ratios) as Viewport[]) {
-        if ((ratios[key] ?? 0) > 0 && (!best || (ratios[key] ?? 0) > (ratios[best] ?? 0))) best = key
-      }
-      setActive(best)
-      setHost(best ? elements.find(([key]) => key === best)![1] : null)
-    }, { threshold: [0, .25, .5, .75, 1] })
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const key = byElement.get(entry.target)
+          if (key) ratios[key] = entry.isIntersecting ? entry.intersectionRatio : 0
+        }
+        let best: Viewport | null = null
+        for (const key of Object.keys(ratios) as Viewport[]) {
+          if ((ratios[key] ?? 0) > 0 && (!best || (ratios[key] ?? 0) > (ratios[best] ?? 0)))
+            best = key
+        }
+        setActive(best)
+        setHost(best ? elements.find(([key]) => key === best)![1] : null)
+      },
+      { threshold: [0, 0.25, 0.5, 0.75, 1] },
+    )
     elements.forEach(([, element]) => observer.observe(element))
-    return () => { observer.disconnect(); setActive(null); setHost(null) }
+    return () => {
+      observer.disconnect()
+      setActive(null)
+      setHost(null)
+    }
   }, [stage, pathname])
   const trackingKey = stage === 'loading' ? 'loading' : active
   // Monotonic: a viewport that has ever loaded stays loaded, since useGLTF caches the parsed
@@ -89,32 +112,79 @@ export function GlobalCanvas() {
   if (pathname !== '/') return null
   const intro = stage === 'loading'
   if (!intro && (!host || !active)) return null
-  const fallback = active === 'hero'
-    ? <div className="absolute inset-0" aria-hidden="true"><Image src="/assets/logo.png" alt="" fill sizes="(min-width: 768px) 30vw, 60vw" className="object-contain opacity-70" /></div>
-    : active === 'building'
-    ? <div className="absolute inset-0" aria-hidden="true"><Image src="/models/data-centre/data-centre-preview.png" alt="" fill sizes="(min-width: 768px) 45vw, 90vw" className="object-contain opacity-80" /></div>
-    : null
-  const scene = sceneFailed ? fallback : <SceneBoundary onFailure={() => setSceneFailed(true)}>
-    <Canvas dpr={lowQuality ? 1 : [1, 2]} frameloop={!visible ? 'never' : active === 'hero' && !reduced ? 'always' : 'demand'}
-      gl={{ antialias: !lowQuality, alpha: true, localClippingEnabled: true }} shadows={!lowQuality}
-      fallback={fallback}>
-      <ContextHealth onFailure={() => setSceneFailed(true)} />
-      <Suspense fallback={null}>
-        {stage === 'loading' && <ServerRackLine reducedMotion={reduced} />}
-        {active === 'hero' && <CompanyLogo reducedMotion={reduced} />}
-        {active === 'building' && <DataCentreScene reducedMotion={reduced} />}
-        {active === 'projects' && <ProjectsBackdrop reducedMotion={reduced} />}
-        <Ready onReady={() => {
-          if (trackingKey) setEveryReady((prev) => (prev.has(trackingKey) ? prev : new Set(prev).add(trackingKey)))
-          setSceneReady(true)
-        }} />
-      </Suspense>
-      {/* multisampling: 0 here would silently cancel gl.antialias — the composer renders to
+  const fallback =
+    active === 'hero' ? (
+      <div className="absolute inset-0" aria-hidden="true">
+        <Image
+          src="/assets/logo.png"
+          alt=""
+          fill
+          sizes="(min-width: 768px) 30vw, 60vw"
+          className="object-contain opacity-70"
+        />
+      </div>
+    ) : active === 'building' ? (
+      <div className="absolute inset-0" aria-hidden="true">
+        <Image
+          src="/models/data-centre/data-centre-preview.png"
+          alt=""
+          fill
+          sizes="(min-width: 768px) 45vw, 90vw"
+          className="object-contain opacity-80"
+        />
+      </div>
+    ) : null
+  const scene = sceneFailed ? (
+    fallback
+  ) : (
+    <SceneBoundary onFailure={() => setSceneFailed(true)}>
+      <Canvas
+        dpr={lowQuality ? 1 : [1, 2]}
+        frameloop={!visible ? 'never' : active === 'hero' && !reduced ? 'always' : 'demand'}
+        gl={{ antialias: !lowQuality, alpha: true, localClippingEnabled: true }}
+        shadows={!lowQuality}
+        fallback={fallback}
+      >
+        <ContextHealth onFailure={() => setSceneFailed(true)} />
+        <Suspense fallback={null}>
+          {stage === 'loading' && <ServerRackLine reducedMotion={reduced} />}
+          {active === 'hero' && <CompanyLogo reducedMotion={reduced} />}
+          {active === 'building' && <DataCentreScene reducedMotion={reduced} />}
+          {active === 'projects' && <ProjectsBackdrop reducedMotion={reduced} />}
+          <Ready
+            onReady={() => {
+              if (trackingKey)
+                setEveryReady((prev) =>
+                  prev.has(trackingKey) ? prev : new Set(prev).add(trackingKey),
+                )
+              setSceneReady(true)
+            }}
+          />
+        </Suspense>
+        {/* multisampling: 0 here would silently cancel gl.antialias — the composer renders to
           a non-multisampled target once mounted, regardless of the context's own setting. */}
-      {!lowQuality && <EffectComposer multisampling={4}><Bloom mipmapBlur intensity={0.22} luminanceThreshold={0.8} luminanceSmoothing={0.3} /><Vignette eskil={false} offset={0.2} darkness={intro ? 0.65 : 0.2} /></EffectComposer>}
-      <PerformanceMonitor onDecline={() => setLowQuality(true)} />
-    </Canvas>
-  </SceneBoundary>
+        {!lowQuality && (
+          <EffectComposer multisampling={4}>
+            <Bloom mipmapBlur intensity={0.22} luminanceThreshold={0.8} luminanceSmoothing={0.3} />
+            <Vignette eskil={false} offset={0.2} darkness={intro ? 0.65 : 0.2} />
+          </EffectComposer>
+        )}
+        <PerformanceMonitor onDecline={() => setLowQuality(true)} />
+      </Canvas>
+    </SceneBoundary>
+  )
   const showFallback = !sceneFailed && trackingKey !== null && !everReady.has(trackingKey)
-  return intro ? <div className="global-canvas is-intro" aria-hidden="true">{scene}</div> : createPortal(<div className="absolute inset-0" aria-hidden="true">{scene}{showFallback && fallback}</div>, host!)
+  return intro ? (
+    <div className="global-canvas is-intro" aria-hidden="true">
+      {scene}
+    </div>
+  ) : (
+    createPortal(
+      <div className="absolute inset-0" aria-hidden="true">
+        {scene}
+        {showFallback && fallback}
+      </div>,
+      host!,
+    )
+  )
 }

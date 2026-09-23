@@ -25,7 +25,11 @@ export function parsePage(value: string | string[] | undefined): number {
 export function youtubeId(url: string | null | undefined): string | null {
   if (!url) return null
   let parsed: URL
-  try { parsed = new URL(url) } catch { return null }
+  try {
+    parsed = new URL(url)
+  } catch {
+    return null
+  }
   const host = parsed.hostname.replace(/^www\./, '')
   let id: string | null = null
   if (host === 'youtu.be') id = parsed.pathname.slice(1)
@@ -42,19 +46,56 @@ export function youtubeEmbedUrl(url: string | null | undefined): string | null {
   return id ? `https://www.youtube-nocookie.com/embed/${id}` : null
 }
 
-const MONTHS_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
-const MONTHS_LONG = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const MONTHS_SHORT = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sept',
+  'Oct',
+  'Nov',
+  'Dec',
+]
+const MONTHS_LONG = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
 
-export function formatMonthYear(date: string | null | undefined, style: 'short' | 'long' = 'short'): string {
+export function formatMonthYear(
+  date: string | null | undefined,
+  style: 'short' | 'long' = 'short',
+): string {
   if (!date) return ''
   const d = new Date(date)
   const months = style === 'short' ? MONTHS_SHORT : MONTHS_LONG
   return `${months[d.getUTCMonth()]} ${d.getUTCFullYear()}`
 }
 
-export function dateRange(status: ProjectStatus, commencementDate?: string | null, completionDate?: string | null): string {
+export function dateRange(
+  status: ProjectStatus,
+  commencementDate?: string | null,
+  completionDate?: string | null,
+): string {
   const start = formatMonthYear(commencementDate)
-  const end = completionDate ? formatMonthYear(completionDate) : status === 'ongoing' ? 'Present' : ''
+  const end = completionDate
+    ? formatMonthYear(completionDate)
+    : status === 'ongoing'
+      ? 'Present'
+      : ''
   return [start, end].filter(Boolean).join(' – ')
 }
 

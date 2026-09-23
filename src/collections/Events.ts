@@ -12,20 +12,41 @@ export const EVENT_CATEGORIES = [
 ] as const
 
 export const Events: CollectionConfig = {
-  slug: 'events', admin: { group: 'Content', useAsTitle: 'title' },
+  slug: 'events',
+  admin: { group: 'Content', useAsTitle: 'title' },
   access: {
     read: publishedRead,
-    create: ({ req }) => Boolean(req.user), update: ({ req }) => Boolean(req.user),
+    create: ({ req }) => Boolean(req.user),
+    update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user?.roles?.includes('admin')),
   },
   fields: [
-    { name: 'title', type: 'text', required: true }, slugField,
-    { name: 'category', type: 'select', required: true, defaultValue: EVENT_CATEGORIES[0].value,
-      options: EVENT_CATEGORIES.map((c) => ({ ...c })) },
-    { name: 'eventDate', type: 'date', required: true, admin: { date: { pickerAppearance: 'dayOnly' } } },
+    { name: 'title', type: 'text', required: true },
+    slugField,
+    {
+      name: 'category',
+      type: 'select',
+      required: true,
+      defaultValue: EVENT_CATEGORIES[0].value,
+      options: EVENT_CATEGORIES.map((c) => ({ ...c })),
+    },
+    {
+      name: 'eventDate',
+      type: 'date',
+      required: true,
+      admin: { date: { pickerAppearance: 'dayOnly' } },
+    },
     { name: 'cover', type: 'upload', relationTo: 'media' },
-    { name: 'gallery', type: 'array', fields: [{ name: 'image', type: 'upload', relationTo: 'media', required: true }] },
-    { name: 'youtubeUrl', type: 'text', admin: { description: 'Any standard YouTube URL (watch, youtu.be, shorts).' } },
+    {
+      name: 'gallery',
+      type: 'array',
+      fields: [{ name: 'image', type: 'upload', relationTo: 'media', required: true }],
+    },
+    {
+      name: 'youtubeUrl',
+      type: 'text',
+      admin: { description: 'Any standard YouTube URL (watch, youtu.be, shorts).' },
+    },
     { name: 'published', type: 'checkbox', defaultValue: false },
     seo,
   ],

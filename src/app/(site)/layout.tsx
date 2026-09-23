@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Manrope, Work_Sans } from 'next/font/google'
+import { Spectral, Karla } from 'next/font/google'
 import '../globals.css'
 import { StageProvider } from '@/three/stage'
 import { Scene } from '@/three/Scene'
@@ -7,8 +7,13 @@ import { TopNav } from '@/components/TopNav'
 import { Footer } from '@/components/Footer'
 import { getSettings } from '@/lib/site-content'
 
-const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope', display: 'swap' })
-const workSans = Work_Sans({ subsets: ['latin'], variable: '--font-work-sans', display: 'swap' })
+const spectral = Spectral({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-spectral',
+  display: 'swap',
+})
+const karla = Karla({ subsets: ['latin'], variable: '--font-karla', display: 'swap' })
 
 const siteUrl = process.env.SERVER_URL ?? 'http://localhost:3000'
 
@@ -39,12 +44,14 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
     url: siteUrl,
     email: settings?.email,
     telephone: settings?.phone,
-    address: settings?.address ? { '@type': 'PostalAddress', streetAddress: settings.address } : undefined,
+    address: settings?.address
+      ? { '@type': 'PostalAddress', streetAddress: settings.address }
+      : undefined,
     sameAs: [settings?.linkedin, settings?.instagram, settings?.facebook].filter(Boolean),
   }
 
   return (
-    <html lang="en" className={`${manrope.variable} ${workSans.variable}`}>
+    <html lang="en" className={`${spectral.variable} ${karla.variable}`}>
       <body className="bg-base text-bone">
         <script
           type="application/ld+json"

@@ -8,6 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
     "knip": "knip",
     "payload": "payload",
@@ -48,6 +50,7 @@
     "eslint-config-next": "15.4.11",
     "husky": "^9.1.7",
     "knip": "^6.37.0",
+    "prettier": "^3.9.9",
     "tailwindcss": "4.0.14",
     "tsx": "4.19.2",
     "typescript": "5.7.2"

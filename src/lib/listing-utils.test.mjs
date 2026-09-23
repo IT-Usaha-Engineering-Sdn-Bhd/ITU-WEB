@@ -1,7 +1,14 @@
 import { strict as assert } from 'node:assert'
 import { test } from 'node:test'
 import {
-  consultantLabel, dateRange, formatMonthYear, parseCategory, parsePage, parseStatus, youtubeEmbedUrl, youtubeId,
+  consultantLabel,
+  dateRange,
+  formatMonthYear,
+  parseCategory,
+  parsePage,
+  parseStatus,
+  youtubeEmbedUrl,
+  youtubeId,
 } from './listing-utils.ts'
 
 test('parseCategory falls back to the first category for anything invalid', () => {
@@ -37,7 +44,10 @@ test('youtubeId handles watch, youtu.be, embed and shorts URLs', () => {
 })
 
 test('youtubeEmbedUrl uses the privacy-enhanced domain', () => {
-  assert.equal(youtubeEmbedUrl('https://youtu.be/dQw4w9WgXcQ'), 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ')
+  assert.equal(
+    youtubeEmbedUrl('https://youtu.be/dQw4w9WgXcQ'),
+    'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ',
+  )
   assert.equal(youtubeEmbedUrl(null), null)
 })
 
@@ -48,7 +58,10 @@ test('formatMonthYear formats short and long in UTC', () => {
 })
 
 test('dateRange shows Present for ongoing projects with no completion date', () => {
-  assert.equal(dateRange('ongoing', '2025-09-01T00:00:00.000Z', '2026-09-01T00:00:00.000Z'), 'Sept 2025 – Sept 2026')
+  assert.equal(
+    dateRange('ongoing', '2025-09-01T00:00:00.000Z', '2026-09-01T00:00:00.000Z'),
+    'Sept 2025 – Sept 2026',
+  )
   assert.equal(dateRange('ongoing', '2025-09-01T00:00:00.000Z', null), 'Sept 2025 – Present')
   assert.equal(dateRange('completed', '2025-09-01T00:00:00.000Z', null), 'Sept 2025')
 })

@@ -38,7 +38,8 @@ export const landingDefaults: Omit<Landing, 'id' | 'updatedAt' | 'createdAt' | '
         body: 'Comprehensive and well-coordinated project execution services tailored for infrastructure and electrical works. IT Usaha oversees every phase from planning, scheduling, and procurement to site supervision and quality control, ensuring seamless delivery that meets technical standards, timelines, and client expectations.',
       },
       {
-        title: 'High Tension & Low Voltage Electrical Supply, Fire Protection Services, ACMV, BMS & Security System',
+        title:
+          'High Tension & Low Voltage Electrical Supply, Fire Protection Services, ACMV, BMS & Security System',
         body: 'Well coordinated safe and efficient power delivery installation and commissioning from cable landing station to 132kV substation down to BMS and security system of Data centre.',
       },
       {
@@ -116,4 +117,3 @@ export const landingDefaults: Omit<Landing, 'id' | 'updatedAt' | 'createdAt' | '
       'Integrated M&E engineering company delivering Data Centre and Mission Critical infrastructure across Malaysia since 1997.',
   },
 }
-

@@ -243,5 +243,380 @@
       "title": "Career",
       "description": "Explore open positions at IT Usaha Engineering."
     }
+  },
+  "serviceDataCentre": {
+    "heading": "Data Centre & Critical System",
+    "highlight": "System",
+    "intro": "Since 1997, ITU has completed many Data Centre projects nationwide, we don’t just build data centres but we run them. With decades of industry experience and more than 100 completed projects nationwide, we are both a trusted MEP and data centre contractor, supporting some of Malaysia’s most demanding digital workloads.",
+    "turnkey": {
+      "title": "Turnkey Design, Build & Operate Services",
+      "body": "We handle the entire lifecycle of the infrastructure from design and construction to live operations. Our in-house experts oversee CSA (Civil, Structural, & Architectural), MEP (Mechanical, Electrical, Plumbing), testing, commissioning, and certification to meet global standards such as the Uptime Institute.",
+      "subtitle": "Computational Fluid Dynamics Simulation",
+      "subBody": "We have our own CFD project tool that simulates the behavior of fluids and their thermodynamic properties using numerical models. Engineers use the Cadence Fidelity CFD Platform for design processes, such as propulsion, aerodynamics, hydrodynamics, and combustion, to improve and increase the efficiency of products by reducing time-consuming and expensive physical testing."
+    },
+    "critical": {
+      "title": "Critical Infrastructure Expertise",
+      "body": "We design and deliver essential systems that ensure performance and safety:",
+      "items": [
+        {
+          "text": "Electrical System and UPS (Uninterruptible Power Supply)"
+        },
+        {
+          "text": "Air Conditioning & Mechanical Ventilation Systems"
+        },
+        {
+          "text": "Fire Protection System"
+        },
+        {
+          "text": "BMS, Access Control, ELV and Security System"
+        }
+      ]
+    },
+    "testing": {
+      "title": "DC Testing & Commissioning Services",
+      "body": "Don’t leave the performance of your DC systems to chance. We provide essential testing and commissioning services for high-voltage equipment, battery banks, and control systems. Using state-of-the-art tools and a meticulous process, we ensure every component is tested for peak performance, safety, and compliance. Our service guarantees a seamless and reliable launch for your electrical infrastructure, protecting your investment and preventing future downtime.",
+      "galleryTitle": "Commissioning Equipment",
+      "equipment": []
+    },
+    "whyHeading": "Why Choose Us?",
+    "why": [
+      {
+        "title": "Live Data Centre Operations",
+        "body": "Our facilities host high-availability environments for major enterprises. With dedicated teams on-site 24/7/365, we provide round-the-clock support, preventive maintenance, and fast-response solutions to ensure zero downtime."
+      },
+      {
+        "title": "Scalable, Future-Proof Design",
+        "body": "Using Revit BIM (Building Information Modeling) and CFD (Computational Fluid Dynamics) simulation tools, we design modular spaces that allow seamless scaling. Expansion and upgrades can be done with minimal impact on operations."
+      }
+    ],
+    "seo": {
+      "title": "Data Centre & Critical System",
+      "description": "Turnkey data centre design, build, operate, and testing & commissioning services by IT Usaha Engineering."
+    }
+  },
+  "serviceHighTension": {
+    "heading": "High Tension & Low Voltage Electric Power and High Tension Switchgear & Transformer",
+    "highlight": "Transformer",
+    "intro": "We deliver safe, reliable, and code-compliant high tension (HT) and low voltage (LV) electrical systems to support commercial, industrial, and data centre operations. From substation setup to transformer and switchgear installation, our team ensures consistent, stable power distribution for even the most demanding facilities.",
+    "power": [
+      {
+        "title": "High Tension (HT) Power Systems",
+        "body": "We design and install high tension systems (typically 11 kV and above) that deliver electricity from the grid to your facility through substations and switchgear setups.",
+        "items": [
+          {
+            "text": "HT switchgear installation & commissioning"
+          },
+          {
+            "text": "HT cable laying, jointing & termination"
+          },
+          {
+            "text": "Power protection and isolation systems"
+          },
+          {
+            "text": "Compliance with energy authority regulations (e.g., Suruhanjaya Tenaga)"
+          }
+        ],
+        "note": ""
+      },
+      {
+        "title": "Switchgear & Transformer Solutions",
+        "body": "We supply, install, and test both HT and LV switchgear along with transformers that step voltage levels up or down as needed for operational safety and energy efficiency.",
+        "items": [
+          {
+            "text": "Oil-immersed & dry-type transformers"
+          },
+          {
+            "text": "Compact Substations (CSS)"
+          },
+          {
+            "text": "Protection relays & monitoring instruments"
+          },
+          {
+            "text": "Fire-rated transformer rooms (as required)"
+          }
+        ],
+        "note": ""
+      },
+      {
+        "title": "MV & LV Distribution",
+        "body": "From the transformer output, we implement LV systems (415V and below) for safe and efficient internal power distribution.",
+        "items": [
+          {
+            "text": "Main & Sub Distribution Boards (MDB/SDB)"
+          },
+          {
+            "text": "Cabling, trunking, and earthing systems"
+          },
+          {
+            "text": "Load distribution and voltage regulation"
+          },
+          {
+            "text": "Integration with control panels and backup systems"
+          }
+        ],
+        "note": ""
+      }
+    ],
+    "divider1": {
+      "heading": "Electrical Works, Generator Sets & Motor Installation",
+      "body": "From robust electrical installations to reliable backup power systems, our electrical engineering team delivers high-performance solutions for mission-critical environments. With decades of hands-on experience, we ensure every component from power cabling to motor control is built for efficiency, safety, and long-term durability."
+    },
+    "backup": [
+      {
+        "title": "Generator Sets (Genset)",
+        "body": "To guarantee power continuity, we supply and install diesel generator systems designed for instant switchovers during power failures. Integrated ATS (Automatic Transfer Switches) allow seamless transition between grid and backup power.",
+        "items": [
+          {
+            "text": "Generator sizing & installation"
+          },
+          {
+            "text": "Synchronization and load sharing systems"
+          },
+          {
+            "text": "Fuel tank and exhaust system setup"
+          },
+          {
+            "text": "Full commissioning and testing"
+          }
+        ],
+        "note": ""
+      },
+      {
+        "title": "ACMV Installation Services",
+        "body": "Our team handles the installation of industrial motors for various operational functions from HVAC systems to water pumps and specialized machinery.",
+        "items": [
+          {
+            "text": "Cooling tower"
+          },
+          {
+            "text": "Chiller system"
+          },
+          {
+            "text": "Motor control centre (MCC) setup"
+          },
+          {
+            "text": "Soft starters and VFDs (Variable Frequency Drives)"
+          },
+          {
+            "text": "Vibration analysis, balancing & alignment"
+          }
+        ],
+        "note": ""
+      }
+    ],
+    "divider2": {
+      "heading": "Lighting Electrical Services and Lightning Protection",
+      "body": "At IT Usaha, we provide BMS, fire and lightning protection solutions, designed to enhance safety, efficiency, and reliability for both commercial and industrial spaces. With years of expertise, we specialize in designing, installing, and maintaining top-tier lighting and lightning protection systems to meet your building’s needs."
+    },
+    "protection": [
+      {
+        "title": "BMS and Security System",
+        "body": "At IT Usaha, we specialize in the design, installation, and maintenance of low-voltage (ELV) systems that ensure effective communication, entertainment, and operational efficiency across various industries. Our ELV solutions include public address (PA) systems, MATV (Master Antenna Television) setups, and PABX (Private Automatic Branch Exchange) systems, each tailored to meet the unique needs of your environment.",
+        "items": [],
+        "note": ""
+      },
+      {
+        "title": "Fire Protection System",
+        "body": "A Fire Protection System is a comprehensive network of equipment and strategies designed to detect, control, and extinguish fires to protect life, property, and the environment. These systems are essential for minimizing the impact of fire-related incidents in residential, commercial, and industrial settings.",
+        "items": [],
+        "note": ""
+      },
+      {
+        "title": "Lightning Protection",
+        "body": "Protecting your building from lightning strikes is essential to avoid costly damages and ensure the safety of the people within. We use the latest technology and industry best practices to safeguard your structure from electrical surges and lightning strikes, ensuring maximum protection for your building’s infrastructure.",
+        "items": [
+          {
+            "text": "Lightning rods and air terminals"
+          },
+          {
+            "text": "Earthing and bonding systems"
+          },
+          {
+            "text": "Surge protection devices"
+          },
+          {
+            "text": "Risk assessments and system maintenance"
+          }
+        ],
+        "note": "Our lightning protection systems are designed with reliability and compliance to international standards, including:"
+      }
+    ],
+    "feature": {
+      "eyebrow": "Why Choose Us?",
+      "title": "Safety. Reliability. Compliance.",
+      "body": "All installations are completed in line with Malaysian Electrical Codes and international standards, ensuring operational reliability, safety, and audit readiness."
+    },
+    "seo": {
+      "title": "High Tension & Electrical Services",
+      "description": "HT/LV power, switchgear, generators, ACMV, BMS, fire protection and lightning protection services."
+    }
+  },
+  "serviceProjectManagement": {
+    "heading": "Project Management",
+    "highlight": "Management",
+    "servicesHeading": "Our PMC Services",
+    "services": [
+      {
+        "title": "Preliminary Planning & Due Diligence"
+      },
+      {
+        "title": "Design Management"
+      },
+      {
+        "title": "Scope Demarcation & Tender Packaging"
+      },
+      {
+        "title": "LLE Vendor Evaluation and Recommendation"
+      },
+      {
+        "title": "Budgeting and Cash Flow Planning"
+      },
+      {
+        "title": "Procurement Management"
+      },
+      {
+        "title": "Value Engineering"
+      },
+      {
+        "title": "Safety Assessment"
+      },
+      {
+        "title": "Document Control and Review"
+      },
+      {
+        "title": "Streamlining Communication"
+      },
+      {
+        "title": "Planning and Scheduling"
+      },
+      {
+        "title": "Quality Control"
+      }
+    ],
+    "seo": {
+      "title": "Project Management",
+      "description": "End-to-end project management consultancy (PMC) services by IT Usaha Engineering."
+    }
+  },
+  "serviceFacilitiesManagement": {
+    "heading": "Facilities Management Services",
+    "highlight": "Services",
+    "intro": "We don’t just build data centres — we stay with them for the long run. IT Usaha offers 24/7/365 Facilities Management (FM) services tailored exclusively for mission-critical data centre environments. Our expert team ensures continuous uptime, operational efficiency, and long-term reliability all while aligning with international standards.",
+    "support": {
+      "title": "24/7/365 Support & Maintenance",
+      "body": "Our dedicated FM teams provide round-the-clock monitoring, rapid response, and preventive maintenance to ensure uninterrupted operations.",
+      "items": [
+        {
+          "text": "On-site and remote monitoring"
+        },
+        {
+          "text": "Preventive and corrective maintenance"
+        },
+        {
+          "text": "Emergency fault resolution and troubleshooting"
+        },
+        {
+          "text": "Health checks, performance tuning & system optimization"
+        },
+        {
+          "text": "Spare parts and hardware replacement"
+        },
+        {
+          "text": "Detailed reporting and lifecycle planning"
+        }
+      ]
+    },
+    "maintenance": {
+      "title": "Critical System Maintenance Expertise",
+      "body": "We maintain all core infrastructure that keeps your data centre running securely and efficiently:",
+      "items": [
+        {
+          "text": "UPS systems (Uninterruptible Power Supply)"
+        },
+        {
+          "text": "Precision cooling and liquid cooling systems"
+        },
+        {
+          "text": "Fire suppression systems (non-water-based)"
+        },
+        {
+          "text": "Access control, CCTV & environmental monitoring"
+        },
+        {
+          "text": "Power distribution and redundancy systems"
+        }
+      ]
+    },
+    "whyHeading": "Why Choose Us?",
+    "why": [
+      {
+        "title": "Zero Downtime Commitment",
+        "body": "Our proactive FM approach minimizes risks and ensures high availability ideal for enterprises that depend on 24/7 digital infrastructure."
+      },
+      {
+        "title": "Operated by Data Centre Experts",
+        "body": "With decades of experience as both a builder and operator, we understand the intricacies of mission-critical environments better than anyone else."
+      }
+    ],
+    "seo": {
+      "title": "Facilities Management",
+      "description": "24/7/365 facilities management for mission-critical data centre environments."
+    }
+  },
+  "serviceDfma": {
+    "heading": "DFMA (Design & Fabrication of Modular Assemblies)",
+    "highlight": "Modular Assemblies",
+    "facts": [
+      {
+        "label": "Floor size",
+        "value": "3,654 m²"
+      },
+      {
+        "label": "Operation Date",
+        "value": "April 2026"
+      }
+    ],
+    "capabilities": {
+      "title": "Key Capabilities",
+      "cards": [
+        {
+          "title": "Concept & Design",
+          "body": "3D modeling, engineering, and DFMA – based modular design."
+        },
+        {
+          "title": "Turnkey Solutions",
+          "body": "End to end service: design – fabrication – assembly – quality check."
+        },
+        {
+          "title": "Fabrication & Prototyping",
+          "body": "Production of custom modules using metal, plastic, or mixed materials."
+        },
+        {
+          "title": "Modular Assembly Integration",
+          "body": "Pre-fabricated components that snap, bolt, or lock together for quick setup."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "Benefits",
+      "items": [
+        {
+          "text": "Reduces assembly time and on-site installation costs."
+        },
+        {
+          "text": "Scalable and flexible modular solutions."
+        },
+        {
+          "text": "Supports innovation and faster product development."
+        }
+      ]
+    },
+    "visual": {
+      "title": "Modular Assembly"
+    },
+    "seo": {
+      "title": "DFMA",
+      "description": "Design & Fabrication of Modular Assemblies (DFMA) services by IT Usaha Engineering."
+    }
   }
 }

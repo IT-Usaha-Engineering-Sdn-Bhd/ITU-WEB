@@ -1,6 +1,12 @@
 import {
-  Color, EdgesGeometry, Group, LineBasicMaterial, LineSegments,
-  Mesh, MeshBasicMaterial, Object3D,
+  Color,
+  EdgesGeometry,
+  Group,
+  LineBasicMaterial,
+  LineSegments,
+  Mesh,
+  MeshBasicMaterial,
+  Object3D,
 } from 'three'
 import type { ColorRepresentation, Material } from 'three'
 

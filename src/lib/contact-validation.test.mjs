@@ -2,7 +2,14 @@ import { strict as assert } from 'node:assert'
 import { test } from 'node:test'
 import { validateContact } from './contact-validation.ts'
 
-const valid = { name: 'Ada', email: 'ada@example.com', phone: '+60 12345', companyName: '', companyAddress: '', message: 'Please call.' }
+const valid = {
+  name: 'Ada',
+  email: 'ada@example.com',
+  phone: '+60 12345',
+  companyName: '',
+  companyAddress: '',
+  message: 'Please call.',
+}
 
 test('accepts and trims a valid enquiry', () => {
   assert.deepEqual(validateContact({ ...valid, name: ' Ada ' }), { ok: true, data: valid })

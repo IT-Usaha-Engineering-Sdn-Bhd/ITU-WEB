@@ -109,6 +109,11 @@ export interface Config {
     'events-page': EventsPage;
     'projects-page': ProjectsPage;
     'career-page': CareerPage;
+    'service-data-centre': ServiceDataCentre;
+    'service-high-tension': ServiceHighTension;
+    'service-project-management': ServiceProjectManagement;
+    'service-facilities-management': ServiceFacilitiesManagement;
+    'service-dfma': ServiceDfma;
   };
   globalsSelect: {
     landing: LandingSelect<false> | LandingSelect<true>;
@@ -120,6 +125,11 @@ export interface Config {
     'events-page': EventsPageSelect<false> | EventsPageSelect<true>;
     'projects-page': ProjectsPageSelect<false> | ProjectsPageSelect<true>;
     'career-page': CareerPageSelect<false> | CareerPageSelect<true>;
+    'service-data-centre': ServiceDataCentreSelect<false> | ServiceDataCentreSelect<true>;
+    'service-high-tension': ServiceHighTensionSelect<false> | ServiceHighTensionSelect<true>;
+    'service-project-management': ServiceProjectManagementSelect<false> | ServiceProjectManagementSelect<true>;
+    'service-facilities-management': ServiceFacilitiesManagementSelect<false> | ServiceFacilitiesManagementSelect<true>;
+    'service-dfma': ServiceDfmaSelect<false> | ServiceDfmaSelect<true>;
   };
   locale: null;
   widgets: {
@@ -1031,6 +1041,264 @@ export interface CareerPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-data-centre".
+ */
+export interface ServiceDataCentre {
+  id: number;
+  heading: string;
+  highlight: string;
+  heroImage?: (number | null) | Media;
+  intro: string;
+  turnkey: {
+    title: string;
+    body: string;
+    subtitle: string;
+    subBody: string;
+    image?: (number | null) | Media;
+  };
+  critical: {
+    title: string;
+    body: string;
+    items?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    image?: (number | null) | Media;
+  };
+  testing: {
+    title: string;
+    body: string;
+    image?: (number | null) | Media;
+    galleryTitle: string;
+    equipment?:
+      | {
+          image?: (number | null) | Media;
+          caption?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  whyHeading: string;
+  why?:
+    | {
+        title: string;
+        body: string;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-high-tension".
+ */
+export interface ServiceHighTension {
+  id: number;
+  heading: string;
+  highlight: string;
+  heroImage?: (number | null) | Media;
+  intro: string;
+  power?:
+    | {
+        title: string;
+        body: string;
+        items?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        note?: string | null;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  divider1: {
+    heading: string;
+    body: string;
+  };
+  backup?:
+    | {
+        title: string;
+        body: string;
+        items?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        note?: string | null;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  divider2: {
+    heading: string;
+    body: string;
+  };
+  protection?:
+    | {
+        title: string;
+        body: string;
+        items?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        note?: string | null;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  feature: {
+    eyebrow: string;
+    title: string;
+    body: string;
+    image?: (number | null) | Media;
+  };
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-project-management".
+ */
+export interface ServiceProjectManagement {
+  id: number;
+  heading: string;
+  highlight: string;
+  heroImage?: (number | null) | Media;
+  servicesHeading: string;
+  services?:
+    | {
+        title: string;
+        id?: string | null;
+      }[]
+    | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-facilities-management".
+ */
+export interface ServiceFacilitiesManagement {
+  id: number;
+  heading: string;
+  highlight: string;
+  heroImage?: (number | null) | Media;
+  intro: string;
+  support: {
+    title: string;
+    body: string;
+    items?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    image?: (number | null) | Media;
+  };
+  maintenance: {
+    title: string;
+    body: string;
+    items?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    image?: (number | null) | Media;
+  };
+  whyHeading: string;
+  why?:
+    | {
+        title: string;
+        body: string;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-dfma".
+ */
+export interface ServiceDfma {
+  id: number;
+  heading: string;
+  highlight: string;
+  heroImage?: (number | null) | Media;
+  facts?:
+    | {
+        label: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  capabilities: {
+    title: string;
+    image?: (number | null) | Media;
+    cards?:
+      | {
+          title: string;
+          body: string;
+          image?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  benefits: {
+    title: string;
+    items?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    image?: (number | null) | Media;
+  };
+  visual: {
+    title: string;
+    image?: (number | null) | Media;
+  };
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "landing_select".
  */
 export interface LandingSelect<T extends boolean = true> {
@@ -1336,6 +1604,296 @@ export interface CareerPageSelect<T extends boolean = true> {
   heroImage?: T;
   applyHeading?: T;
   applyBody?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-data-centre_select".
+ */
+export interface ServiceDataCentreSelect<T extends boolean = true> {
+  heading?: T;
+  highlight?: T;
+  heroImage?: T;
+  intro?: T;
+  turnkey?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        subtitle?: T;
+        subBody?: T;
+        image?: T;
+      };
+  critical?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        image?: T;
+      };
+  testing?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        image?: T;
+        galleryTitle?: T;
+        equipment?:
+          | T
+          | {
+              image?: T;
+              caption?: T;
+              id?: T;
+            };
+      };
+  whyHeading?: T;
+  why?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        image?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-high-tension_select".
+ */
+export interface ServiceHighTensionSelect<T extends boolean = true> {
+  heading?: T;
+  highlight?: T;
+  heroImage?: T;
+  intro?: T;
+  power?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        note?: T;
+        image?: T;
+        id?: T;
+      };
+  divider1?:
+    | T
+    | {
+        heading?: T;
+        body?: T;
+      };
+  backup?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        note?: T;
+        image?: T;
+        id?: T;
+      };
+  divider2?:
+    | T
+    | {
+        heading?: T;
+        body?: T;
+      };
+  protection?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        note?: T;
+        image?: T;
+        id?: T;
+      };
+  feature?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        body?: T;
+        image?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-project-management_select".
+ */
+export interface ServiceProjectManagementSelect<T extends boolean = true> {
+  heading?: T;
+  highlight?: T;
+  heroImage?: T;
+  servicesHeading?: T;
+  services?:
+    | T
+    | {
+        title?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-facilities-management_select".
+ */
+export interface ServiceFacilitiesManagementSelect<T extends boolean = true> {
+  heading?: T;
+  highlight?: T;
+  heroImage?: T;
+  intro?: T;
+  support?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        image?: T;
+      };
+  maintenance?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        image?: T;
+      };
+  whyHeading?: T;
+  why?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        image?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "service-dfma_select".
+ */
+export interface ServiceDfmaSelect<T extends boolean = true> {
+  heading?: T;
+  highlight?: T;
+  heroImage?: T;
+  facts?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        id?: T;
+      };
+  capabilities?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        cards?:
+          | T
+          | {
+              title?: T;
+              body?: T;
+              image?: T;
+              id?: T;
+            };
+      };
+  benefits?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        image?: T;
+      };
+  visual?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+      };
   seo?:
     | T
     | {

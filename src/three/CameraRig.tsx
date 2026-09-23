@@ -23,5 +23,7 @@ export function CameraRig({
     ref.current?.lookAt(...target)
   }, [target])
 
-  return <PerspectiveCamera makeDefault ref={ref} position={position} fov={fov} near={0.1} far={far} />
+  return (
+    <PerspectiveCamera makeDefault ref={ref} position={position} fov={fov} near={0.1} far={far} />
+  )
 }

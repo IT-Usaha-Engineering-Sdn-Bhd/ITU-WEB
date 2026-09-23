@@ -39,10 +39,26 @@ export function StageProvider({ children }: { children: React.ReactNode }) {
     setSceneReady(false)
     setIntro(next)
     if (next === 'scroll') {
-      try { sessionStorage.setItem(SEEN_INTRO_KEY, '1') } catch { /* Optional storage. */ }
+      try {
+        sessionStorage.setItem(SEEN_INTRO_KEY, '1')
+      } catch {
+        /* Optional storage. */
+      }
     }
   }, [])
-  const value = useMemo(() => ({ stage, activeSection, setStage, setActiveSection, sceneReady, setSceneReady, sceneFailed, setSceneFailed }), [stage, activeSection, setStage, sceneReady, sceneFailed])
+  const value = useMemo(
+    () => ({
+      stage,
+      activeSection,
+      setStage,
+      setActiveSection,
+      sceneReady,
+      setSceneReady,
+      sceneFailed,
+      setSceneFailed,
+    }),
+    [stage, activeSection, setStage, sceneReady, sceneFailed],
+  )
   return <StageContext.Provider value={value}>{children}</StageContext.Provider>
 }
 export function useStage() {

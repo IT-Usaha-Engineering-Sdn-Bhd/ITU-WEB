@@ -1,8 +1,15 @@
 type SectionBounds = { top: number; bottom: number }
 
 /** Relative destination, or null when native scrolling should retain control. */
-export function sectionDestination(sections: SectionBounds[], direction: number, height: number, inset: number): number | null {
-  const index = sections.findIndex((section) => section.top <= inset + 3 && section.bottom > inset + 3)
+export function sectionDestination(
+  sections: SectionBounds[],
+  direction: number,
+  height: number,
+  inset: number,
+): number | null {
+  const index = sections.findIndex(
+    (section) => section.top <= inset + 3 && section.bottom > inset + 3,
+  )
   if (index < 0) {
     // Nothing straddles the nav inset — we're off the tracked sections entirely (e.g. below
     // the last one, in the footer). Land on the nearest tracked section in the travel

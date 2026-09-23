@@ -28,11 +28,12 @@ export function ServerRackLine({ reducedMotion }: { reducedMotion: boolean }) {
   }, [scene])
 
   const positions = useMemo(
-    () => Array.from({ length: ROWS * COLS }, (_, i) => {
-      const row = Math.floor(i / COLS)
-      const col = i % COLS
-      return [(col - (COLS - 1) / 2) * SPACING, 0, -row * SPACING] as const
-    }),
+    () =>
+      Array.from({ length: ROWS * COLS }, (_, i) => {
+        const row = Math.floor(i / COLS)
+        const col = i % COLS
+        return [(col - (COLS - 1) / 2) * SPACING, 0, -row * SPACING] as const
+      }),
     [],
   )
   const fixtureRows = useMemo(() => Array.from({ length: ROWS }, (_, row) => -row * SPACING), [])
@@ -44,7 +45,10 @@ export function ServerRackLine({ reducedMotion }: { reducedMotion: boolean }) {
     if (reducedMotion) return
     const move = (event: PointerEvent) => {
       if (event.pointerType === 'touch') return
-      pointer.current = { x: (event.clientX / window.innerWidth) * 2 - 1, y: (event.clientY / window.innerHeight) * 2 - 1 }
+      pointer.current = {
+        x: (event.clientX / window.innerWidth) * 2 - 1,
+        y: (event.clientY / window.innerHeight) * 2 - 1,
+      }
       invalidate()
     }
     window.addEventListener('pointermove', move)
@@ -56,8 +60,8 @@ export function ServerRackLine({ reducedMotion }: { reducedMotion: boolean }) {
   const DAMPING = 7
   useFrame((_, delta) => {
     if (!group.current) return
-    const targetY = reducedMotion ? 0 : pointer.current.x * .09
-    const targetX = reducedMotion ? 0 : pointer.current.y * .03
+    const targetY = reducedMotion ? 0 : pointer.current.x * 0.09
+    const targetX = reducedMotion ? 0 : pointer.current.y * 0.03
     const step = Math.min(delta, 1 / 30)
     velocity.current.y += (targetY - group.current.rotation.y) * STIFFNESS * step
     velocity.current.y *= Math.max(0, 1 - DAMPING * step)
@@ -65,8 +69,11 @@ export function ServerRackLine({ reducedMotion }: { reducedMotion: boolean }) {
     velocity.current.x += (targetX - group.current.rotation.x) * STIFFNESS * step
     velocity.current.x *= Math.max(0, 1 - DAMPING * step)
     group.current.rotation.x += velocity.current.x * step
-    const settled = Math.abs(velocity.current.x) < .0001 && Math.abs(velocity.current.y) < .0001
-      && Math.abs(targetX - group.current.rotation.x) < .0001 && Math.abs(targetY - group.current.rotation.y) < .0001
+    const settled =
+      Math.abs(velocity.current.x) < 0.0001 &&
+      Math.abs(velocity.current.y) < 0.0001 &&
+      Math.abs(targetX - group.current.rotation.x) < 0.0001 &&
+      Math.abs(targetY - group.current.rotation.y) < 0.0001
     if (!settled) invalidate()
   })
 
@@ -75,7 +82,13 @@ export function ServerRackLine({ reducedMotion }: { reducedMotion: boolean }) {
       <CameraRig position={[4.2, 3.1, 4.6]} target={[0, 1.2, -HALL_DEPTH / 2]} far={60} />
       {/* Dark factory floor, lit only from directly above — the loading-stage brief. */}
       <color attach="background" args={['#040404']} />
-      <pointLight position={[0, 6, -HALL_DEPTH / 2]} intensity={140} distance={26} decay={2} color="#f3eee4" />
+      <pointLight
+        position={[0, 6, -HALL_DEPTH / 2]}
+        intensity={140}
+        distance={26}
+        decay={2}
+        color="#f3eee4"
+      />
       {/* Key light — a directional light doesn't fall off with distance, so unlike the point
           light above it lights the whole hall evenly, not just the racks directly beneath it. */}
       <directionalLight position={[4, 5, 2]} intensity={4.5} color="#f3eee4" />

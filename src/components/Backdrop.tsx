@@ -15,17 +15,26 @@ export function Backdrop() {
           'M100,0 V180 H340 V420 H60 V800',
           'M1100,0 V220 H860 V560 H1150 V800',
         ].map((d, i) => (
-          <path
-            key={d}
-            d={d}
-            className="circuit-trace"
-            style={{ animationDelay: `${i * 1.6}s` }}
-          />
+          <path key={d} d={d} className="circuit-trace" style={{ animationDelay: `${i * 1.6}s` }} />
         ))}
         {[
-          [260, 120], [520, 300], [900, 80], [180, 520], [460, 640], [820, 520], [340, 180], [860, 220],
+          [260, 120],
+          [520, 300],
+          [900, 80],
+          [180, 520],
+          [460, 640],
+          [820, 520],
+          [340, 180],
+          [860, 220],
         ].map(([cx, cy]) => (
-          <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={4} fill="var(--color-accent)" stroke="none" />
+          <circle
+            key={`${cx}-${cy}`}
+            cx={cx}
+            cy={cy}
+            r={4}
+            fill="var(--color-accent)"
+            stroke="none"
+          />
         ))}
       </g>
     </svg>

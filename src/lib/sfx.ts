@@ -17,14 +17,18 @@ export function initializeSfx() {
     const stored = sessionStorage.getItem('itu:sound')
     hasPreference = stored !== null
     muted = stored !== 'on'
-  } catch { /* Optional storage. */ }
+  } catch {
+    /* Optional storage. */
+  }
   const activate = () => {
     activated = true
     // First-ever interaction this session with no explicit choice yet: turn sound on rather
     // than waiting for a separate click on the sound toggle. A stored preference (on or off)
     // is always respected as-is.
-    if (!hasPreference) { hasPreference = true; setSfxMuted(false) }
-    else if (!muted) startAmbient()
+    if (!hasPreference) {
+      hasPreference = true
+      setSfxMuted(false)
+    } else if (!muted) startAmbient()
     window.removeEventListener('pointerdown', activate)
     window.removeEventListener('keydown', activate)
   }
@@ -36,11 +40,15 @@ export function initializeSfx() {
   })
   // Delegated so every button/link/CTA gets hover + click sound with no per-component wiring.
   let hovered: Element | null = null
-  const interactive = (target: EventTarget | null) => (target as Element | null)?.closest?.('button, a, [role="button"]') ?? null
+  const interactive = (target: EventTarget | null) =>
+    (target as Element | null)?.closest?.('button, a, [role="button"]') ?? null
   window.addEventListener('pointerover', (event) => {
     if (event.pointerType === 'touch') return
     const button = interactive(event.target)
-    if (!button) { hovered = null; return }
+    if (!button) {
+      hovered = null
+      return
+    }
     if (button === hovered || (button as HTMLButtonElement).disabled) return
     hovered = button
     playSfx('ui-hover')
@@ -69,7 +77,11 @@ export function playSfx(name: SfxName) {
 export function setSfxMuted(next: boolean) {
   activated = true
   muted = next
-  try { sessionStorage.setItem('itu:sound', muted ? 'off' : 'on') } catch { /* Optional storage. */ }
+  try {
+    sessionStorage.setItem('itu:sound', muted ? 'off' : 'on')
+  } catch {
+    /* Optional storage. */
+  }
   if (muted) {
     ambient?.pause()
     sounds.forEach((sound) => sound.stop())
@@ -79,5 +91,7 @@ export function setSfxMuted(next: boolean) {
 export const isSfxMuted = () => muted
 export function subscribeSfx(listener: () => void) {
   listeners.add(listener)
-  return () => { listeners.delete(listener) }
+  return () => {
+    listeners.delete(listener)
+  }
 }

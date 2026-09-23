@@ -10,7 +10,22 @@ import { Users } from '@/collections/Users'
 import { Media } from '@/collections/Media'
 import { Landing } from '@/globals/Landing'
 import { Settings } from '@/globals/Settings'
-import { AboutUs, CareerPage, ContactUs, EventsPage, PrivacyPolicy, ProjectsPage, TermsAndConditions } from '@/globals/InnerPages'
+import {
+  AboutUs,
+  CareerPage,
+  ContactUs,
+  EventsPage,
+  PrivacyPolicy,
+  ProjectsPage,
+  TermsAndConditions,
+} from '@/globals/InnerPages'
+import {
+  ServiceDataCentre,
+  ServiceDfma,
+  ServiceFacilitiesManagement,
+  ServiceHighTension,
+  ServiceProjectManagement,
+} from '@/globals/Services'
 import { Enquiries } from '@/collections/Enquiries'
 import { Events } from '@/collections/Events'
 import { Projects } from '@/collections/Projects'
@@ -27,12 +42,18 @@ const dirname = path.dirname(filename)
 // Résumés always need their own private bucket in production: if media is on GCS, résumés
 // must be too, since Cloud Run's disk isn't persistent and isn't private.
 if (process.env.GCS_BUCKET && !process.env.GCS_RESUME_BUCKET) {
-  throw new Error('GCS_RESUME_BUCKET must be set alongside GCS_BUCKET (résumés need their own private bucket).')
+  throw new Error(
+    'GCS_RESUME_BUCKET must be set alongside GCS_BUCKET (résumés need their own private bucket).',
+  )
 }
 const gcsPlugins = process.env.GCS_BUCKET
   ? [
       gcsStorage({ collections: { media: true }, bucket: process.env.GCS_BUCKET, options: {} }),
-      gcsStorage({ collections: { resumes: true }, bucket: process.env.GCS_RESUME_BUCKET!, options: {} }),
+      gcsStorage({
+        collections: { resumes: true },
+        bucket: process.env.GCS_RESUME_BUCKET!,
+        options: {},
+      }),
     ]
   : []
 
@@ -43,7 +64,22 @@ export default buildConfig({
   },
   editor: lexicalEditor(),
   collections: [Users, Media, Enquiries, Events, Projects, Vacancies, JobApplications, Resumes],
-  globals: [Landing, Settings, AboutUs, ContactUs, PrivacyPolicy, TermsAndConditions, EventsPage, ProjectsPage, CareerPage],
+  globals: [
+    Landing,
+    Settings,
+    AboutUs,
+    ContactUs,
+    PrivacyPolicy,
+    TermsAndConditions,
+    EventsPage,
+    ProjectsPage,
+    CareerPage,
+    ServiceDataCentre,
+    ServiceHighTension,
+    ServiceProjectManagement,
+    ServiceFacilitiesManagement,
+    ServiceDfma,
+  ],
   secret: process.env.PAYLOAD_SECRET ?? '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
   db: postgresAdapter({

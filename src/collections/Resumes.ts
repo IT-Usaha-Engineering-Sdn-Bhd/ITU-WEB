@@ -3,7 +3,8 @@ import type { CollectionConfig } from 'payload'
 // Private: only staff can read/download. Applicants upload through the career-applications
 // API route (server-side, overrideAccess), never directly through this collection.
 export const Resumes: CollectionConfig = {
-  slug: 'resumes', admin: { group: 'Contact' },
+  slug: 'resumes',
+  admin: { group: 'Contact' },
   access: {
     read: ({ req }) => Boolean(req.user),
     create: () => false,

@@ -67,6 +67,22 @@ download them, matching the `enquiries` pattern above.
   on this bucket, and set `GCS_RESUME_BUCKET` on both the Cloud Run service and the
   `itu-web-migrate` job alongside `GCS_BUCKET`.
 
+## Our Services pages
+
+The five `/services/*` routes (linked from the "Our Services" nav dropdown) use Payload
+globals grouped under "Our Services" in the admin: `service-data-centre`,
+`service-high-tension`, `service-project-management`, `service-facilities-management` and
+`service-dfma`. `bun run seed:pages` seeds their text from the matching template in
+`template/`; rerunning it preserves any CMS edits, same as the other page seeds.
+
+Every banner, section and card image is an optional upload. An empty one renders a styled
+placeholder (the same technical-grid/orange-linework look as the rest of the site); uploading
+an image replaces it at the same aspect ratio, and clearing the upload brings the placeholder
+back. Uploads respect the media collection's focal point for cropping. The Data Centre page's
+equipment gallery shows one neutral placeholder with no upload, a static image with one, and
+the existing carousel controls once an editor adds a second. The DFMA page's closing visual
+falls back to an inline SVG diagram until an image is uploaded.
+
 ## Build brief
 
 The next build's requirements live in `template/important.md` and `template/landing.md`.
