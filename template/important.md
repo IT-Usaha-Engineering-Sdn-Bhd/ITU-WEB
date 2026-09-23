@@ -11,7 +11,7 @@
 - Color palette: #040404, #EB8C24, #F3EEE4, #747474
 - Theme: Futuristic, editorial, industrial
 - Use animejs
-- Include PayloadCMS + Supabase + Vercel
+- Include PayloadCMS + Docker + GCP
 - TailwindCSS for styling
 - Include SEO
 - Use icon from phosphor

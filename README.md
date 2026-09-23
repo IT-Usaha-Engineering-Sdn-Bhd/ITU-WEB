@@ -1,13 +1,13 @@
 # ITU-WEB
 
 Blank starter: Next.js · React Three Fiber · Three.js · anime.js · TailwindCSS · PayloadCMS ·
-Supabase (Postgres + Storage) · Vercel.
+Docker · Google Cloud Run · Cloud SQL (Postgres) · Google Cloud Storage.
 
 ## Setup
 
 ```bash
 bun install
-cp .env.example .env   # fill in Supabase credentials + PAYLOAD_SECRET
+cp .env.example .env   # fill in DATABASE_URI + PAYLOAD_SECRET
 bun dev
 ```
 
@@ -16,7 +16,7 @@ bun dev
 
 ## Structure
 
-- `src/payload.config.ts` — Payload config (Postgres adapter + S3 storage adapter for Supabase)
+- `src/payload.config.ts` — Payload config (Postgres adapter + GCS storage adapter)
 - `src/collections/` — `Users`, `Media`
 - `src/three/` — `GlobalCanvas.tsx` (R3F scene), `Scene.tsx` (client-only dynamic wrapper)
 - `src/components/Reveal.tsx` — anime.js proof-of-wiring
@@ -25,7 +25,13 @@ bun dev
 
 ## Env vars
 
-See `.env.example` for the full list and comments on non-obvious values (pooler port, sslmode).
+See `.env.example` for the full list.
+
+## Deploy
+
+Docker image + Cloud Run, migrations run as a separate Cloud Run Job (`payload migrate`
+doesn't run during `next build` anymore). Locally: `docker compose up`. For GCP setup and the
+full `gcloud` command list, see the deploy plan.
 
 ## Build brief
 

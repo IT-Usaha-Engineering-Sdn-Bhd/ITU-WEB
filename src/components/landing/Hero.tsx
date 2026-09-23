@@ -12,7 +12,6 @@ export function Hero({ punchline }: { punchline: string }) {
     {(sceneFailed || !sceneReady) && <div className="logo-poster" aria-hidden="true"><Image src="/assets/logo.png" alt="" width={100} height={138} /></div>}
     <div className="hero-top"><SoundToggle label /></div>
     <div className="punchline-copy">
-      <p className="eyebrow">IT Usaha Engineering</p>
       <h1 id="hero-heading" className="punchline-heading">{punchline}</h1>
       <button type="button" className="text-button" onClick={scrollToWhoWeAre}>Explore our expertise <ArrowDown size={20} /></button>
     </div>

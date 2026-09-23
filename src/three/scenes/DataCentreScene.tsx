@@ -27,6 +27,6 @@ export function DataCentreScene({ reducedMotion }: { reducedMotion: boolean }) {
         autoRotate is a built-in OrbitControls feature — it pauses while dragging and resumes
         after, no extra invalidate() plumbing needed beyond what damping already requires. */}
     <OrbitControls target={[0, 15, 0]} enableDamping dampingFactor={0.08} enableZoom={false} enablePan={false}
-      autoRotate={!reducedMotion} autoRotateSpeed={0.5} />
+      autoRotate={!reducedMotion} autoRotateSpeed={0.25} />
   </>
 }

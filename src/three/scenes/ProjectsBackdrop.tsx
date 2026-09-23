@@ -27,9 +27,11 @@ export function ProjectsBackdrop({ reducedMotion }: { reducedMotion: boolean }) 
   // Same spring-damper inertia as the loading screen's rack hall.
   const STIFFNESS = 24
   const DAMPING = 7
-  useFrame((_, delta) => {
+  const spin = useRef(0)
+  useFrame(({ clock }, delta) => {
     if (!group.current) return
-    const targetY = reducedMotion ? 0 : pointer.current.x * .09
+    if (!reducedMotion) spin.current += delta * .06
+    const targetY = spin.current + (reducedMotion ? 0 : pointer.current.x * .09)
     const targetX = reducedMotion ? 0 : pointer.current.y * .03
     const step = Math.min(delta, 1 / 30)
     velocity.current.y += (targetY - group.current.rotation.y) * STIFFNESS * step
@@ -38,7 +40,8 @@ export function ProjectsBackdrop({ reducedMotion }: { reducedMotion: boolean }) 
     velocity.current.x += (targetX - group.current.rotation.x) * STIFFNESS * step
     velocity.current.x *= Math.max(0, 1 - DAMPING * step)
     group.current.rotation.x += velocity.current.x * step
-    const settled = Math.abs(velocity.current.x) < .0001 && Math.abs(velocity.current.y) < .0001
+    if (!reducedMotion) group.current.position.y = Math.sin(clock.elapsedTime * .6) * 1.2
+    const settled = reducedMotion && Math.abs(velocity.current.x) < .0001 && Math.abs(velocity.current.y) < .0001
       && Math.abs(targetX - group.current.rotation.x) < .0001 && Math.abs(targetY - group.current.rotation.y) < .0001
     if (!settled) invalidate()
   })

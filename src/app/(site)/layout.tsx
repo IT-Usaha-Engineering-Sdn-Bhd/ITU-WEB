@@ -11,7 +11,7 @@ import { getSettings } from '@/lib/site-content'
 const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope', display: 'swap' })
 const workSans = Work_Sans({ subsets: ['latin'], variable: '--font-work-sans', display: 'swap' })
 
-const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'
+const siteUrl = process.env.SERVER_URL ?? 'http://localhost:3000'
 
 // Payload's local API does not participate in Next's fetch revalidation.
 export const dynamic = 'force-dynamic'
