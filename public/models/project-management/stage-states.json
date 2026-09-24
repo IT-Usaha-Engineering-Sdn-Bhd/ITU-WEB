@@ -1,0 +1,72 @@
+{
+  "states": {
+    "structure": {
+      "visibleGroups": [
+        "Stage_Structure"
+      ],
+      "anchor": "Anchor_Structure"
+    },
+    "equipment": {
+      "visibleGroups": [
+        "Stage_Structure",
+        "Stage_Equipment"
+      ],
+      "anchor": "Anchor_Equipment"
+    },
+    "coordination": {
+      "visibleGroups": [
+        "Stage_Structure",
+        "Stage_Equipment",
+        "Stage_Coordination"
+      ],
+      "anchor": "Anchor_Coordination"
+    },
+    "commissioning": {
+      "visibleGroups": [
+        "Stage_Structure",
+        "Stage_Equipment",
+        "Stage_Coordination",
+        "Stage_Commissioning"
+      ],
+      "anchor": "Anchor_Commissioning"
+    }
+  },
+  "anchors": {
+    "Anchor_Structure": {
+      "group": "Stage_Structure",
+      "position": [
+        -6.4,
+        4.15,
+        3.7
+      ],
+      "label": "Structural coordination and site readiness"
+    },
+    "Anchor_Equipment": {
+      "group": "Stage_Equipment",
+      "position": [
+        -3,
+        2.7,
+        -1
+      ],
+      "label": "Equipment placement and installation coordination"
+    },
+    "Anchor_Coordination": {
+      "group": "Stage_Coordination",
+      "position": [
+        -2.9,
+        3.3,
+        -1
+      ],
+      "label": "MEP routing and interface coordination"
+    },
+    "Anchor_Commissioning": {
+      "group": "Stage_Commissioning",
+      "position": [
+        3,
+        1.5,
+        2
+      ],
+      "label": "Inspection access and commissioning coordination"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "normal": {
+    "highlighted": [
+      "Path_PrimaryToTransformer",
+      "Path_NormalToUPS",
+      "Path_UPSToLV",
+      "Path_LVToOutgoing",
+      "Path_Outgoing"
+    ],
+    "subdued": [
+      "Path_BackupToUPS"
+    ]
+  },
+  "backup": {
+    "highlighted": [
+      "Path_BackupToUPS",
+      "Path_UPSToLV",
+      "Path_LVToOutgoing",
+      "Path_Outgoing"
+    ],
+    "subdued": [
+      "Path_PrimaryToTransformer",
+      "Path_NormalToUPS"
+    ]
+  }
+}

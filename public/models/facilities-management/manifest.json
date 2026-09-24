@@ -1,0 +1,323 @@
+{
+  "id": "facilities-management",
+  "description": "Illustrative operating plant with selectable inspection areas; no live status, fault, alarm, capacity or certification claim.",
+  "files": [
+    {
+      "file": "facilities-management.glb",
+      "bytes": 147652,
+      "compression": "EXT_meshopt_compression"
+    },
+    {
+      "file": "facilities-management-mobile.glb",
+      "bytes": 144224,
+      "compression": "EXT_meshopt_compression"
+    },
+    {
+      "file": "state-neutral.webp",
+      "bytes": 29774
+    },
+    {
+      "file": "state-cooling.webp",
+      "bytes": 30560
+    },
+    {
+      "file": "state-electrical.webp",
+      "bytes": 31150
+    },
+    {
+      "file": "state-monitoring.webp",
+      "bytes": 30308
+    },
+    {
+      "file": "state-general.webp",
+      "bytes": 30552
+    },
+    {
+      "file": "facilities-management-poster.webp",
+      "bytes": 29774
+    },
+    {
+      "file": "facilities-management-mobile-poster.webp",
+      "bytes": 20752
+    },
+    {
+      "file": "facilities-management.blend",
+      "bytes": 136817
+    },
+    {
+      "file": "maintenance-states.json",
+      "bytes": 1782
+    },
+    {
+      "file": "facilities-management.README.md",
+      "bytes": 2974
+    },
+    {
+      "file": "state-neutral.png",
+      "bytes": 1599763
+    },
+    {
+      "file": "state-cooling.png",
+      "bytes": 1601345
+    },
+    {
+      "file": "state-electrical.png",
+      "bytes": 1598152
+    },
+    {
+      "file": "state-monitoring.png",
+      "bytes": 1603327
+    },
+    {
+      "file": "state-general.png",
+      "bytes": 1605666
+    },
+    {
+      "file": "facilities-management-mobile-render.png",
+      "bytes": 1180778
+    }
+  ],
+  "geometry": [
+    {
+      "variant": "desktop",
+      "triangles": 3324,
+      "meshes": 47
+    },
+    {
+      "variant": "mobile",
+      "triangles": 3104,
+      "meshes": 47
+    }
+  ],
+  "groups": [
+    "Architecture",
+    "Maintenance_Cooling",
+    "Maintenance_Electrical",
+    "Maintenance_Monitoring",
+    "Maintenance_General"
+  ],
+  "componentIds": [
+    "Anchor_Cooling",
+    "Anchor_Electrical",
+    "Anchor_General",
+    "Anchor_Monitoring",
+    "Architecture",
+    "Architecture_Base",
+    "Architecture_Coping",
+    "Architecture_Floor",
+    "Architecture_LeftWall",
+    "Architecture_RearWall",
+    "Cooling_FilterAccess_01",
+    "Cooling_FilterAccess_02",
+    "Cooling_IsolationValve_01",
+    "Cooling_IsolationValve_02",
+    "Cooling_Louvres_01",
+    "Cooling_Louvres_02",
+    "Cooling_PipeCircuit_01",
+    "Cooling_PipeCircuit_02",
+    "Cooling_Plinth_01",
+    "Cooling_Plinth_02",
+    "Cooling_Unit_01",
+    "Cooling_Unit_02",
+    "Electrical_BlankInstrument_01",
+    "Electrical_BlankInstrument_02",
+    "Electrical_BlankInstrument_03",
+    "Electrical_Cabinet_01",
+    "Electrical_Cabinet_02",
+    "Electrical_Cabinet_03",
+    "Electrical_Handle_01",
+    "Electrical_Handle_02",
+    "Electrical_Handle_03",
+    "Electrical_OverheadFeeder_01",
+    "Electrical_ServiceDoor_01",
+    "Electrical_ServiceDoor_02",
+    "Electrical_ServiceDoor_03",
+    "General_AccessClearance_01",
+    "General_FloorInspectionCover_01",
+    "General_MaintenanceCart_01",
+    "Maintenance_Cooling",
+    "Maintenance_Electrical",
+    "Maintenance_General",
+    "Maintenance_Monitoring",
+    "Monitoring_BlankDisplay_01",
+    "Monitoring_Controller_01",
+    "Monitoring_RoomSensor_01",
+    "Monitoring_RoomSensor_02",
+    "Monitoring_SecurityCamera_01"
+  ],
+  "states": {
+    "neutral": {
+      "highlighted": [],
+      "poster": "state-neutral.webp"
+    },
+    "cooling": {
+      "highlighted": [
+        "Cooling_FilterAccess_01",
+        "Cooling_FilterAccess_02",
+        "Cooling_IsolationValve_01",
+        "Cooling_IsolationValve_02"
+      ],
+      "anchor": "Anchor_Cooling",
+      "poster": "state-cooling.webp"
+    },
+    "electrical": {
+      "highlighted": [
+        "Electrical_ServiceDoor_01",
+        "Electrical_ServiceDoor_02",
+        "Electrical_ServiceDoor_03"
+      ],
+      "anchor": "Anchor_Electrical",
+      "poster": "state-electrical.webp"
+    },
+    "monitoring": {
+      "highlighted": [
+        "Monitoring_Controller_01",
+        "Monitoring_RoomSensor_01",
+        "Monitoring_RoomSensor_02",
+        "Monitoring_SecurityCamera_01"
+      ],
+      "anchor": "Anchor_Monitoring",
+      "poster": "state-monitoring.webp"
+    },
+    "general": {
+      "highlighted": [
+        "General_AccessClearance_01",
+        "General_FloorInspectionCover_01"
+      ],
+      "anchor": "Anchor_General",
+      "poster": "state-general.webp"
+    }
+  },
+  "anchors": {
+    "Anchor_Cooling": {
+      "group": "Maintenance_Cooling",
+      "position": [
+        -1.5,
+        1,
+        -1
+      ],
+      "label": "Cooling service access and pipe fittings"
+    },
+    "Anchor_Electrical": {
+      "group": "Maintenance_Electrical",
+      "position": [
+        3.75,
+        1.5,
+        -1.9
+      ],
+      "label": "Electrical enclosure inspection access"
+    },
+    "Anchor_Monitoring": {
+      "group": "Maintenance_Monitoring",
+      "position": [
+        1,
+        2.3,
+        -4.1
+      ],
+      "label": "Monitoring device inspection"
+    },
+    "Anchor_General": {
+      "group": "Maintenance_General",
+      "position": [
+        1,
+        0.35,
+        1
+      ],
+      "label": "Floor access and maintenance circulation"
+    }
+  },
+  "defaultState": "neutral",
+  "stateBehavior": "Keep all equipment visible and stationary. Save original mesh material references, restore before each selection, then assign a separate orange PBR material to the highlighted objects and child meshes. Clear restores original references.",
+  "highlightMaterial": {
+    "linearRGB": [
+      0.85,
+      0.19,
+      0.035
+    ],
+    "metalness": 0.25,
+    "roughness": 0.4,
+    "emissive": false
+  },
+  "units": "metres, illustrative scale",
+  "origin": "Fixed footprint centre at floor height; foundation below zero",
+  "coordinates": {
+    "blender": "Z up, front -Y",
+    "gltf": "Y up, front +Z"
+  },
+  "bounds": {
+    "min": [
+      -6.5,
+      -0.46000000834465027,
+      -5
+    ],
+    "max": [
+      6.5,
+      3.290000017732382,
+      5
+    ]
+  },
+  "cameras": {
+    "desktop": {
+      "position": [
+        12,
+        14,
+        18
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "horizontalSpan": 19.5,
+      "verticalSpan": 14.625
+    },
+    "inspection": {
+      "position": [
+        -9,
+        9,
+        12
+      ],
+      "target": [
+        -1,
+        1.3,
+        -1
+      ],
+      "horizontalSpan": 13
+    },
+    "mobile": {
+      "position": [
+        12,
+        14,
+        18
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "verticalSpan": 21,
+      "horizontalSpan": 19.090909
+    }
+  },
+  "materials": {
+    "type": "Opaque metallic-roughness PBR, normal vectors, no unlit shaders or baked illumination",
+    "textures": 0,
+    "textureCompression": "KTX2 not applicable",
+    "shadows": "Enable renderer.shadowMap.enabled, keyLight.castShadow, and mesh.castShadow/receiveShadow. Fit shadow frustum to 13 x 10 m footprint."
+  },
+  "source": {
+    "generator": "Blender 5.2.2 LTS",
+    "materials": "Appended from ../data-centre/data-centre.blend",
+    "geometry": "Original procedural geometry in scripts/build-facilities-management.py; no downloaded meshes or textures.",
+    "mobile": "Simplified louvres; all IDs, transforms, anchors and state memberships retained.",
+    "preview": "Separate Preview collection with studio ground, cameras and lights, excluded from GLBs."
+  },
+  "verification": [
+    "Reopened Blender source.",
+    "Both GLBs loaded using Three.js GLTFLoader and MeshoptDecoder.",
+    "Identical names/transforms and anchor locations verified across variants.",
+    "All four highlight assignments and neutral material restoration exercised.",
+    "Normals, PBR materials, triangle counts and size budgets checked.",
+    "Neutral, highlight and mobile renders visually reviewed. Browser GPU performance not benchmarked."
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "id": "homepage-campus",
+  "description": "Illustrative data centre campus overview, not a representation of a named or verified company site.",
+  "generator": "Blender 5.2.2 LTS",
+  "files": [
+    {
+      "file": "homepage-campus.blend",
+      "bytes": 156102
+    },
+    {
+      "file": "homepage-campus.glb",
+      "bytes": 269660
+    },
+    {
+      "file": "homepage-campus-poster.webp",
+      "bytes": 32694
+    },
+    {
+      "file": "homepage-campus-render.png",
+      "bytes": 1889292
+    },
+    {
+      "file": "homepage-campus-lighting-check.png",
+      "bytes": 567666
+    },
+    {
+      "file": "homepage-campus.README.md",
+      "bytes": 2691
+    }
+  ],
+  "geometry": {
+    "triangles": 7020,
+    "drawCalls": 82,
+    "compression": "EXT_meshopt_compression",
+    "textures": 0
+  },
+  "groups": [
+    "Campus_Buildings",
+    "Campus_Site",
+    "Campus_Accents"
+  ],
+  "components": [
+    "Campus_Accents_Bollard_0",
+    "Campus_Accents_Bollard_1",
+    "Campus_Accents_Bollard_2",
+    "Campus_Accents_Bollard_3",
+    "Campus_Accents_Bollard_4",
+    "Campus_Accents_Bollard_5",
+    "Campus_Accents_BollardBand_0",
+    "Campus_Accents_BollardBand_1",
+    "Campus_Accents_BollardBand_2",
+    "Campus_Accents_BollardBand_3",
+    "Campus_Accents_BollardBand_4",
+    "Campus_Accents_BollardBand_5",
+    "Campus_Accents_EntranceCanopy",
+    "Campus_Accents_FacadeBlade",
+    "Campus_Accents",
+    "Campus_Buildings_Entrance",
+    "Campus_Buildings_EntranceFrames",
+    "Campus_Buildings_EntranceGlass",
+    "Campus_Buildings_MainHall_FacadeBays",
+    "Campus_Buildings_MainHall_Plinth",
+    "Campus_Buildings_MainHall_Roof",
+    "Campus_Buildings_MainHall_RoofEdge",
+    "Campus_Buildings_MainHall_RoofEdge.001",
+    "Campus_Buildings_MainHall_RoofEdge.002",
+    "Campus_Buildings_MainHall_RoofEdge.003",
+    "Campus_Buildings_MainHall_Shell",
+    "Campus_Buildings_RoofPlant_01",
+    "Campus_Buildings_RoofPlant_02",
+    "Campus_Buildings_RoofPlant_03",
+    "Campus_Buildings_RoofPlant_04",
+    "Campus_Buildings_RoofPlant_05",
+    "Campus_Buildings_RoofPlant_06",
+    "Campus_Buildings_RoofSpine",
+    "Campus_Buildings_SecondaryHall_FacadeBays",
+    "Campus_Buildings_SecondaryHall_Plinth",
+    "Campus_Buildings_SecondaryHall_Roof",
+    "Campus_Buildings_SecondaryHall_RoofEdge",
+    "Campus_Buildings_SecondaryHall_RoofEdge.001",
+    "Campus_Buildings_SecondaryHall_RoofEdge.002",
+    "Campus_Buildings_SecondaryHall_RoofEdge.003",
+    "Campus_Buildings_SecondaryHall_Shell",
+    "Campus_Buildings_ServiceDoor_1",
+    "Campus_Buildings_ServiceDoor_2",
+    "Campus_Buildings_ServiceDoorSlats_1",
+    "Campus_Buildings_ServiceDoorSlats_2",
+    "Campus_Buildings_Utility_FacadeBays",
+    "Campus_Buildings_Utility_Plinth",
+    "Campus_Buildings_Utility_Roof",
+    "Campus_Buildings_Utility_RoofEdge",
+    "Campus_Buildings_Utility_RoofEdge.001",
+    "Campus_Buildings_Utility_RoofEdge.002",
+    "Campus_Buildings_Utility_RoofEdge.003",
+    "Campus_Buildings_Utility_Shell",
+    "Campus_Buildings",
+    "Campus_Site_AccessMarkings",
+    "Campus_Site_Foundation",
+    "Campus_Site_FrontAccess",
+    "Campus_Site_Kerb_Front",
+    "Campus_Site_Kerb_Outer",
+    "Campus_Site_Paving",
+    "Campus_Site_Planter_1",
+    "Campus_Site_Planter_2",
+    "Campus_Site_Planter_3",
+    "Campus_Site_Planter_4",
+    "Campus_Site_Planting_1",
+    "Campus_Site_Planting_2",
+    "Campus_Site_Planting_3",
+    "Campus_Site_Planting_4",
+    "Campus_Site_ServiceAccess",
+    "Campus_Site"
+  ],
+  "units": "metres; conceptual dimensions, not surveyed",
+  "origin": "Campus ground-plane centre [0,0,0]; foundation extends below ground",
+  "coordinates": {
+    "blender": "Z up, front -Y",
+    "gltf": "Y up, front +Z"
+  },
+  "bounds": {
+    "min": [
+      -31,
+      -1.2999999523162842,
+      -22
+    ],
+    "max": [
+      31,
+      12.415000081062317,
+      22
+    ]
+  },
+  "camera": {
+    "projection": "orthographic",
+    "position": [
+      80,
+      86,
+      110
+    ],
+    "target": [
+      0,
+      2,
+      0
+    ],
+    "horizontalSpan": 135,
+    "verticalSpan": 75,
+    "blenderShiftX": -0.19,
+    "threeOrthographic": {
+      "left": -93.15,
+      "right": 41.85,
+      "top": 37.5,
+      "bottom": -37.5
+    },
+    "poster": [
+      1800,
+      1000
+    ],
+    "composition": "Campus on right; left region reserved for HTML copy. No baked labels."
+  },
+  "materials": {
+    "model": "Opaque metallic-roughness PBR",
+    "lighting": "No baked illumination; normal vectors and opaque surfaces support dynamic light and shadows.",
+    "runtime": "Enable renderer.shadowMap.enabled, light.castShadow and mesh.castShadow/receiveShadow. Fit shadow-camera bounds to campus. Preview studio lights are excluded from GLB.",
+    "textures": "None; KTX2 not applicable."
+  },
+  "source": {
+    "service": "../data-centre/data-centre.blend",
+    "retained": "Six actual service-family materials appended into this source.",
+    "rebuilt": "All campus geometry authored procedurally in scripts/build-homepage-campus.py. Inspected service shell is a 12.6 x 9.6 m interior cutaway; its walls and open roof do not fit this exterior overview. Original exterior is facade-specific and unnecessary for the lower-cost campus silhouette.",
+    "license": "Original geometry created for this repository; no third-party meshes or textures downloaded. Reused materials originate from the repository Data Centre scene; no external license asserted.",
+    "scale": "Site footprint 62 x 44 m; primary hall 31 x 22 x 10 m. Illustrative proportions only."
+  },
+  "verification": {
+    "gltf": "Reopened with Three.js GLTFLoader and bundled MeshoptDecoder; checked named groups, lit PBR materials, normals, triangles and transfer budgets.",
+    "blender": "Saved source reopened independently to inspect collections and camera.",
+    "visual": "Hero poster and changed-light render inspected; no browser performance benchmark."
+  }
+}

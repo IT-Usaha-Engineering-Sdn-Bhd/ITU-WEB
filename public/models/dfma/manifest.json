@@ -1,0 +1,1656 @@
+{
+  "id": "dfma",
+  "description": "Illustrative modular MEP assembly. No verified manufacturing, lifting, transport, capacity or certification claims.",
+  "files": [
+    {
+      "file": "dfma.glb",
+      "bytes": 153368,
+      "compression": "EXT_meshopt_compression"
+    },
+    {
+      "file": "dfma-mobile.glb",
+      "bytes": 149636,
+      "compression": "EXT_meshopt_compression"
+    },
+    {
+      "file": "stage-design.webp",
+      "bytes": 15692
+    },
+    {
+      "file": "stage-fabrication.webp",
+      "bytes": 25436
+    },
+    {
+      "file": "stage-transport.webp",
+      "bytes": 27194
+    },
+    {
+      "file": "stage-installation.webp",
+      "bytes": 25716
+    },
+    {
+      "file": "dfma-poster.webp",
+      "bytes": 25716
+    },
+    {
+      "file": "dfma-mobile-poster.webp",
+      "bytes": 19418
+    },
+    {
+      "file": "dfma-exploded-poster.webp",
+      "bytes": 25436
+    },
+    {
+      "file": "dfma.blend",
+      "bytes": 135178
+    },
+    {
+      "file": "assembly-states.json",
+      "bytes": 9118
+    },
+    {
+      "file": "dfma.README.md",
+      "bytes": 3097
+    },
+    {
+      "file": "stage-design.png",
+      "bytes": 1524897
+    },
+    {
+      "file": "stage-fabrication.png",
+      "bytes": 1607673
+    },
+    {
+      "file": "stage-transport.png",
+      "bytes": 1623315
+    },
+    {
+      "file": "stage-installation.png",
+      "bytes": 1609398
+    },
+    {
+      "file": "dfma-mobile-render.png",
+      "bytes": 1191855
+    },
+    {
+      "file": "dfma-exploded-render.png",
+      "bytes": 1607673
+    }
+  ],
+  "geometry": [
+    {
+      "variant": "desktop",
+      "triangles": 3640,
+      "meshes": 45
+    },
+    {
+      "variant": "mobile",
+      "triangles": 3256,
+      "meshes": 45
+    }
+  ],
+  "groups": [
+    "Module_Frame",
+    "Module_Pipework",
+    "Module_Cable_Containment",
+    "Module_Distribution",
+    "Module_Interfaces",
+    "Transport_Preparation"
+  ],
+  "componentIds": [
+    "Anchor_CableConnection",
+    "Anchor_Distribution",
+    "Anchor_PipeConnection",
+    "Cable_FeederBundle_01",
+    "Cable_LadderTray_01",
+    "Datum_Base",
+    "Distribution_Feeder_01",
+    "Distribution_Panel_01",
+    "Frame_Base_01",
+    "Frame_EndPortal_01",
+    "Frame_EndPortal_02",
+    "Frame_ServiceCrossmember_01",
+    "Frame_ServiceCrossmember_02",
+    "Frame_ServiceCrossmember_03",
+    "Frame_TopRail_01",
+    "Frame_TopRail_02",
+    "Interface_CableEntry_01",
+    "Interface_DistributionOutlet_01",
+    "Interface_InletBolts_01",
+    "Interface_InletBolts_02",
+    "Interface_Inlet_01",
+    "Interface_Inlet_02",
+    "Interface_OutletBolts_01",
+    "Interface_OutletBolts_02",
+    "Interface_Outlet_01",
+    "Interface_Outlet_02",
+    "Module_Cable_Containment",
+    "Module_Distribution",
+    "Module_Frame",
+    "Module_Interfaces",
+    "Module_Pipework",
+    "Pipe_Circuit_01",
+    "Pipe_Circuit_02",
+    "Pipe_IsolationValve_01",
+    "Pipe_IsolationValve_02",
+    "Transport_InletCap_01",
+    "Transport_InletCap_02",
+    "Transport_OutletCap_01",
+    "Transport_OutletCap_02",
+    "Transport_Preparation",
+    "Transport_SupportBlock_01",
+    "Transport_SupportBlock_02"
+  ],
+  "transforms": {
+    "Frame_Base_01": {
+      "assembled": {
+        "position": [
+          0,
+          0.1599999964237213,
+          1.25
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          0,
+          0.1599999964237213,
+          1.25
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Frame_EndPortal_01": {
+      "assembled": {
+        "position": [
+          -3.200000047683716,
+          1.600000023841858,
+          1.25
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          -3.200000047683716,
+          1.600000023841858,
+          1.25
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Frame_EndPortal_02": {
+      "assembled": {
+        "position": [
+          3.200000047683716,
+          1.600000023841858,
+          1.25
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          3.200000047683716,
+          1.600000023841858,
+          1.25
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Frame_TopRail_01": {
+      "assembled": {
+        "position": [
+          0,
+          3.0999999046325684,
+          1.25
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          0,
+          3.0999999046325684,
+          1.25
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Frame_TopRail_02": {
+      "assembled": {
+        "position": [
+          0,
+          3.0999999046325684,
+          -1.25
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          0,
+          3.0999999046325684,
+          -1.25
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Frame_ServiceCrossmember_01": {
+      "assembled": {
+        "position": [
+          -2,
+          2.799999952316284,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          -2,
+          2.799999952316284,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Frame_ServiceCrossmember_02": {
+      "assembled": {
+        "position": [
+          0,
+          2.799999952316284,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          0,
+          2.799999952316284,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Frame_ServiceCrossmember_03": {
+      "assembled": {
+        "position": [
+          2,
+          2.799999952316284,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          2,
+          2.799999952316284,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Pipe_Circuit_01": {
+      "assembled": {
+        "position": [
+          0,
+          1.75,
+          0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          0,
+          2.25,
+          -0.5
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Pipe_IsolationValve_01": {
+      "assembled": {
+        "position": [
+          0.9249999523162842,
+          1.75,
+          0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          0.9249999523162842,
+          2.25,
+          -0.5
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Pipe_Circuit_02": {
+      "assembled": {
+        "position": [
+          0,
+          1.75,
+          -0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          0,
+          2.25,
+          -1.399999976158142
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Pipe_IsolationValve_02": {
+      "assembled": {
+        "position": [
+          0.9249999523162842,
+          1.75,
+          -0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          0.9249999523162842,
+          2.25,
+          -1.399999976158142
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Cable_LadderTray_01": {
+      "assembled": {
+        "position": [
+          0,
+          2.5799999237060547,
+          0.3799999952316284
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          0,
+          4.079999923706055,
+          0.3799999952316284
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Cable_FeederBundle_01": {
+      "assembled": {
+        "position": [
+          0,
+          2.5899999141693115,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          0,
+          4.090000152587891,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Distribution_Panel_01": {
+      "assembled": {
+        "position": [
+          1.9500000476837158,
+          0.9599999785423279,
+          1.1299999952316284
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          1.9500000476837158,
+          0.9599999785423279,
+          2.5299999713897705
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Distribution_Feeder_01": {
+      "assembled": {
+        "position": [
+          1.9500000476837158,
+          2.0899999141693115,
+          1.0499999523162842
+        ],
+        "quaternion": [
+          0,
+          -1,
+          0,
+          7.549790126404332e-8
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          1.9500000476837158,
+          2.0899999141693115,
+          2.4499998092651367
+        ],
+        "quaternion": [
+          0,
+          -1,
+          0,
+          7.549790126404332e-8
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Interface_Inlet_01": {
+      "assembled": {
+        "position": [
+          -3.380000114440918,
+          1.75,
+          0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          -4.480000019073486,
+          2.25,
+          -0.5
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Interface_InletBolts_01": {
+      "assembled": {
+        "position": [
+          -3.380000114440918,
+          1.75,
+          0.23999999463558197
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          -4.480000019073486,
+          2.25,
+          -0.7099999785423279
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Interface_Outlet_01": {
+      "assembled": {
+        "position": [
+          3.380000114440918,
+          1.75,
+          0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          4.480000019073486,
+          2.25,
+          -0.5
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Interface_OutletBolts_01": {
+      "assembled": {
+        "position": [
+          3.380000114440918,
+          1.75,
+          0.23999999463558197
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          4.480000019073486,
+          2.25,
+          -0.7099999785423279
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Interface_Inlet_02": {
+      "assembled": {
+        "position": [
+          -3.380000114440918,
+          1.75,
+          -0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          -4.480000019073486,
+          2.25,
+          -1.399999976158142
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Interface_InletBolts_02": {
+      "assembled": {
+        "position": [
+          -3.380000114440918,
+          1.75,
+          -0.6600000262260437
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          -4.480000019073486,
+          2.25,
+          -1.6100000143051147
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Interface_Outlet_02": {
+      "assembled": {
+        "position": [
+          3.380000114440918,
+          1.75,
+          -0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          4.480000019073486,
+          2.25,
+          -1.399999976158142
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Interface_OutletBolts_02": {
+      "assembled": {
+        "position": [
+          3.380000114440918,
+          1.75,
+          -0.6600000262260437
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          4.480000019073486,
+          2.25,
+          -1.6100000143051147
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Interface_CableEntry_01": {
+      "assembled": {
+        "position": [
+          -3.299999952316284,
+          2.5899999141693115,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          -3.799999952316284,
+          4.090000152587891,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Interface_DistributionOutlet_01": {
+      "assembled": {
+        "position": [
+          1.9500000476837158,
+          0.5600000023841858,
+          1.3799999952316284
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          1.9500000476837158,
+          0.5600000023841858,
+          2.7799999713897705
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Datum_Base": {
+      "assembled": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Anchor_PipeConnection": {
+      "assembled": {
+        "position": [
+          3.380000114440918,
+          1.75,
+          -0.44999998807907104
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          4.480000019073486,
+          2.25,
+          -1.399999976158142
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Anchor_CableConnection": {
+      "assembled": {
+        "position": [
+          -3.299999952316284,
+          2.5899999141693115,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          -3.799999952316284,
+          4.090000152587891,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Anchor_Distribution": {
+      "assembled": {
+        "position": [
+          1.9500000476837158,
+          0.9599999785423279,
+          1.399999976158142
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          1.9500000476837158,
+          0.9599999785423279,
+          2.799999952316284
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Transport_InletCap_01": {
+      "assembled": {
+        "position": [
+          -3.5299999713897705,
+          1.75,
+          0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          -0.5,
+          0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          -3.5299999713897705,
+          1.75,
+          0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          -0.5,
+          0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Transport_OutletCap_01": {
+      "assembled": {
+        "position": [
+          3.5299999713897705,
+          1.75,
+          0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          3.5299999713897705,
+          1.75,
+          0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Transport_InletCap_02": {
+      "assembled": {
+        "position": [
+          -3.5299999713897705,
+          1.75,
+          -0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          -0.5,
+          0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          -3.5299999713897705,
+          1.75,
+          -0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          -0.5,
+          0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Transport_OutletCap_02": {
+      "assembled": {
+        "position": [
+          3.5299999713897705,
+          1.75,
+          -0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          3.5299999713897705,
+          1.75,
+          -0.44999998807907104
+        ],
+        "quaternion": [
+          0.5,
+          0.5,
+          -0.5,
+          0.5
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Transport_SupportBlock_01": {
+      "assembled": {
+        "position": [
+          -2.4000000953674316,
+          -0.18000000715255737,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          -2.4000000953674316,
+          -0.18000000715255737,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "Transport_SupportBlock_02": {
+      "assembled": {
+        "position": [
+          2.4000000953674316,
+          -0.18000000715255737,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "exploded": {
+        "position": [
+          2.4000000953674316,
+          -0.18000000715255737,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      }
+    }
+  },
+  "transformSpace": "glTF local transforms relative to named identity root groups; quaternions in xyzw order. Apply absolute values, never accumulate offsets.",
+  "states": {
+    "design": {
+      "visibleGroups": [
+        "Module_Frame",
+        "Module_Interfaces"
+      ],
+      "view": "assembled",
+      "highlightGroups": [
+        "Module_Frame"
+      ],
+      "hiddenComponents": [
+        "Interface_Inlet_01",
+        "Interface_InletBolts_01",
+        "Interface_Outlet_01",
+        "Interface_OutletBolts_01",
+        "Interface_Inlet_02",
+        "Interface_InletBolts_02",
+        "Interface_Outlet_02",
+        "Interface_OutletBolts_02",
+        "Interface_CableEntry_01",
+        "Interface_DistributionOutlet_01"
+      ],
+      "poster": "stage-design.webp"
+    },
+    "fabrication": {
+      "visibleGroups": [
+        "Module_Frame",
+        "Module_Pipework",
+        "Module_Cable_Containment",
+        "Module_Distribution",
+        "Module_Interfaces"
+      ],
+      "view": "exploded",
+      "highlightGroups": [
+        "Module_Pipework",
+        "Module_Cable_Containment"
+      ],
+      "poster": "stage-fabrication.webp"
+    },
+    "transport": {
+      "visibleGroups": [
+        "Module_Frame",
+        "Module_Pipework",
+        "Module_Cable_Containment",
+        "Module_Distribution",
+        "Module_Interfaces",
+        "Transport_Preparation"
+      ],
+      "view": "assembled",
+      "highlightGroups": [
+        "Transport_Preparation"
+      ],
+      "poster": "stage-transport.webp"
+    },
+    "installation": {
+      "visibleGroups": [
+        "Module_Frame",
+        "Module_Pipework",
+        "Module_Cable_Containment",
+        "Module_Distribution",
+        "Module_Interfaces"
+      ],
+      "view": "assembled",
+      "highlightGroups": [
+        "Module_Interfaces"
+      ],
+      "poster": "stage-installation.webp"
+    }
+  },
+  "defaultState": "installation",
+  "initialization": "GLB includes all stage objects. Immediately apply installation visibility, hiding Transport_Preparation; restore per-component visibility before applying hiddenComponents for each stage.",
+  "stageEmphasis": "Optional neutral silver material emphasis for highlightGroups; store and restore original materials. Rendered stage differences use geometry/visibility and assembly spacing.",
+  "units": "metres, illustrative proportions",
+  "origin": "Frame centre/base datum [0,0,0]",
+  "coordinates": {
+    "blender": "Z up, front -Y",
+    "gltf": "Y up, front +Z"
+  },
+  "boundsIncludingTransport": {
+    "min": [
+      -3.559999942779541,
+      -0.33000001311302185,
+      -1.5
+    ],
+    "max": [
+      3.559999942779541,
+      3.1799999475479126,
+      1.5
+    ]
+  },
+  "cameras": {
+    "desktop": {
+      "position": [
+        10,
+        9,
+        13
+      ],
+      "target": [
+        0,
+        1.5,
+        0
+      ],
+      "horizontalSpan": 12.8,
+      "verticalSpan": 9.6
+    },
+    "mobile": {
+      "position": [
+        10,
+        9,
+        13
+      ],
+      "target": [
+        0,
+        1.5,
+        0
+      ],
+      "verticalSpan": 12.8,
+      "horizontalSpan": 11.63636
+    }
+  },
+  "materials": {
+    "type": "Opaque metallic-roughness PBR, normals, no unlit shaders or baked lighting",
+    "textures": 0,
+    "textureCompression": "KTX2 not applicable",
+    "shadows": "Enable renderer.shadowMap.enabled, keyLight.castShadow and mesh.castShadow/receiveShadow. Refit light shadow bounds for exploded view."
+  },
+  "source": {
+    "generator": "Blender 5.2.2 LTS",
+    "materials": "Appended from ../data-centre/data-centre.blend",
+    "geometry": "Original procedural model in scripts/build-dfma.py; no downloaded meshes or textures.",
+    "mobile": "Simplifies flange bolts only, preserving IDs and interface positions.",
+    "preview": "Separate Preview rig with ground, camera and lights excluded from exports."
+  },
+  "verification": [
+    "Reopened Blender source.",
+    "Both GLBs loaded through Three.js GLTFLoader and MeshoptDecoder.",
+    "Exact assembled/exploded transforms match between desktop and mobile.",
+    "Three exploded/assembled cycles verified without transform drift.",
+    "Stage groups/components, lit materials, normals and budgets checked.",
+    "Stage, exploded and mobile posters visually reviewed; browser GPU performance not benchmarked."
+  ]
+}

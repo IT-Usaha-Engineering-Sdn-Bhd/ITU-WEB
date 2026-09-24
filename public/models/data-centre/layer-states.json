@@ -1,0 +1,78 @@
+{
+  "Power": {
+    "visibleGroups": [
+      "Architecture",
+      "Power"
+    ],
+    "components": [
+      "Power_RackAisle_01_Rack_01",
+      "Power_RackAisle_01_Rack_01_FineVents",
+      "Power_RackAisle_01_Rack_02",
+      "Power_RackAisle_01_Rack_02_FineVents",
+      "Power_RackAisle_01_Rack_03",
+      "Power_RackAisle_01_Rack_03_FineVents",
+      "Power_RackAisle_01_Rack_04",
+      "Power_RackAisle_01_Rack_04_FineVents",
+      "Power_RackAisle_02_Rack_01",
+      "Power_RackAisle_02_Rack_01_FineVents",
+      "Power_RackAisle_02_Rack_02",
+      "Power_RackAisle_02_Rack_02_FineVents",
+      "Power_RackAisle_02_Rack_03",
+      "Power_RackAisle_02_Rack_03_FineVents",
+      "Power_RackAisle_02_Rack_04",
+      "Power_RackAisle_02_Rack_04_FineVents",
+      "Power_OverheadDistribution_01",
+      "Power_OverheadDistribution_02",
+      "Power_DistributionLink",
+      "Power_UPS_01",
+      "Power_Switchboard_01",
+      "Power_DistributionPanel_01",
+      "Power_Feeder",
+      "Power_PanelDrop"
+    ]
+  },
+  "Cooling": {
+    "visibleGroups": [
+      "Architecture",
+      "Cooling"
+    ],
+    "components": [
+      "Cooling_AHU_01",
+      "Cooling_AHU_02",
+      "Cooling_PipeCircuit_01",
+      "Cooling_PipeCircuit_02"
+    ]
+  },
+  "Protection": {
+    "visibleGroups": [
+      "Architecture",
+      "Protection"
+    ],
+    "components": [
+      "Protection_SprinklerNetwork_01",
+      "Protection_SuppressionCylinder_01",
+      "Protection_SuppressionCylinder_02",
+      "Protection_FirePanel"
+    ]
+  },
+  "Controls": {
+    "visibleGroups": [
+      "Architecture",
+      "Controls"
+    ],
+    "components": [
+      "Controls_BMSPanel",
+      "Controls_BMSDisplay",
+      "Controls_Sensor_01",
+      "Controls_Sensor_02",
+      "Controls_Sensor_03",
+      "Controls_CameraMount_01",
+      "Controls_SecurityCamera_01",
+      "Controls_CameraLens_01",
+      "Controls_CameraMount_02",
+      "Controls_SecurityCamera_02",
+      "Controls_CameraLens_02",
+      "Controls_AccessReader"
+    ]
+  }
+}

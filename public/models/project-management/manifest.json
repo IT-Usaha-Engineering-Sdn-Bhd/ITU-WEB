@@ -1,0 +1,286 @@
+{
+  "id": "project-management",
+  "description": "Illustrative construction progression; not an actual client site, schedule, certification or performance claim.",
+  "files": [
+    {
+      "file": "project-management.glb",
+      "bytes": 192880,
+      "compression": "EXT_meshopt_compression"
+    },
+    {
+      "file": "project-management-mobile.glb",
+      "bytes": 182500,
+      "compression": "EXT_meshopt_compression"
+    },
+    {
+      "file": "stage-structure.webp",
+      "bytes": 28132
+    },
+    {
+      "file": "stage-equipment.webp",
+      "bytes": 36116
+    },
+    {
+      "file": "stage-coordination.webp",
+      "bytes": 42454
+    },
+    {
+      "file": "stage-commissioning.webp",
+      "bytes": 44044
+    },
+    {
+      "file": "project-management-poster.webp",
+      "bytes": 44044
+    },
+    {
+      "file": "project-management-mobile-poster.webp",
+      "bytes": 28450
+    },
+    {
+      "file": "project-management.blend",
+      "bytes": 142457
+    },
+    {
+      "file": "stage-states.json",
+      "bytes": 1575
+    },
+    {
+      "file": "project-management.README.md",
+      "bytes": 2910
+    },
+    {
+      "file": "stage-structure.png",
+      "bytes": 1751773
+    },
+    {
+      "file": "stage-equipment.png",
+      "bytes": 1814356
+    },
+    {
+      "file": "stage-coordination.png",
+      "bytes": 1853375
+    },
+    {
+      "file": "stage-commissioning.png",
+      "bytes": 1882535
+    },
+    {
+      "file": "project-management-mobile-render.png",
+      "bytes": 1242020
+    }
+  ],
+  "geometry": [
+    {
+      "variant": "desktop",
+      "triangles": 4676,
+      "meshes": 67
+    },
+    {
+      "variant": "mobile",
+      "triangles": 3972,
+      "meshes": 67
+    }
+  ],
+  "groups": [
+    "Stage_Structure",
+    "Stage_Equipment",
+    "Stage_Coordination",
+    "Stage_Commissioning"
+  ],
+  "componentIds": [
+    "Anchor_Commissioning",
+    "Anchor_Coordination",
+    "Anchor_Equipment",
+    "Anchor_Structure",
+    "Commissioning_AccessClearances_01",
+    "Commissioning_InspectionCart_01",
+    "Commissioning_InspectionValve_01",
+    "Commissioning_InspectionValve_02",
+    "Commissioning_TestAccessPanel_01",
+    "Coordination_CoolingCircuit_01",
+    "Coordination_CoolingCircuit_02",
+    "Coordination_OverheadDistribution_01",
+    "Coordination_PowerFeeder_01",
+    "Equipment_CoolingSkid_01",
+    "Equipment_DistributionBoard_01",
+    "Equipment_RackGrille_01",
+    "Equipment_RackGrille_02",
+    "Equipment_RackGrille_03",
+    "Equipment_RackGrille_04",
+    "Equipment_Rack_01",
+    "Equipment_Rack_02",
+    "Equipment_Rack_03",
+    "Equipment_Rack_04",
+    "Stage_Commissioning",
+    "Stage_Coordination",
+    "Stage_Equipment",
+    "Stage_Structure",
+    "Structure_BasePlate_0_0",
+    "Structure_BasePlate_0_1",
+    "Structure_BasePlate_1_0",
+    "Structure_BasePlate_1_1",
+    "Structure_BasePlate_2_0",
+    "Structure_BasePlate_2_1",
+    "Structure_Column_0_0",
+    "Structure_Column_0_1",
+    "Structure_Column_1_0",
+    "Structure_Column_1_1",
+    "Structure_Column_2_0",
+    "Structure_Column_2_1",
+    "Structure_EquipmentPlinth_0",
+    "Structure_EquipmentPlinth_1",
+    "Structure_Foundation",
+    "Structure_Header_0",
+    "Structure_Header_1",
+    "Structure_LeftWall",
+    "Structure_RearWall",
+    "Structure_RoofBeam_0",
+    "Structure_RoofBeam_1",
+    "Structure_RoofBeam_2",
+    "Structure_Slab"
+  ],
+  "states": {
+    "structure": {
+      "visibleGroups": [
+        "Stage_Structure"
+      ],
+      "anchor": "Anchor_Structure",
+      "poster": "stage-structure.webp"
+    },
+    "equipment": {
+      "visibleGroups": [
+        "Stage_Structure",
+        "Stage_Equipment"
+      ],
+      "anchor": "Anchor_Equipment",
+      "poster": "stage-equipment.webp"
+    },
+    "coordination": {
+      "visibleGroups": [
+        "Stage_Structure",
+        "Stage_Equipment",
+        "Stage_Coordination"
+      ],
+      "anchor": "Anchor_Coordination",
+      "poster": "stage-coordination.webp"
+    },
+    "commissioning": {
+      "visibleGroups": [
+        "Stage_Structure",
+        "Stage_Equipment",
+        "Stage_Coordination",
+        "Stage_Commissioning"
+      ],
+      "anchor": "Anchor_Commissioning",
+      "poster": "stage-commissioning.webp"
+    }
+  },
+  "anchors": {
+    "Anchor_Structure": {
+      "group": "Stage_Structure",
+      "position": [
+        -6.4,
+        4.15,
+        3.7
+      ],
+      "label": "Structural coordination and site readiness"
+    },
+    "Anchor_Equipment": {
+      "group": "Stage_Equipment",
+      "position": [
+        -3,
+        2.7,
+        -1
+      ],
+      "label": "Equipment placement and installation coordination"
+    },
+    "Anchor_Coordination": {
+      "group": "Stage_Coordination",
+      "position": [
+        -2.9,
+        3.3,
+        -1
+      ],
+      "label": "MEP routing and interface coordination"
+    },
+    "Anchor_Commissioning": {
+      "group": "Stage_Commissioning",
+      "position": [
+        3,
+        1.5,
+        2
+      ],
+      "label": "Inspection access and commissioning coordination"
+    }
+  },
+  "defaultState": "commissioning",
+  "stateBehavior": "Cumulative group visibility only. All components retain fixed transforms. Responsibility labels are HTML content at empty-node anchors.",
+  "units": "metres, illustrative scale",
+  "origin": "Fixed footprint centre at floor height; foundation below zero",
+  "coordinates": {
+    "blender": "Z up, front -Y",
+    "gltf": "Y up, front +Z"
+  },
+  "bounds": {
+    "min": [
+      -7.5,
+      -0.5,
+      -5.5
+    ],
+    "max": [
+      7.5,
+      4.07000008225441,
+      5.5
+    ]
+  },
+  "cameras": {
+    "desktop": {
+      "position": [
+        13,
+        15,
+        19
+      ],
+      "target": [
+        0,
+        1.2,
+        0
+      ],
+      "horizontalSpan": 22,
+      "verticalSpan": 16.133333
+    },
+    "mobile": {
+      "position": [
+        13,
+        15,
+        19
+      ],
+      "target": [
+        0,
+        1.2,
+        0
+      ],
+      "verticalSpan": 23,
+      "horizontalSpan": 20.90909
+    }
+  },
+  "materials": {
+    "type": "Opaque metallic-roughness PBR, normal vectors, no unlit shaders or baked illumination",
+    "textures": 0,
+    "textureCompression": "KTX2 not applicable",
+    "shadows": "Enable renderer.shadowMap.enabled, keyLight.castShadow, and mesh.castShadow/receiveShadow. Fit shadow frustum to the 15 x 11 m footprint."
+  },
+  "source": {
+    "generator": "Blender 5.2.2 LTS",
+    "materials": "Appended from ../data-centre/data-centre.blend",
+    "geometry": "Original procedural geometry in scripts/build-project-management.py; no downloaded meshes or textures.",
+    "mobile": "Simplifies rack grille meshes while preserving every node ID and transform.",
+    "preview": "Separate Preview collection with studio ground, camera and lights; excluded from GLBs."
+  },
+  "verification": [
+    "Reopened saved Blender source.",
+    "Both GLBs loaded through Three.js GLTFLoader and MeshoptDecoder.",
+    "Identical node IDs and world transforms verified across variants.",
+    "Four group visibility states and label anchor positions verified.",
+    "Lit materials, normals, sizes and stage/mobile renders checked. Browser GPU performance not benchmarked."
+  ]
+}

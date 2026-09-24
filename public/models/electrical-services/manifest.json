@@ -1,0 +1,218 @@
+{
+  "id": "electrical-services",
+  "description": "Illustrative distribution arrangement, not a wiring diagram or verified installation. No ratings, redundancy or live operating status implied.",
+  "files": [
+    {
+      "file": "electrical-services.glb",
+      "bytes": 139420,
+      "compression": "EXT_meshopt_compression"
+    },
+    {
+      "file": "electrical-services-mobile.glb",
+      "bytes": 137564,
+      "compression": "EXT_meshopt_compression"
+    },
+    {
+      "file": "electrical-services-poster.webp",
+      "bytes": 35212,
+      "compression": "WebP"
+    },
+    {
+      "file": "electrical-services-mobile-poster.webp",
+      "bytes": 24202,
+      "compression": "WebP"
+    },
+    {
+      "file": "electrical-services-backup-poster.webp",
+      "bytes": 34894,
+      "compression": "WebP"
+    },
+    {
+      "file": "electrical-services.blend",
+      "bytes": 131917
+    },
+    {
+      "file": "supply-states.json",
+      "bytes": 481
+    },
+    {
+      "file": "electrical-services.README.md",
+      "bytes": 2810
+    },
+    {
+      "file": "electrical-services-render.png",
+      "bytes": 1705418
+    },
+    {
+      "file": "electrical-services-mobile-render.png",
+      "bytes": 1226455
+    },
+    {
+      "file": "electrical-services-backup-render.png",
+      "bytes": 1701293
+    }
+  ],
+  "geometry": [
+    {
+      "variant": "desktop",
+      "triangles": 2860,
+      "meshes": 55
+    },
+    {
+      "variant": "mobile",
+      "triangles": 2744,
+      "meshes": 55
+    }
+  ],
+  "groups": [
+    "Architecture",
+    "Primary_Supply",
+    "Backup_Supply",
+    "UPS",
+    "Low_Voltage_Distribution",
+    "Outgoing_Supply"
+  ],
+  "componentIds": [
+    "Architecture",
+    "Architecture_BackCoping",
+    "Architecture_BackWall",
+    "Architecture_EquipmentPad_00",
+    "Architecture_EquipmentPad_01",
+    "Architecture_EquipmentPad_02",
+    "Architecture_EquipmentPad_03",
+    "Architecture_EquipmentPad_04",
+    "Architecture_EquipmentPad_05",
+    "Architecture_Foundation",
+    "Architecture_Paving",
+    "Backup_GeneratorGrille_01",
+    "Backup_Generator_01",
+    "Backup_Supply",
+    "LV_DistributionBoard_01",
+    "LV_DistributionBoard_02",
+    "LV_DistributionBoard_03",
+    "Low_Voltage_Distribution",
+    "Outgoing_FeederPillar_01",
+    "Outgoing_Supply",
+    "Path_BackupToUPS",
+    "Path_LVToOutgoing",
+    "Path_NormalToUPS",
+    "Path_Outgoing",
+    "Path_PrimaryToTransformer",
+    "Path_UPSToLV",
+    "Primary_Supply",
+    "Primary_Switchgear_01",
+    "Primary_Switchgear_02",
+    "Primary_Transformer_01",
+    "UPS",
+    "UPS_BatteryCabinet_01",
+    "UPS_Module_01"
+  ],
+  "states": {
+    "normal": {
+      "highlighted": [
+        "Path_PrimaryToTransformer",
+        "Path_NormalToUPS",
+        "Path_UPSToLV",
+        "Path_LVToOutgoing",
+        "Path_Outgoing"
+      ],
+      "subdued": [
+        "Path_BackupToUPS"
+      ]
+    },
+    "backup": {
+      "highlighted": [
+        "Path_BackupToUPS",
+        "Path_UPSToLV",
+        "Path_LVToOutgoing",
+        "Path_Outgoing"
+      ],
+      "subdued": [
+        "Path_PrimaryToTransformer",
+        "Path_NormalToUPS"
+      ]
+    }
+  },
+  "stateBehavior": "All equipment stays visible and stationary. Set highlighted route materials to Safety orange and subdued route materials to Graphite powdercoat. Default export is normal supply.",
+  "units": "metres, illustrative scale",
+  "origin": "Footprint centre at floor height; foundation extends below zero",
+  "coordinates": {
+    "blender": "Z up, front -Y",
+    "gltf": "Y up, front +Z"
+  },
+  "bounds": {
+    "min": [
+      -9,
+      -0.5,
+      -5
+    ],
+    "max": [
+      9,
+      2.899999976158142,
+      5
+    ]
+  },
+  "cameras": {
+    "hero": {
+      "position": [
+        12,
+        16,
+        19
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "horizontalSpan": 23,
+      "verticalSpan": 15.333333
+    },
+    "powerPath": {
+      "position": [
+        0,
+        22,
+        12
+      ],
+      "target": [
+        0,
+        0.5,
+        0
+      ],
+      "horizontalSpan": 22
+    },
+    "mobile": {
+      "position": [
+        12,
+        16,
+        19
+      ],
+      "target": [
+        0,
+        1,
+        0
+      ],
+      "verticalSpan": 24,
+      "horizontalSpan": 21.81818
+    }
+  },
+  "materials": {
+    "type": "Opaque metallic-roughness PBR",
+    "textures": 0,
+    "compression": "No textures; KTX2 not applicable",
+    "shadows": "Dynamic lighting and shadow-ready normals/geometry. Enable Three.js renderer shadows, light.castShadow and mesh.castShadow/receiveShadow. No baked lighting or unlit materials."
+  },
+  "source": {
+    "generator": "Blender 5.2.2 LTS",
+    "materials": "Appended from ../data-centre/data-centre.blend",
+    "geometry": "Original procedural geometry in scripts/build-electrical-services.py; no downloaded meshes or textures.",
+    "mobile": "Simplified generator grille; identical node IDs, positions and state membership.",
+    "preview": "Separate Preview collection with studio ground, camera presets and lights; excluded from GLBs."
+  },
+  "verification": [
+    "Reopened Blender source.",
+    "Both GLBs parsed with Three.js GLTFLoader and MeshoptDecoder.",
+    "Verified identical node names and both material-switch states.",
+    "Checked PBR materials, normals, triangle counts and transfer budgets.",
+    "Visually reviewed normal, backup and mobile renders. Browser performance not benchmarked."
+  ]
+}

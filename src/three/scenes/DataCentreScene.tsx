@@ -21,8 +21,8 @@ export function DataCentreScene({ reducedMotion }: { reducedMotion: boolean }) {
   return (
     <>
       <CameraRig
-        position={narrow ? [95, 56, 135] : [76, 45, 105]}
-        target={[0, 15, 0]}
+        position={narrow ? [17.81, 5.72, 25.31] : [14.25, 4.69, 19.69]}
+        target={[0, 0, 0]}
         fov={37}
         far={500}
       />
@@ -32,11 +32,11 @@ export function DataCentreScene({ reducedMotion }: { reducedMotion: boolean }) {
         <DataCentre mode="outline" outlineColor="#eb8c24" />
       </group>
       {/* Zoom/pan stay off — this canvas sits mid-page inside a small box, and a wheel-zoom
-        would fight the page's own wheel-driven scroll-snap whenever the cursor is over it.
-        autoRotate is a built-in OrbitControls feature — it pauses while dragging and resumes
-        after, no extra invalidate() plumbing needed beyond what damping already requires. */}
+        would fight the page's own scroll whenever the cursor is over it. autoRotate is a
+        built-in OrbitControls feature — it pauses while dragging and resumes after, no extra
+        invalidate() plumbing needed beyond what damping already requires. */}
       <OrbitControls
-        target={[0, 15, 0]}
+        target={[0, 0, 0]}
         enableDamping
         dampingFactor={0.08}
         enableZoom={false}

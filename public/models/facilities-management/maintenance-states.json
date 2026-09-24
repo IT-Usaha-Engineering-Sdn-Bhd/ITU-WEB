@@ -1,0 +1,78 @@
+{
+  "states": {
+    "neutral": {
+      "highlighted": []
+    },
+    "cooling": {
+      "highlighted": [
+        "Cooling_FilterAccess_01",
+        "Cooling_FilterAccess_02",
+        "Cooling_IsolationValve_01",
+        "Cooling_IsolationValve_02"
+      ],
+      "anchor": "Anchor_Cooling"
+    },
+    "electrical": {
+      "highlighted": [
+        "Electrical_ServiceDoor_01",
+        "Electrical_ServiceDoor_02",
+        "Electrical_ServiceDoor_03"
+      ],
+      "anchor": "Anchor_Electrical"
+    },
+    "monitoring": {
+      "highlighted": [
+        "Monitoring_Controller_01",
+        "Monitoring_RoomSensor_01",
+        "Monitoring_RoomSensor_02",
+        "Monitoring_SecurityCamera_01"
+      ],
+      "anchor": "Anchor_Monitoring"
+    },
+    "general": {
+      "highlighted": [
+        "General_AccessClearance_01",
+        "General_FloorInspectionCover_01"
+      ],
+      "anchor": "Anchor_General"
+    }
+  },
+  "anchors": {
+    "Anchor_Cooling": {
+      "group": "Maintenance_Cooling",
+      "position": [
+        -1.5,
+        1,
+        -1
+      ],
+      "label": "Cooling service access and pipe fittings"
+    },
+    "Anchor_Electrical": {
+      "group": "Maintenance_Electrical",
+      "position": [
+        3.75,
+        1.5,
+        -1.9
+      ],
+      "label": "Electrical enclosure inspection access"
+    },
+    "Anchor_Monitoring": {
+      "group": "Maintenance_Monitoring",
+      "position": [
+        1,
+        2.3,
+        -4.1
+      ],
+      "label": "Monitoring device inspection"
+    },
+    "Anchor_General": {
+      "group": "Maintenance_General",
+      "position": [
+        1,
+        0.35,
+        1
+      ],
+      "label": "Floor access and maintenance circulation"
+    }
+  }
+}

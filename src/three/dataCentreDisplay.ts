@@ -1,4 +1,5 @@
 import {
+  Box3,
   Color,
   EdgesGeometry,
   Group,
@@ -7,6 +8,7 @@ import {
   Mesh,
   MeshBasicMaterial,
   Object3D,
+  Vector3,
 } from 'three'
 import type { ColorRepresentation, Material } from 'three'
 
@@ -15,6 +17,8 @@ export type DataCentreMode = 'textured' | 'outline'
 /** Owns only edge buffers and display materials; the loader's assets stay shared. */
 export function createDataCentreDisplay(source: Object3D) {
   const root = source.clone(true) as Group
+  const center = new Box3().setFromObject(root).getCenter(new Vector3())
+  root.position.sub(center)
   const edges: LineSegments<EdgesGeometry, LineBasicMaterial>[] = []
   const surfaces: { mesh: Mesh; material: Material | Material[]; visible: boolean }[] = []
   const depth = new MeshBasicMaterial({

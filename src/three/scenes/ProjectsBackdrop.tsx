@@ -30,12 +30,12 @@ export function ProjectsBackdrop({ reducedMotion }: { reducedMotion: boolean }) 
   // Same spring-damper inertia as the loading screen's rack hall.
   const STIFFNESS = 24
   const DAMPING = 7
-  const spin = useRef(0)
   useFrame(({ clock }, delta) => {
     if (!group.current) return
-    if (!reducedMotion) spin.current += delta * 0.06
-    const targetY = spin.current + (reducedMotion ? 0 : pointer.current.x * 0.09)
-    const targetX = reducedMotion ? 0 : pointer.current.y * 0.03
+    const targetY = reducedMotion
+      ? 0
+      : Math.sin(clock.elapsedTime * 0.25) * 0.35 + pointer.current.x * 0.2
+    const targetX = reducedMotion ? 0 : pointer.current.y * 0.08
     const step = Math.min(delta, 1 / 30)
     velocity.current.y += (targetY - group.current.rotation.y) * STIFFNESS * step
     velocity.current.y *= Math.max(0, 1 - DAMPING * step)
@@ -43,7 +43,7 @@ export function ProjectsBackdrop({ reducedMotion }: { reducedMotion: boolean }) 
     velocity.current.x += (targetX - group.current.rotation.x) * STIFFNESS * step
     velocity.current.x *= Math.max(0, 1 - DAMPING * step)
     group.current.rotation.x += velocity.current.x * step
-    if (!reducedMotion) group.current.position.y = Math.sin(clock.elapsedTime * 0.6) * 1.2
+    if (!reducedMotion) group.current.position.y = Math.sin(clock.elapsedTime * 0.6) * 0.4
     const settled =
       reducedMotion &&
       Math.abs(velocity.current.x) < 0.0001 &&
@@ -58,8 +58,8 @@ export function ProjectsBackdrop({ reducedMotion }: { reducedMotion: boolean }) 
   return (
     <>
       <CameraRig
-        position={narrow ? [66.5, 43.7, 94.5] : [53.2, 36, 73.5]}
-        target={[0, 15, 0]}
+        position={narrow ? [12.48, 4.57, 17.73] : [9.98, 3.85, 13.78]}
+        target={[0, 0, 0]}
         fov={37}
         far={500}
       />

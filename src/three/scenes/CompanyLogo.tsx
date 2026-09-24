@@ -120,9 +120,9 @@ export function CompanyLogo({ reducedMotion }: { reducedMotion: boolean }) {
   return (
     <>
       <CameraRig position={[0, 0.2, 8]} target={[0, -0.1, 0]} fov={38} far={20} />
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[3, 4, 5]} intensity={1.7} />
-      <directionalLight position={[-3, 1, 2]} intensity={1.1} color="#ffffff" />
+      <ambientLight intensity={0.4} />
+      <directionalLight position={[3, 4, 5]} intensity={1.1} />
+      <directionalLight position={[-3, 1, 2]} intensity={0.7} color="#ffffff" />
       <group ref={group} position={[0, 0.75, 0]} onPointerDown={onPointerDown}>
         <primitive object={instance} dispose={null} />
       </group>

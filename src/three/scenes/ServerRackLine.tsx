@@ -58,8 +58,9 @@ export function ServerRackLine({ reducedMotion }: { reducedMotion: boolean }) {
   // the pointer, eases past it slightly, and settles — actual inertia rather than a snap-to.
   const STIFFNESS = 24
   const DAMPING = 7
-  useFrame((_, delta) => {
+  useFrame(({ clock }, delta) => {
     if (!group.current) return
+    if (!reducedMotion) group.current.position.y = Math.sin(clock.elapsedTime * 0.35) * 0.12
     const targetY = reducedMotion ? 0 : pointer.current.x * 0.09
     const targetX = reducedMotion ? 0 : pointer.current.y * 0.03
     const step = Math.min(delta, 1 / 30)
@@ -74,7 +75,7 @@ export function ServerRackLine({ reducedMotion }: { reducedMotion: boolean }) {
       Math.abs(velocity.current.y) < 0.0001 &&
       Math.abs(targetX - group.current.rotation.x) < 0.0001 &&
       Math.abs(targetY - group.current.rotation.y) < 0.0001
-    if (!settled) invalidate()
+    if (!settled || !reducedMotion) invalidate()
   })
 
   return (

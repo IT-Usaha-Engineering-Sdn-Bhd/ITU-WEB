@@ -1,0 +1,283 @@
+{
+  "id": "data-centre",
+  "description": "Illustrative engineering cutaway; no measured capacities, certification or live status.",
+  "generator": "Blender 5.2.2 LTS",
+  "files": [
+    {
+      "file": "data-centre.glb",
+      "bytes": 352148,
+      "compression": "EXT_meshopt_compression",
+      "triangles": 10908,
+      "meshes": 102,
+      "bounds": {
+        "min": [
+          -6.300000190734863,
+          -0.4399999976158142,
+          -4.800000190734863
+        ],
+        "max": [
+          6.300000190734863,
+          3.540000017732382,
+          4.800000190734863
+        ]
+      },
+      "verification": "Reopened with Three.js GLTFLoader and MeshoptDecoder; all system groups, PBR materials and normals present."
+    },
+    {
+      "file": "data-centre-poster.webp",
+      "bytes": 61076,
+      "compression": "WebP quality 82"
+    },
+    {
+      "file": "data-centre-mobile.glb",
+      "bytes": 308872,
+      "compression": "EXT_meshopt_compression",
+      "triangles": 8892,
+      "meshes": 94,
+      "bounds": {
+        "min": [
+          -6.300000190734863,
+          -0.4399999976158142,
+          -4.800000190734863
+        ],
+        "max": [
+          6.300000190734863,
+          3.540000017732382,
+          4.800000190734863
+        ]
+      },
+      "verification": "Reopened with Three.js GLTFLoader and MeshoptDecoder; all system groups, PBR materials and normals present."
+    },
+    {
+      "file": "data-centre-mobile-poster.webp",
+      "bytes": 39188,
+      "compression": "WebP quality 82"
+    },
+    {
+      "file": "data-centre.blend",
+      "bytes": 161506
+    },
+    {
+      "file": "data-centre-working.blend",
+      "bytes": 161506
+    },
+    {
+      "file": "source-inspection.json",
+      "bytes": 4454
+    },
+    {
+      "file": "layer-states.json",
+      "bytes": 2077
+    },
+    {
+      "file": "layer-power.webp",
+      "bytes": 24238
+    },
+    {
+      "file": "layer-cooling.webp",
+      "bytes": 19108
+    },
+    {
+      "file": "layer-protection.webp",
+      "bytes": 20274
+    },
+    {
+      "file": "layer-controls.webp",
+      "bytes": 17400
+    },
+    {
+      "file": "data-centre-mobile-raw.glb",
+      "bytes": 635824,
+      "role": "Uncompressed intermediate"
+    },
+    {
+      "file": "data-centre-mobile-render.png",
+      "bytes": 1100806,
+      "role": "Supporting source, render or documentation"
+    },
+    {
+      "file": "data-centre-outline.png",
+      "bytes": 32128,
+      "role": "Historical exterior preview"
+    },
+    {
+      "file": "data-centre-preview.png",
+      "bytes": 2094921,
+      "role": "Historical exterior preview"
+    },
+    {
+      "file": "data-centre-raw.glb",
+      "bytes": 773260,
+      "role": "Uncompressed intermediate"
+    },
+    {
+      "file": "data-centre-render.png",
+      "bytes": 1808769,
+      "role": "Supporting source, render or documentation"
+    },
+    {
+      "file": "data-centre.blend1",
+      "bytes": 2666098,
+      "role": "Supporting source, render or documentation"
+    },
+    {
+      "file": "data-centre.README.md",
+      "bytes": 3790,
+      "role": "Supporting source, render or documentation"
+    },
+    {
+      "file": "layer-controls.png",
+      "bytes": 710394,
+      "role": "Supporting source, render or documentation"
+    },
+    {
+      "file": "layer-cooling.png",
+      "bytes": 727696,
+      "role": "Supporting source, render or documentation"
+    },
+    {
+      "file": "layer-power.png",
+      "bytes": 763995,
+      "role": "Supporting source, render or documentation"
+    },
+    {
+      "file": "layer-protection.png",
+      "bytes": 730548,
+      "role": "Supporting source, render or documentation"
+    },
+    {
+      "file": "layer-review.png",
+      "bytes": 1083348,
+      "role": "Supporting source, render or documentation"
+    },
+    {
+      "file": "lighting-check.png",
+      "bytes": 764641,
+      "role": "Supporting source, render or documentation"
+    }
+  ],
+  "units": "metres",
+  "origin": "Facility footprint centre at finished floor level; foundation extends below origin",
+  "coordinates": {
+    "blender": "Z up, open front -Y",
+    "gltf": "Y up, open front +Z"
+  },
+  "groups": [
+    "Architecture",
+    "Power",
+    "Cooling",
+    "Protection",
+    "Controls"
+  ],
+  "states": {
+    "Power": {
+      "visibleGroups": [
+        "Architecture",
+        "Power"
+      ],
+      "components": [
+        "Power_RackAisle_01_Rack_01",
+        "Power_RackAisle_01_Rack_01_FineVents",
+        "Power_RackAisle_01_Rack_02",
+        "Power_RackAisle_01_Rack_02_FineVents",
+        "Power_RackAisle_01_Rack_03",
+        "Power_RackAisle_01_Rack_03_FineVents",
+        "Power_RackAisle_01_Rack_04",
+        "Power_RackAisle_01_Rack_04_FineVents",
+        "Power_RackAisle_02_Rack_01",
+        "Power_RackAisle_02_Rack_01_FineVents",
+        "Power_RackAisle_02_Rack_02",
+        "Power_RackAisle_02_Rack_02_FineVents",
+        "Power_RackAisle_02_Rack_03",
+        "Power_RackAisle_02_Rack_03_FineVents",
+        "Power_RackAisle_02_Rack_04",
+        "Power_RackAisle_02_Rack_04_FineVents",
+        "Power_OverheadDistribution_01",
+        "Power_OverheadDistribution_02",
+        "Power_DistributionLink",
+        "Power_UPS_01",
+        "Power_Switchboard_01",
+        "Power_DistributionPanel_01",
+        "Power_Feeder",
+        "Power_PanelDrop"
+      ],
+      "poster": "layer-power.webp"
+    },
+    "Cooling": {
+      "visibleGroups": [
+        "Architecture",
+        "Cooling"
+      ],
+      "components": [
+        "Cooling_AHU_01",
+        "Cooling_AHU_02",
+        "Cooling_PipeCircuit_01",
+        "Cooling_PipeCircuit_02"
+      ],
+      "poster": "layer-cooling.webp"
+    },
+    "Protection": {
+      "visibleGroups": [
+        "Architecture",
+        "Protection"
+      ],
+      "components": [
+        "Protection_SprinklerNetwork_01",
+        "Protection_SuppressionCylinder_01",
+        "Protection_SuppressionCylinder_02",
+        "Protection_FirePanel"
+      ],
+      "poster": "layer-protection.webp"
+    },
+    "Controls": {
+      "visibleGroups": [
+        "Architecture",
+        "Controls"
+      ],
+      "components": [
+        "Controls_BMSPanel",
+        "Controls_BMSDisplay",
+        "Controls_Sensor_01",
+        "Controls_Sensor_02",
+        "Controls_Sensor_03",
+        "Controls_CameraMount_01",
+        "Controls_SecurityCamera_01",
+        "Controls_CameraLens_01",
+        "Controls_CameraMount_02",
+        "Controls_SecurityCamera_02",
+        "Controls_CameraLens_02",
+        "Controls_AccessReader"
+      ],
+      "poster": "layer-controls.webp"
+    }
+  },
+  "camera": {
+    "projection": "orthographic",
+    "position": [
+      13,
+      14,
+      18
+    ],
+    "target": [
+      0,
+      1,
+      -0.3
+    ],
+    "desktopVerticalSpan": 13.65,
+    "mobileVerticalSpan": 20.11
+  },
+  "lighting": {
+    "materials": "Opaque metallic-roughness PBR; no baked illumination, no textures, no unlit materials",
+    "runtime": "Enable renderer.shadowMap, castShadow on light, and castShadow/receiveShadow on meshes. GLB does not store Three.js shadow flags. Provide environment/fill lighting.",
+    "preview": "Source contains separate Preview collection with camera, floor and three area lights; excluded from GLBs."
+  },
+  "mobile": "Omits 168 fine vent bars; same system hierarchy, primary component names and camera origin.",
+  "textures": "None; KTX2 not applicable.",
+  "sourceDecision": "Preserve original exterior in originals/. Rebuild interior cutaway: exterior is approximately 60 x 28 x 32 m, grouped by facade material, with foliage and closed roof unsuitable for system isolation. Retain graphite/metal/neutral palette concept; rebuild geometry and materials at illustrative room scale.",
+  "notes": [
+    "Original exterior assets preserved in originals/.",
+    "Power, Cooling, Protection, Controls isolation retains Architecture context.",
+    "Meshopt decoder required. Use the bundled Three.js decoder.",
+    "Lightweight floor seams and vents are modeled geometry, allowing correct shadows."
+  ]
+}

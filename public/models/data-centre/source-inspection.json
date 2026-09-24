@@ -1,0 +1,190 @@
+{
+  "blenderVersion": "5.2.2 LTS",
+  "sourceObjects": [
+    {
+      "name": "Concrete_and_roof_architecture",
+      "type": "MESH",
+      "dimensions": [
+        60.0,
+        28.0,
+        32.060001373291016
+      ],
+      "vertices": 96
+    },
+    {
+      "name": "Recessed_facade_backing_architecture",
+      "type": "MESH",
+      "dimensions": [
+        10.0,
+        26.200000762939453,
+        32.0
+      ],
+      "vertices": 24
+    },
+    {
+      "name": "Concrete_and_roof_detail",
+      "type": "MESH",
+      "dimensions": [
+        59.5,
+        27.5,
+        0.20000076293945312
+      ],
+      "vertices": 24
+    },
+    {
+      "name": "Aluminium_frame_edges_architecture",
+      "type": "MESH",
+      "dimensions": [
+        60.30000305175781,
+        28.040000915527344,
+        32.099998474121094
+      ],
+      "vertices": 72
+    },
+    {
+      "name": "Brown_bronze_vertical_fins_architecture",
+      "type": "MESH",
+      "dimensions": [
+        46.400001525878906,
+        2.0900001525878906,
+        32.0
+      ],
+      "vertices": 72
+    },
+    {
+      "name": "Brown_bronze_vertical_fins_detail",
+      "type": "MESH",
+      "dimensions": [
+        9.680999755859375,
+        0.8999996185302734,
+        27.700000762939453
+      ],
+      "vertices": 696
+    },
+    {
+      "name": "Entrance_glazing_-_opaque_architecture",
+      "type": "MESH",
+      "dimensions": [
+        8.25,
+        0.05999946594238281,
+        2.9000000953674316
+      ],
+      "vertices": 96
+    },
+    {
+      "name": "Aluminium_frame_edges_detail",
+      "type": "MESH",
+      "dimensions": [
+        59.974998474121094,
+        1.8400001525878906,
+        31.900001525878906
+      ],
+      "vertices": 18096
+    },
+    {
+      "name": "Living_wall_foliage_architecture",
+      "type": "MESH",
+      "dimensions": [
+        60.595001220703125,
+        28.619998931884766,
+        32.0
+      ],
+      "vertices": 2136
+    },
+    {
+      "name": "Anodised_silver_screens_architecture",
+      "type": "MESH",
+      "dimensions": [
+        59.935001373291016,
+        0.1399993896484375,
+        31.900001525878906
+      ],
+      "vertices": 2040
+    },
+    {
+      "name": "Silver_screens_-_alternate_architecture",
+      "type": "MESH",
+      "dimensions": [
+        59.935001373291016,
+        28.399999618530273,
+        31.900001525878906
+      ],
+      "vertices": 5160
+    },
+    {
+      "name": "Living_wall_foliage_detail",
+      "type": "MESH",
+      "dimensions": [
+        60.97996139526367,
+        28.06999969482422,
+        31.81999969482422
+      ],
+      "vertices": 11040
+    },
+    {
+      "name": "Preview ground (not exported)",
+      "type": "MESH",
+      "dimensions": [
+        200.0,
+        200.0,
+        0.0
+      ],
+      "vertices": 4
+    },
+    {
+      "name": "Preview sun",
+      "type": "LIGHT",
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "vertices": 0
+    },
+    {
+      "name": "Area",
+      "type": "LIGHT",
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "vertices": 0
+    },
+    {
+      "name": "Camera",
+      "type": "CAMERA",
+      "dimensions": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "vertices": 0
+    }
+  ],
+  "sourceCollections": [
+    "Collection",
+    "DataCentre | exterior",
+    "Preview rig | not exported"
+  ],
+  "glb": {
+    "bytes": 3656804,
+    "meshes": 12,
+    "nodes": [
+      "Aluminium_frame_edges_architecture",
+      "Aluminium_frame_edges_detail",
+      "Anodised_silver_screens_architecture",
+      "Brown_bronze_vertical_fins_architecture",
+      "Brown_bronze_vertical_fins_detail",
+      "Concrete_and_roof_architecture",
+      "Concrete_and_roof_detail",
+      "Entrance_glazing_-_opaque_architecture",
+      "Living_wall_foliage_architecture",
+      "Living_wall_foliage_detail",
+      "Recessed_facade_backing_architecture",
+      "Silver_screens_-_alternate_architecture"
+    ],
+    "materials": 8
+  },
+  "decision": "Preserve original exterior in originals/. Rebuild interior cutaway: exterior is approximately 60 x 28 x 32 m, grouped by facade material, with foliage and closed roof unsuitable for system isolation. Retain graphite/metal/neutral palette concept; rebuild geometry and materials at illustrative room scale."
+}
