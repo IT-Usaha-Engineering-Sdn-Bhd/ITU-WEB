@@ -118,7 +118,7 @@ function PositionSelect({
         className="position-select-trigger"
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-controls={id}
+        aria-controls={`${id}-list`}
         aria-labelledby={`career-vacancy-label ${id}`}
         aria-describedby={describedBy}
         onClick={() => setOpen(!open)}
@@ -130,14 +130,17 @@ function PositionSelect({
         <CaretDown size={16} aria-hidden="true" className={open ? 'rotate-180' : ''} />
       </button>
       <ul
+        id={`${id}-list`}
         role="listbox"
         className="position-select-panel"
         aria-labelledby="career-vacancy-label"
         hidden={!open}
       >
         {options.map((option, index) => (
-          <li key={option.id} role="option" aria-selected={option.key === value}>
+          <li key={option.id} role="none">
             <button
+              role="option"
+              aria-selected={option.key === value}
               type="button"
               tabIndex={-1}
               onClick={() => pick(option.key)}
@@ -173,7 +176,12 @@ export function CareerApplication({
 
   function selectVacancy(key: string) {
     setVacancyKey(key)
-    headingRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    headingRef.current?.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'instant'
+        : 'smooth',
+      block: 'start',
+    })
     headingRef.current?.focus({ preventScroll: true })
   }
 
@@ -204,7 +212,11 @@ export function CareerApplication({
     const data = new FormData(form)
     const fieldErrors = validate(data)
     setErrors(fieldErrors)
-    if (Object.keys(fieldErrors).length > 0) return
+    if (Object.keys(fieldErrors).length > 0) {
+      setState('error')
+      setFormError(Object.values(fieldErrors).join(' '))
+      return
+    }
     setState('pending')
     setFormError('')
     try {

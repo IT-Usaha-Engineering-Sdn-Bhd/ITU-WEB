@@ -1,6 +1,7 @@
 'use client'
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { devicePolicy } from './model-policy'
 
 export type Stage = 'loading' | 'scroll'
 type StageContextValue = {
@@ -12,23 +13,37 @@ type StageContextValue = {
   setSceneReady: (ready: boolean) => void
   sceneFailed: boolean
   setSceneFailed: (failed: boolean) => void
+  allow3D: boolean
+  enable3D: () => void
 }
 const StageContext = createContext<StageContextValue | null>(null)
 const SEEN_INTRO_KEY = 'itu:seen-intro'
 
 export function StageProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const [intro, setIntro] = useState<Stage>('loading')
+  const [intro, setIntro] = useState<Stage>('scroll')
+  const [allow3D, setAllow3D] = useState(false)
   const [activeSection, setActiveSection] = useState<string | null>(null)
   const [sceneReady, setSceneReady] = useState(false)
   const [sceneFailed, setSceneFailed] = useState(false)
   const stage = pathname === '/' ? intro : 'scroll'
   useEffect(() => {
+    setAllow3D(devicePolicy() !== 'constrained')
+  }, [])
+  const enable3D = useCallback(() => {
+    setSceneFailed(false)
+    setAllow3D(true)
+  }, [])
+  useEffect(() => {
     if (pathname !== '/') return
     try {
-      if (window.location.hash || sessionStorage.getItem(SEEN_INTRO_KEY) === '1') setIntro('scroll')
+      setIntro(
+        window.location.hash || sessionStorage.getItem(SEEN_INTRO_KEY) === '1'
+          ? 'scroll'
+          : 'loading',
+      )
     } catch {
-      if (window.location.hash) setIntro('scroll')
+      setIntro(window.location.hash ? 'scroll' : 'loading')
     }
   }, [pathname])
   useEffect(() => {
@@ -56,8 +71,10 @@ export function StageProvider({ children }: { children: React.ReactNode }) {
       setSceneReady,
       sceneFailed,
       setSceneFailed,
+      allow3D,
+      enable3D,
     }),
-    [stage, activeSection, setStage, sceneReady, sceneFailed],
+    [stage, activeSection, setStage, sceneReady, sceneFailed, allow3D, enable3D],
   )
   return <StageContext.Provider value={value}>{children}</StageContext.Provider>
 }

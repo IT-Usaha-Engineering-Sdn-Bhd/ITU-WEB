@@ -1,44 +1,55 @@
 'use client'
-import { Howl } from 'howler'
+import { Howl, Howler } from 'howler'
+import { createSoundController } from './sound-controller'
 
 type SfxName = 'ui-hover' | 'ui-click' | 'stage-reveal' | 'section-snap'
 const sounds = new Map<SfxName, Howl>()
 const listeners = new Set<() => void>()
 let ambient: Howl | null = null
-let muted = true
-let initialized = false
-let activated = false
-
+let ambientId: number | undefined
+let controller: ReturnType<typeof createSoundController> | null = null
+const notify = () => listeners.forEach((listener) => listener())
+function startAmbient() {
+  if (document.hidden) return
+  // Called directly from Commission or Sound On, inside user activation.
+  void Howler.ctx?.resume().catch(() => {})
+  if (!ambient)
+    ambient = new Howl({
+      src: ['/sfx/ambient-loop.mp3'],
+      loop: true,
+      volume: 0.12,
+      onplayerror: () => {
+        controller?.playbackFailed()
+        notify()
+      },
+    })
+  if (!ambient.playing(ambientId))
+    ambientId = ambientId === undefined ? ambient.play() : ambient.play(ambientId)
+}
 export function initializeSfx() {
-  if (initialized || typeof window === 'undefined') return
-  initialized = true
-  let hasPreference = true
+  if (controller || typeof window === 'undefined') return
+  let preference: string | null = null
   try {
-    const stored = sessionStorage.getItem('itu:sound')
-    hasPreference = stored !== null
-    muted = stored !== 'on'
+    preference = localStorage.getItem('itu:sound') ?? sessionStorage.getItem('itu:sound')
   } catch {
     /* Optional storage. */
   }
-  const activate = () => {
-    activated = true
-    // First-ever interaction this session with no explicit choice yet: turn sound on rather
-    // than waiting for a separate click on the sound toggle. A stored preference (on or off)
-    // is always respected as-is.
-    if (!hasPreference) {
-      hasPreference = true
-      setSfxMuted(false)
-    } else if (!muted) startAmbient()
-    window.removeEventListener('pointerdown', activate)
-    window.removeEventListener('keydown', activate)
-  }
-  window.addEventListener('pointerdown', activate)
-  window.addEventListener('keydown', activate)
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) ambient?.pause()
-    else if (activated && !muted) startAmbient()
+  controller = createSoundController(preference, {
+    start: startAmbient,
+    stop: () => {
+      ambient?.pause()
+      sounds.forEach((sound) => sound.stop())
+    },
+    save: (value) => {
+      try {
+        localStorage.setItem('itu:sound', value)
+        sessionStorage.setItem('itu:sound', value)
+      } catch {
+        /* Optional storage. */
+      }
+    },
   })
-  // Delegated so every button/link/CTA gets hover + click sound with no per-component wiring.
+  document.addEventListener('visibilitychange', () => controller?.visibility(document.hidden))
   let hovered: Element | null = null
   const interactive = (target: EventTarget | null) =>
     (target as Element | null)?.closest?.('button, a, [role="button"]') ?? null
@@ -54,41 +65,37 @@ export function initializeSfx() {
     playSfx('ui-hover')
   })
   window.addEventListener('pointerdown', (event) => {
-    if (event.pointerType === 'touch') return
     const button = interactive(event.target)
-    if (!button || (button as HTMLButtonElement).disabled) return
-    playSfx('ui-click')
+    if (event.pointerType !== 'touch' && button && !(button as HTMLButtonElement).disabled)
+      playSfx('ui-click')
   })
-  listeners.forEach((listener) => listener())
+  notify()
 }
-function startAmbient() {
-  if (!ambient) ambient = new Howl({ src: ['/sfx/ambient-loop.mp3'], loop: true, volume: 0.12 })
-  if (!ambient.playing()) ambient.play()
+export function commissionSound() {
+  initializeSfx()
+  controller?.commission()
+  playSfx('stage-reveal')
+  notify()
 }
 export function playSfx(name: SfxName) {
-  if (muted || !activated || document.hidden) return
+  if (!controller || controller.muted() || !controller.activated() || document.hidden) return
   let sound = sounds.get(name)
   if (!sound) {
     sound = new Howl({ src: [`/sfx/${name}.mp3`], volume: name === 'ui-hover' ? 0.12 : 0.25 })
     sounds.set(name, sound)
   }
-  sound.play()
+  try {
+    sound.play()
+  } catch {
+    /* Navigation is independent of audio availability. */
+  }
 }
 export function setSfxMuted(next: boolean) {
-  activated = true
-  muted = next
-  try {
-    sessionStorage.setItem('itu:sound', muted ? 'off' : 'on')
-  } catch {
-    /* Optional storage. */
-  }
-  if (muted) {
-    ambient?.pause()
-    sounds.forEach((sound) => sound.stop())
-  } else startAmbient()
-  listeners.forEach((listener) => listener())
+  initializeSfx()
+  controller?.setMuted(next)
+  notify()
 }
-export const isSfxMuted = () => muted
+export const isSfxMuted = () => controller?.muted() ?? true
 export function subscribeSfx(listener: () => void) {
   listeners.add(listener)
   return () => {

@@ -1,3 +1,5 @@
+import { ModelStage } from '@/components/ModelStage'
+import { HighlightedHeading } from '@/components/HighlightedHeading'
 import type { Metadata } from 'next'
 import {
   Blueprint,
@@ -27,15 +29,16 @@ export default async function ProjectManagementPage() {
   const [data, settings] = await Promise.all([getServiceProjectManagement(), getSettings()])
 
   return (
-    <main id="main-content" className="inner-page">
+    <main id="main-content" className="inner-page service-page">
       <section className="section-shell inner-hero">
         <p className="eyebrow">{data.eyebrow}</p>
         <h1 className="section-heading">
-          {data.heading.split(data.highlight)[0]}
-          <span className="text-accent">{data.highlight}</span>
+          <HighlightedHeading text={data.heading} highlight={data.highlight} />
         </h1>
       </section>
+      <ModelStage id="project-management" title={data.bannerLabel} />
       <HeroBanner
+        priority={false}
         image={data.heroImage}
         label={data.bannerLabel}
         kicker={settings.heroBannerKicker}

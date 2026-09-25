@@ -36,6 +36,7 @@ export function ContactForm({
   ] as const
   const [state, setState] = useState<'idle' | 'pending' | 'success' | 'error'>('idle')
   const [error, setError] = useState('')
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (state === 'pending') return
@@ -63,7 +64,19 @@ export function ContactForm({
       <p className="eyebrow">{eyebrow}</p>
       <h2>{title}</h2>
       <p className="section-body">{description}</p>
-      <form onSubmit={submit} aria-busy={state === 'pending'}>
+      <form
+        onSubmit={submit}
+        aria-busy={state === 'pending'}
+        onInvalidCapture={(event) => {
+          const field = event.target as HTMLInputElement | HTMLTextAreaElement
+          setFieldErrors((previous) => ({ ...previous, [field.name]: field.validationMessage }))
+        }}
+        onInput={(event) => {
+          const field = event.target as HTMLInputElement | HTMLTextAreaElement
+          if (field.validity.valid)
+            setFieldErrors((previous) => ({ ...previous, [field.name]: '' }))
+        }}
+      >
         <div className="form-two-col">
           {fields.map((field) => (
             <label key={field.name}>
@@ -74,6 +87,10 @@ export function ContactForm({
                 type={'type' in field ? field.type : 'text'}
                 maxLength={field.maxLength}
                 required={field.required}
+                aria-invalid={Boolean(fieldErrors[field.name])}
+                aria-describedby={
+                  fieldErrors[field.name] ? `contact-error-${field.name}` : undefined
+                }
                 autoComplete={
                   field.name === 'name'
                     ? 'name'
@@ -84,6 +101,11 @@ export function ContactForm({
                         : 'organization'
                 }
               />
+              {fieldErrors[field.name] && (
+                <span className="field-error" id={`contact-error-${field.name}`}>
+                  {fieldErrors[field.name]}
+                </span>
+              )}
             </label>
           ))}
         </div>
@@ -93,7 +115,19 @@ export function ContactForm({
         </label>
         <label>
           {labels.messageLabel} <span aria-hidden="true">*</span>
-          <textarea name="message" maxLength={5000} rows={5} required />
+          <textarea
+            name="message"
+            maxLength={5000}
+            rows={5}
+            required
+            aria-invalid={Boolean(fieldErrors.message)}
+            aria-describedby={fieldErrors.message ? 'contact-error-message' : undefined}
+          />
+          {fieldErrors.message && (
+            <span className="field-error" id="contact-error-message">
+              {fieldErrors.message}
+            </span>
+          )}
         </label>
         <div className="form-trap" aria-hidden="true">
           <label>

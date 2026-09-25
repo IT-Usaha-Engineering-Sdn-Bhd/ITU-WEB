@@ -10,7 +10,7 @@ export function ModularDiagram({ title }: { title: string }) {
       aria-labelledby="modular-diagram-title"
     >
       <title id="modular-diagram-title">
-        {title}: separate modules assembling into one complete system
+        {`${title}: separate modules assembling into one complete system`}
       </title>
       <g
         className="modular-diagram-module"

@@ -13,7 +13,7 @@ export function Hero({
   exploreLabel: string
   logoUrl: string
 }) {
-  const { sceneFailed, sceneReady } = useStage()
+  const { sceneFailed, sceneReady, allow3D, enable3D } = useStage()
   const scrollToWhoWeAre = () =>
     document.getElementById('who-we-are')?.scrollIntoView({
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -30,9 +30,14 @@ export function Hero({
       )}
       <div className="hero-top">
         <SoundToggle label />
+        {(!allow3D || sceneFailed) && (
+          <button type="button" className="text-button" onClick={enable3D}>
+            {sceneFailed ? 'Retry 3D' : 'Load 3D'}
+          </button>
+        )}
       </div>
       <div className="punchline-copy">
-        <h1 id="hero-heading" className="punchline-heading">
+        <h1 id="hero-heading" tabIndex={-1} className="punchline-heading">
           {punchline}
         </h1>
         <button type="button" className="text-button" onClick={scrollToWhoWeAre}>

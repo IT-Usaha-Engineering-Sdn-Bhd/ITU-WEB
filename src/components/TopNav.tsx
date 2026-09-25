@@ -10,6 +10,7 @@ import { SoundToggle } from './SoundToggle'
 type NavLink = { label: string; href: string }
 
 function Dropdown({ label, items }: { label: string; items: { label: string; href: string }[] }) {
+  const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const id = useId()
   const ref = useRef<HTMLDivElement>(null)
@@ -51,7 +52,11 @@ function Dropdown({ label, items }: { label: string; items: { label: string; hre
         <ul>
           {items.map((item) => (
             <li key={item.href}>
-              <Link href={item.href} onClick={() => setOpen(false)}>
+              <Link
+                href={item.href}
+                aria-current={pathname === item.href ? 'page' : undefined}
+                onClick={() => setOpen(false)}
+              >
                 {item.label}
               </Link>
             </li>
@@ -80,17 +85,33 @@ export function TopNav({
   contactCtaLabel: string
   contactCtaHref: string
 }) {
-  const { stage, activeSection } = useStage()
+  const { stage } = useStage()
   const pathname = usePathname()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [heroPassed, setHeroPassed] = useState(false)
   const header = useRef<HTMLElement>(null)
   const toggle = useRef<HTMLButtonElement>(null)
   useEffect(() => {
     setMobileOpen(false)
   }, [pathname])
   useEffect(() => {
+    if (pathname !== '/') return
+    const hero = document.getElementById('hero')
+    if (!hero) return
+    const update = () => setHeroPassed(hero.getBoundingClientRect().bottom <= 0)
+    update()
+    const observer = new IntersectionObserver(update, { threshold: 0 })
+    observer.observe(hero)
+    window.addEventListener('resize', update)
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', update)
+    }
+  }, [pathname, stage])
+  useEffect(() => {
     if (!mobileOpen) return
     const previous = document.body.style.overflow
+    const trigger = toggle.current
     document.body.style.overflow = 'hidden'
     const query = window.matchMedia('(min-width: 1200px)')
     const resize = () => {
@@ -100,13 +121,13 @@ export function TopNav({
     return () => {
       document.body.style.overflow = previous
       query.removeEventListener('change', resize)
+      trigger?.focus({ preventScroll: true })
     }
   }, [mobileOpen])
   // Kept mounted (never returns null) so SnapContainer's `document.querySelector('header')`
   // inset never flaps between the real nav height and its fallback — just faded/inert while
   // on the loading screen or the hero section.
-  const hidden =
-    pathname === '/' && (stage !== 'scroll' || activeSection === null || activeSection === 'hero')
+  const hidden = pathname === '/' && (stage !== 'scroll' || !heroPassed)
   // Contact Us gets its own accent CTA button — drop it from the plain link list so it
   // doesn't appear twice.
   const inlineLinks = navLinks.filter((link) => link.href !== contactCtaHref)
@@ -125,7 +146,7 @@ export function TopNav({
         }
         if (event.key === 'Tab') {
           const focusable = Array.from(
-            header.current?.querySelectorAll<HTMLElement>('a, button') ?? [],
+            header.current?.querySelectorAll<HTMLElement>('a, button, summary') ?? [],
           ).filter((element) => element.getClientRects().length)
           const first = focusable[0],
             last = focusable[focusable.length - 1]
@@ -152,7 +173,11 @@ export function TopNav({
         </Link>
         <div className="desktop-navigation">
           {inlineLinks.map((link) => (
-            <Link key={link.href} href={link.href}>
+            <Link
+              key={link.href}
+              href={link.href}
+              aria-current={pathname === link.href ? 'page' : undefined}
+            >
               {link.label}
             </Link>
           ))}
@@ -185,7 +210,12 @@ export function TopNav({
           data-native-scroll
         >
           {inlineLinks.map((link) => (
-            <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)}>
+            <Link
+              key={link.href}
+              href={link.href}
+              aria-current={pathname === link.href ? 'page' : undefined}
+              onClick={() => setMobileOpen(false)}
+            >
               {link.label}
             </Link>
           ))}
@@ -196,7 +226,12 @@ export function TopNav({
             </summary>
             <div>
               {serviceLinks.map((item) => (
-                <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}>
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={pathname === item.href ? 'page' : undefined}
+                  onClick={() => setMobileOpen(false)}
+                >
                   {item.label}
                 </Link>
               ))}

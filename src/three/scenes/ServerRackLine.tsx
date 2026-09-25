@@ -5,8 +5,9 @@ import { Instance, Instances, useGLTF } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { Group, Mesh, MeshStandardMaterial } from 'three'
 import { CameraRig } from '@/three/CameraRig'
+import { modelRegistry } from '@/three/model-registry'
 
-const URL = '/models/server/server-rack.glb'
+const URL = modelRegistry['server-rack'].url
 const ROWS = 6
 const COLS = 10
 const SPACING = 1.4
@@ -58,9 +59,8 @@ export function ServerRackLine({ reducedMotion }: { reducedMotion: boolean }) {
   // the pointer, eases past it slightly, and settles — actual inertia rather than a snap-to.
   const STIFFNESS = 24
   const DAMPING = 7
-  useFrame(({ clock }, delta) => {
+  useFrame((_, delta) => {
     if (!group.current) return
-    if (!reducedMotion) group.current.position.y = Math.sin(clock.elapsedTime * 0.35) * 0.12
     const targetY = reducedMotion ? 0 : pointer.current.x * 0.09
     const targetX = reducedMotion ? 0 : pointer.current.y * 0.03
     const step = Math.min(delta, 1 / 30)
@@ -75,7 +75,7 @@ export function ServerRackLine({ reducedMotion }: { reducedMotion: boolean }) {
       Math.abs(velocity.current.y) < 0.0001 &&
       Math.abs(targetX - group.current.rotation.x) < 0.0001 &&
       Math.abs(targetY - group.current.rotation.y) < 0.0001
-    if (!settled || !reducedMotion) invalidate()
+    if (!settled) invalidate()
   })
 
   return (
@@ -120,5 +120,3 @@ export function ServerRackLine({ reducedMotion }: { reducedMotion: boolean }) {
     </group>
   )
 }
-
-useGLTF.preload(URL)

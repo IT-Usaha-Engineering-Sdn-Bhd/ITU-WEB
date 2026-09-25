@@ -11,3 +11,5 @@ pages.json
 tsconfig.tsbuildinfo
 public/models/**/*.blend
 .vercel
+docs
+template/frontend

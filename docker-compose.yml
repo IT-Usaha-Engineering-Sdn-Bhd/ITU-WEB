@@ -12,16 +12,32 @@ services:
     # postgres:18+ images store data directly under /var/lib/postgresql (not .../data) —
     # see https://github.com/docker-library/postgres/pull/1259.
     volumes: ['db-data:/var/lib/postgresql']
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U payload -d payload']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
-  app:
+  migrate:
     build: .
-    ports: ['3000:3000']
-    environment:
+    environment: &app-env
       DATABASE_URI: postgresql://payload:payload@db:5432/payload # container-to-container: still 5432
       DATABASE_POOL_MAX: 10
       PAYLOAD_SECRET: ${PAYLOAD_SECRET:-dev-secret-change-me}
       SERVER_URL: http://localhost:3000
-    depends_on: [db]
+    command: ['npx', 'payload', 'migrate']
+    depends_on:
+      db:
+        condition: service_healthy
+
+  app:
+    build: .
+    ports: ['127.0.0.1:3000:3000']
+    environment: *app-env
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
 
 volumes:
   db-data:

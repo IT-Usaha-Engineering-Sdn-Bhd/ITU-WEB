@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
 import { Reveal } from '@/components/Reveal'
 import type { Landing } from '@/payload-types'
+import { ModelStage } from '@/components/ModelStage'
 
 export function WhoWeAre({ data }: { data: Landing['whoWeAre'] }) {
   return (
@@ -25,11 +26,8 @@ export function WhoWeAre({ data }: { data: Landing['whoWeAre'] }) {
             <ArrowUpRight size={20} />
           </Link>
         </Reveal>
-        <div
-          id="building-viewport"
-          className="building-viewport"
-          aria-label="Data centre architectural model"
-        >
+        <div className="building-viewport" aria-label="Data centre architectural model">
+          <ModelStage id="homepage-campus" title={data.modelCaptionTitle} compact />
           <div className="model-caption">
             <span>{data.modelCaptionTitle}</span>
             <span>{data.modelCaptionSubtitle}</span>

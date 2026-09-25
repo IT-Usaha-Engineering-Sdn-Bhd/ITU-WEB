@@ -1,3 +1,4 @@
+import { HighlightedHeading } from '@/components/HighlightedHeading'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getProjectsPage } from '@/lib/inner-pages'
@@ -39,8 +40,7 @@ export default async function ProjectsPage({
       <section className="section-shell inner-hero">
         <p className="eyebrow">{data.eyebrow}</p>
         <h1 className="section-heading">
-          {data.heading.split(data.highlight)[0]}
-          <span className="text-accent">{data.highlight}</span>
+          <HighlightedHeading text={data.heading} highlight={data.highlight} />
         </h1>
       </section>
       <HeroBanner

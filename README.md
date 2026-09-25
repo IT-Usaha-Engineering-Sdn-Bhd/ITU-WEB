@@ -8,12 +8,56 @@ Google Cloud Storage.
 
 ```bash
 bun install
-cp .env.example .env   # fill in DATABASE_URI + PAYLOAD_SECRET
+cp .env.example .env   # set DATABASE_URI + a non-empty PAYLOAD_SECRET
+# Bring up Postgres (see Local Docker), then:
+bun run migrate
+bun run seed && bun run seed:pages   # optional, first run
 bun dev
 ```
 
 - `/` — homepage: R3F canvas, anime.js reveal, all copy and imagery editable in Payload
 - `/admin` — Payload admin (first run prompts you to create an admin user)
+
+Use the compose DB on port **5434** unless you already have a matching local Postgres role
+and database on **5432**. Leave `GCS_*` unset for local disk uploads unless you intentionally
+target non-production buckets (do not point a local `.env` at production buckets by accident).
+
+## Local Docker
+
+Two supported paths. Credentials `payload` / `payload` and the compose `PAYLOAD_SECRET`
+fallback `dev-secret-change-me` are **local-only** — production uses Secret Manager.
+
+| Port             | Role                                       |
+| ---------------- | ------------------------------------------ |
+| `5432`           | Native Postgres on the host (if installed) |
+| `127.0.0.1:5434` | Compose `db` (maps to container `5432`)    |
+| `5435`           | Cloud SQL Auth Proxy (see Deploy)          |
+| `127.0.0.1:3000` | Compose `app` (full-stack path)            |
+
+**Recommended — host app + compose DB**
+
+```bash
+bun run docker:up:db
+# .env: DATABASE_URI=postgresql://payload:payload@localhost:5434/payload
+bun run migrate
+bun run seed && bun run seed:pages   # optional
+bun dev
+```
+
+**Full stack — migrate then serve in Docker**
+
+```bash
+bun run docker:up
+# waits for a healthy DB, runs `payload migrate`, then starts the app on 127.0.0.1:3000
+```
+
+Compose `app` / `migrate` hardcode `DATABASE_URI` to `postgresql://payload:payload@db:5432/payload`
+(they do not use the host `.env` URI). They interpolate `PAYLOAD_SECRET` from the project
+`.env` when set. `GCS_*` is not passed into compose — uploads inside the container use local
+disk and are ephemeral.
+
+`bun run docker:down` removes containers and keeps the named volume `*-db-data`.  
+**Do not** run `docker compose down -v` unless you intend to wipe local CMS data.
 
 ## Structure
 
@@ -29,7 +73,8 @@ bun dev
 
 ## Env vars
 
-See `.env.example` for the full list.
+See `.env.example` for the full list and port / GCS guidance. For local work, set a real
+`PAYLOAD_SECRET` and prefer unset `GCS_BUCKET` / `GCS_RESUME_BUCKET` so media stays on disk.
 
 ## Editable content
 
@@ -104,7 +149,12 @@ inline SVG diagram until an image is uploaded.
 ## Deploy
 
 Docker image + Cloud Run, with migrations run as a separate Cloud Run Job (`payload migrate`
-doesn't run during `next build`). Locally: `docker compose up`.
+doesn't run during `next build`). For local bring-up, migrate, and `down` vs `down -v`, see
+**Local Docker** above.
+
+The image is multi-stage (`deps` → `builder` → `runner`). The final runner still includes
+`src/` and `template/backend` so the same Artifact Registry tag can run `next start`,
+`payload migrate`, and the seed script overrides used by Cloud Run jobs.
 
 The commands below set up the whole stack from scratch, and match what's actually deployed:
 project **`prod-web-itu`**, region **`asia-southeast1`**, Artifact Registry repo **`itu-web`**,

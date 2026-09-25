@@ -1,3 +1,4 @@
+import { HighlightedHeading } from '@/components/HighlightedHeading'
 import type { Metadata } from 'next'
 import { getAboutUs } from '@/lib/inner-pages'
 import { getSettings } from '@/lib/site-content'
@@ -17,8 +18,7 @@ export default async function AboutPage() {
       <section className="section-shell inner-hero">
         <p className="eyebrow">{data.heroEyebrow}</p>
         <h1 className="section-heading">
-          {data.headline.split(data.highlight)[0]}
-          <span className="text-accent">{data.highlight}</span>
+          <HighlightedHeading text={data.headline} highlight={data.highlight} />
         </h1>
       </section>
       <HeroBanner

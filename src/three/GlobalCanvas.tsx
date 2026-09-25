@@ -1,27 +1,26 @@
 'use client'
-import { Component, Suspense, useEffect, useLayoutEffect, useState, type ReactNode } from 'react'
+import {
+  Component,
+  Suspense,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react'
 import { createPortal } from 'react-dom'
-import Image from 'next/image'
-import { Canvas, useThree } from '@react-three/fiber'
-import { PerformanceMonitor } from '@react-three/drei'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { useGLTF } from '@react-three/drei'
 import { Bloom, EffectComposer, Vignette } from '@react-three/postprocessing'
-import { usePathname } from 'next/navigation'
-import { useStage } from './stage'
 import { useReducedMotion } from '@/lib/use-reduced-motion'
+import { useViewer } from './viewer-store'
+import { ModelScene } from './ModelScene'
 import { ServerRackLine } from './scenes/ServerRackLine'
 import { CompanyLogo } from './scenes/CompanyLogo'
-import { DataCentreScene } from './scenes/DataCentreScene'
-import { ProjectsBackdrop } from './scenes/ProjectsBackdrop'
-
-type Viewport = 'hero' | 'building' | 'projects'
-const VIEWPORT_IDS: Record<Viewport, string> = {
-  hero: 'hero-viewport',
-  building: 'building-viewport',
-  projects: 'projects-viewport',
-}
 
 class SceneBoundary extends Component<
-  { children: ReactNode; onFailure: () => void },
+  { children: ReactNode; failed: () => void; resetKey: string },
   { failed: boolean }
 > {
   state = { failed: false }
@@ -29,191 +28,131 @@ class SceneBoundary extends Component<
     return { failed: true }
   }
   componentDidCatch() {
-    this.props.onFailure()
+    this.props.failed()
+  }
+  componentDidUpdate(
+    previous: Readonly<{ children: ReactNode; failed: () => void; resetKey: string }>,
+  ) {
+    if (this.state.failed && previous.resetKey !== this.props.resetKey)
+      this.setState({ failed: false })
   }
   render() {
     return this.state.failed ? null : this.props.children
   }
 }
-function Ready({ onReady }: { onReady: () => void }) {
-  useEffect(() => {
-    onReady()
-  }, [onReady])
-  return null
-}
-function ContextHealth({ onFailure }: { onFailure: () => void }) {
+function Health({
+  ready,
+  failed,
+  downgrade,
+}: {
+  ready: () => void
+  failed: () => void
+  downgrade: () => void
+}) {
   const gl = useThree((state) => state.gl)
+  const drawn = useRef(false)
+  const slow = useRef(0)
   useEffect(() => {
     const canvas = gl.domElement
-    canvas.addEventListener('webglcontextlost', onFailure)
-    return () => canvas.removeEventListener('webglcontextlost', onFailure)
-  }, [gl, onFailure])
+    const lost = (event: Event) => {
+      event.preventDefault()
+      failed()
+    }
+    canvas.addEventListener('webglcontextlost', lost)
+    return () => canvas.removeEventListener('webglcontextlost', lost)
+  }, [gl, failed])
+  useFrame((_, delta) => {
+    if (!drawn.current) {
+      drawn.current = true
+      requestAnimationFrame(ready)
+    }
+    // Long idle gaps are not interaction frames.
+    slow.current = delta > 1 / 30 && delta < 0.25 ? slow.current + delta : 0
+    if (slow.current >= 3) {
+      downgrade()
+      slow.current = 0
+    }
+  })
   return null
 }
 export function GlobalCanvas() {
-  const { stage, sceneFailed, setSceneFailed, setSceneReady } = useStage()
-  const pathname = usePathname()
-  const reduced = useReducedMotion()
-  // One DOM node for the whole component's lifetime — it's relocated (intro overlay vs. the
-  // active viewport div) with plain DOM calls below, never unmounted and recreated, so the
-  // <Canvas> portaled into it keeps the same WebGL context across every section change.
-  const [container] = useState(() => {
-    const el = document.createElement('div')
-    el.setAttribute('aria-hidden', 'true')
-    return el
-  })
-  const [host, setHost] = useState<HTMLElement | null>(null)
-  const [active, setActive] = useState<Viewport | null>(null)
-  const [hadHost, setHadHost] = useState(false)
-  const [visible, setVisible] = useState(true)
-  const [lowQuality, setLowQuality] = useState(false)
-  useEffect(() => {
-    setLowQuality(window.innerWidth < 768 || navigator.hardwareConcurrency <= 4)
-    const visibility = () => setVisible(!document.hidden)
-    visibility()
-    document.addEventListener('visibilitychange', visibility)
-    return () => document.removeEventListener('visibilitychange', visibility)
-  }, [])
-  // The hero (3D logo) and Who We Are (data centre) sections share one Canvas, portaled into
-  // whichever of their viewport divs is currently more visible — this swaps only the
-  // Suspense child (CompanyLogo <-> DataCentreScene), it does not remount the Canvas.
-  useEffect(() => {
-    if (stage !== 'scroll' || pathname !== '/') return
-    const elements = (Object.keys(VIEWPORT_IDS) as Viewport[])
-      .map((key) => [key, document.getElementById(VIEWPORT_IDS[key])] as const)
-      .filter((entry): entry is [Viewport, HTMLElement] => !!entry[1])
-    if (!elements.length) return
-    const byElement = new Map<Element, Viewport>(elements.map(([key, element]) => [element, key]))
-    const ratios: Partial<Record<Viewport, number>> = {}
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          const key = byElement.get(entry.target)
-          if (key) ratios[key] = entry.isIntersecting ? entry.intersectionRatio : 0
-        }
-        let best: Viewport | null = null
-        for (const key of Object.keys(ratios) as Viewport[]) {
-          if ((ratios[key] ?? 0) > 0 && (!best || (ratios[key] ?? 0) > (ratios[best] ?? 0)))
-            best = key
-        }
-        setActive(best)
-        setHost(best ? elements.find(([key]) => key === best)![1] : null)
-      },
-      { threshold: [0, 0.25, 0.5, 0.75, 1] },
-    )
-    elements.forEach(([, element]) => observer.observe(element))
-    return () => {
-      observer.disconnect()
-      setActive(null)
-      setHost(null)
-    }
-  }, [stage, pathname])
-  const intro = stage === 'loading'
-  useEffect(() => {
-    if (host) setHadHost(true)
-  }, [host])
-  // Relocate the persistent container: the intro overlay lives directly on <body>; once
-  // scrolling starts it moves into whichever viewport div is currently active. When no
-  // viewport is active (briefly, between sections, or on a non-3D section) it's left parked
-  // in its last host rather than removed — removing it is what used to force a remount.
+  const request = useViewer()
+  const currentRequest = useRef(request)
   useLayoutEffect(() => {
-    if (pathname !== '/') return
-    if (intro) {
-      container.className = 'global-canvas is-intro'
-      if (container.parentElement !== document.body) document.body.appendChild(container)
-    } else if (host && container.parentElement !== host) {
-      container.className = 'absolute inset-0'
-      host.appendChild(container)
-    }
-  }, [intro, host, pathname, container])
-  useEffect(() => () => container.remove(), [container])
-  const trackingKey = intro ? 'loading' : active
-  // Monotonic: a viewport that has ever loaded stays loaded, since useGLTF caches the parsed
-  // model — a remount (e.g. scrolling away from the hero and back) never truly re-suspends, so
-  // its fallback poster shouldn't reappear each time the way a single "last loaded key" would.
-  const [everReady, setEveryReady] = useState<Set<string>>(() => new Set())
+    currentRequest.current = request
+  }, [request])
+  const reduced = useReducedMotion()
+  const [container] = useState(() => document.createElement('div'))
+  const [visible, setVisible] = useState(!document.hidden)
+  const [downgraded, setDowngraded] = useState(false)
+  const [loaded, setLoaded] = useState('')
+  const token = request ? `${request.key}:${request.url}:${request.reset}` : ''
+  const ready = useCallback(() => {
+    setLoaded(token)
+    request?.ready()
+  }, [token, request])
+  const failed = useCallback(() => {
+    const request = currentRequest.current
+    if (!request) return
+    // Evict rejected loader promises so an explicit Retry can fetch again.
+    // Clearing the loader entry does not dispose shared geometry or materials.
+    useGLTF.clear(request.url)
+    request.failed()
+  }, [])
+  const downgrade = useCallback(() => setDowngraded(true), [])
   useEffect(() => {
-    if (!trackingKey || everReady.has(trackingKey) || sceneFailed) return
-    const timer = setTimeout(() => setSceneFailed(true), 15000)
-    return () => clearTimeout(timer)
-  }, [trackingKey, everReady, sceneFailed, setSceneFailed])
-  if (pathname !== '/') return null
-  // Nothing to show yet: no intro overlay, and no viewport has ever activated (so the
-  // container has nowhere to live).
-  if (!intro && !hadHost) return null
-  const fallback =
-    active === 'hero' ? (
-      <div className="absolute inset-0" aria-hidden="true">
-        <Image
-          src="/assets/logo.png"
-          alt=""
-          fill
-          sizes="(min-width: 768px) 30vw, 60vw"
-          className="object-contain opacity-70"
-        />
-      </div>
-    ) : active === 'building' ? (
-      <div className="absolute inset-0" aria-hidden="true">
-        <Image
-          src="/models/data-centre/data-centre-preview.png"
-          alt=""
-          fill
-          sizes="(min-width: 768px) 45vw, 90vw"
-          className="object-contain opacity-80"
-        />
-      </div>
-    ) : null
-  const scene = sceneFailed ? (
-    fallback
-  ) : (
-    <SceneBoundary onFailure={() => setSceneFailed(true)}>
+    const change = () => setVisible(!document.hidden)
+    document.addEventListener('visibilitychange', change)
+    return () => document.removeEventListener('visibilitychange', change)
+  }, [])
+  useLayoutEffect(() => {
+    if (!request) return
+    container.className = 'shared-model-canvas'
+    request.host.appendChild(container)
+  }, [request, container])
+  useEffect(() => () => container.remove(), [container])
+  useEffect(() => {
+    if (!token || loaded === token || !visible) return
+    const timeout = setTimeout(failed, 12000)
+    return () => clearTimeout(timeout)
+  }, [token, loaded, failed, visible])
+  if (!request) return null
+  const logo = request.id === 'company-logo'
+  const rack = request.id === 'server-rack'
+  const high = request.quality === 'high' && !downgraded
+  return createPortal(
+    <SceneBoundary failed={failed} resetKey={token}>
       <Canvas
-        dpr={lowQuality ? 1 : [1, 2]}
+        dpr={high ? 1.5 : 1}
         frameloop={
-          !visible || (!intro && !active)
+          !visible || (request.ratio === 0 && loaded === token)
             ? 'never'
-            : active === 'hero' && !reduced
+            : logo && !reduced
               ? 'always'
               : 'demand'
         }
-        gl={{ antialias: !lowQuality, alpha: true, localClippingEnabled: true }}
-        shadows={!lowQuality}
-        fallback={fallback}
+        shadows={high}
+        gl={{ antialias: high, alpha: true, localClippingEnabled: true }}
+        fallback={<span className="sr-only">3D unavailable</span>}
       >
-        <ContextHealth onFailure={() => setSceneFailed(true)} />
         <Suspense fallback={null}>
-          {stage === 'loading' && <ServerRackLine reducedMotion={reduced} />}
-          {active === 'hero' && <CompanyLogo reducedMotion={reduced} />}
-          {active === 'building' && <DataCentreScene reducedMotion={reduced} />}
-          {active === 'projects' && <ProjectsBackdrop reducedMotion={reduced} />}
-          <Ready
-            onReady={() => {
-              if (trackingKey)
-                setEveryReady((prev) =>
-                  prev.has(trackingKey) ? prev : new Set(prev).add(trackingKey),
-                )
-              setSceneReady(true)
-            }}
-          />
+          {rack ? (
+            <ServerRackLine reducedMotion={reduced} />
+          ) : logo ? (
+            <CompanyLogo reducedMotion={reduced} />
+          ) : (
+            <ModelScene key={request.key} request={request} high={high} />
+          )}
+          <Health key={token} ready={ready} failed={failed} downgrade={downgrade} />
         </Suspense>
-        {/* multisampling: 0 here would silently cancel gl.antialias — the composer renders to
-          a non-multisampled target once mounted, regardless of the context's own setting. */}
-        {!lowQuality && (
+        {logo && high && (
           <EffectComposer multisampling={4}>
             <Bloom mipmapBlur intensity={0.22} luminanceThreshold={0.8} luminanceSmoothing={0.3} />
-            <Vignette eskil={false} offset={0.2} darkness={intro ? 0.65 : 0.2} />
+            <Vignette eskil={false} offset={0.2} darkness={0.2} />
           </EffectComposer>
         )}
-        <PerformanceMonitor onDecline={() => setLowQuality(true)} />
       </Canvas>
-    </SceneBoundary>
-  )
-  const showFallback = !sceneFailed && trackingKey !== null && !everReady.has(trackingKey)
-  return createPortal(
-    <>
-      {scene}
-      {showFallback && fallback}
-    </>,
+    </SceneBoundary>,
     container,
   )
 }

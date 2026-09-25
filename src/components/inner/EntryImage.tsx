@@ -40,6 +40,11 @@ export function EntryImage({
           fill
           sizes={KIND_SIZES[kind]}
           className="object-cover"
+          style={
+            typeof image === 'object' && image
+              ? { objectPosition: `${image.focalX ?? 50}% ${image.focalY ?? 50}%` }
+              : undefined
+          }
           priority={priority}
           loading={priority ? undefined : 'lazy'}
         />

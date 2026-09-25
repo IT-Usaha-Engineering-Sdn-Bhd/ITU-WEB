@@ -7,11 +7,13 @@ export function HeroBanner({
   label,
   kicker,
   wordmark,
+  priority = true,
 }: {
   image?: number | Media | null
   label: string
   kicker: string
   wordmark: string
+  priority?: boolean
 }) {
   const url = mediaUrl(image)
 
@@ -24,7 +26,12 @@ export function HeroBanner({
           fill
           sizes="100vw"
           className="object-cover"
-          priority
+          priority={priority}
+          style={
+            typeof image === 'object' && image
+              ? { objectPosition: `${image.focalX ?? 50}% ${image.focalY ?? 50}%` }
+              : undefined
+          }
         />
       ) : (
         <div

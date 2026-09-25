@@ -6,9 +6,10 @@ import type { ThreeEvent } from '@react-three/fiber'
 import { animate } from 'animejs'
 import { Group, Mesh, MeshStandardMaterial } from 'three'
 import { CameraRig } from '@/three/CameraRig'
+import { modelRegistry } from '@/three/model-registry'
 
 export function CompanyLogo({ reducedMotion }: { reducedMotion: boolean }) {
-  const { scene } = useGLTF('/models/logo/company-logo.glb')
+  const { scene } = useGLTF(modelRegistry['company-logo'].url)
   const group = useRef<Group>(null)
   const instance = useMemo(() => {
     const copy = scene.clone(true)

@@ -21,8 +21,8 @@ export function Reveal({
         if (!entry.isIntersecting) return
         animation = animate(el, {
           opacity: [0, 1],
-          translateY: [24, 0],
-          duration: 750,
+          translateY: [16, 0],
+          duration: 420,
           ease: 'outCubic',
         })
         observer.disconnect()

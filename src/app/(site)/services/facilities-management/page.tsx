@@ -1,3 +1,5 @@
+import { ModelStage } from '@/components/ModelStage'
+import { HighlightedHeading } from '@/components/HighlightedHeading'
 import type { Metadata } from 'next'
 import {
   ClipboardText,
@@ -31,24 +33,22 @@ export default async function FacilitiesManagementPage() {
   const [data, settings] = await Promise.all([getServiceFacilitiesManagement(), getSettings()])
 
   return (
-    <main id="main-content" className="inner-page">
+    <main id="main-content" className="inner-page service-page">
       <section className="section-shell inner-hero">
         <p className="eyebrow">{data.eyebrow}</p>
         <h1 className="section-heading">
-          {data.heading.split(data.highlight)[0]}
-          <span className="text-accent">{data.highlight}</span>
+          <HighlightedHeading text={data.heading} highlight={data.highlight} />
         </h1>
+        <p className="section-body service-intro">{data.intro}</p>
       </section>
+      <ModelStage id="facilities-management" title={data.bannerLabel} />
       <HeroBanner
+        priority={false}
         image={data.heroImage}
         label={data.bannerLabel}
         kicker={settings.heroBannerKicker}
         wordmark={settings.heroBannerWordmark}
       />
-
-      <section className="section-shell service-intro">
-        <p className="section-body">{data.intro}</p>
-      </section>
 
       <section className="section-shell">
         <SplitSection
@@ -56,7 +56,6 @@ export default async function FacilitiesManagementPage() {
           imageLabel={data.support.title}
           icon={ClockCountdown}
           reverse
-          priority
         >
           <h2 className="section-heading">{data.support.title}</h2>
           <p className="section-body">{data.support.body}</p>
