@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { CaretDown, ChatCircleDots, List, X } from '@phosphor-icons/react'
 import { useStage } from '@/three/stage'
 import { SoundToggle } from './SoundToggle'
+import { ThemeToggle } from './ThemeToggle'
 
 type NavLink = { label: string; href: string }
 
@@ -185,6 +186,7 @@ export function TopNav({
         </div>
         <div className="nav-actions">
           <SoundToggle />
+          <ThemeToggle />
           <Link href={contactCtaHref} className="button button-accent nav-contact">
             {contactCtaLabel}
             <ChatCircleDots size={18} />

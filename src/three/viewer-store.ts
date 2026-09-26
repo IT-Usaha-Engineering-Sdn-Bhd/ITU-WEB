@@ -16,6 +16,7 @@ export type ViewerRequest = {
   rotation: number
   reset: number
   drag: boolean
+  parallax?: boolean
   ready: () => void
   failed: () => void
 }

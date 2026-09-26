@@ -47,6 +47,7 @@ export function Scene() {
           rotation: 0,
           reset: 0,
           drag: false,
+          parallax: key === 'projects-viewport',
           ready: () => setSceneReady(true),
           failed: () => setSceneFailed(true),
         })

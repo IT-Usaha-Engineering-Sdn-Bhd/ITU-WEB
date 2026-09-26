@@ -1,4 +1,4 @@
-export type ServiceModelState = {
+type ServiceModelState = {
   'data-centre': 'all' | 'power' | 'cooling' | 'protection' | 'controls'
   'electrical-services': 'normal' | 'backup'
   'project-management': 'structure' | 'equipment' | 'coordination' | 'commissioning'
@@ -7,7 +7,7 @@ export type ServiceModelState = {
 }
 export type ServiceId = keyof ServiceModelState
 export type ModelId = ServiceId | 'server-rack' | 'company-logo' | 'homepage-campus'
-export type CameraPreset = {
+type CameraPreset = {
   position: [number, number, number]
   target: [number, number, number]
   span: number

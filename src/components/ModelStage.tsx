@@ -27,7 +27,6 @@ export function ModelStage({
   const [ratio, setRatio] = useState(0)
   const [rotation, setRotation] = useState(0)
   const [reset, setReset] = useState(0)
-  const [drag, setDrag] = useState(false)
   const [touch, setTouch] = useState(true)
   const ready = useCallback(() => setMode('ready'), [])
   const failed = useCallback(() => {
@@ -43,12 +42,18 @@ export function ModelStage({
         ? model.mobileUrl
         : model.url,
     )
-    setTouch(window.matchMedia('(pointer: coarse)').matches)
     if (quality !== 'constrained') {
       setEnabled(true)
       setMode('loading')
     }
   }, [model])
+  useEffect(() => {
+    const query = window.matchMedia('(hover: hover) and (pointer: fine)')
+    const update = () => setTouch(!query.matches)
+    update()
+    query.addEventListener('change', update)
+    return () => query.removeEventListener('change', update)
+  }, [])
   useEffect(() => {
     if (!host.current) return
     const proximity = new IntersectionObserver(([entry]) => setNear(entry.isIntersecting), {
@@ -79,27 +84,12 @@ export function ModelStage({
       quality: policy,
       rotation,
       reset,
-      drag: !touch || drag,
+      drag: !touch,
       ready,
       failed,
     })
     return () => removeViewer(key)
-  }, [
-    key,
-    id,
-    state,
-    url,
-    near,
-    ratio,
-    enabled,
-    policy,
-    rotation,
-    reset,
-    drag,
-    touch,
-    ready,
-    failed,
-  ])
+  }, [key, id, state, url, near, ratio, enabled, policy, rotation, reset, touch, ready, failed])
   const load = () => {
     setMode('loading')
     setEnabled(true)
@@ -117,8 +107,8 @@ export function ModelStage({
           ref={host}
           className="model-stage-canvas"
           style={{
-            pointerEvents: touch && !drag ? 'none' : 'auto',
-            touchAction: touch && !drag ? 'pan-y' : 'none',
+            pointerEvents: touch ? 'none' : 'auto',
+            touchAction: touch ? 'pan-y' : 'none',
           }}
           aria-hidden="true"
         />
@@ -155,53 +145,51 @@ export function ModelStage({
         <p className="model-description" aria-live="polite">
           {selected?.description ?? 'Campus overview.'}
         </p>
-        <div className="model-view-buttons" role="group" aria-label="Model view">
-          <button
-            type="button"
-            disabled={!enabled}
-            onClick={() => setRotation((value) => Math.max(-1.1, value - 0.2))}
-          >
-            Rotate left
-          </button>
-          <button
-            type="button"
-            disabled={!enabled}
-            onClick={() => setRotation((value) => Math.min(1.1, value + 0.2))}
-          >
-            Rotate right
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setRotation(0)
-              setReset((value) => value + 1)
-              setDrag(false)
-            }}
-          >
-            Reset view
-          </button>
-          {enabled ? (
+        {touch && (
+          <div className="model-view-buttons" role="group" aria-label="Model view">
+            <button
+              type="button"
+              disabled={!enabled}
+              onClick={() => setRotation((value) => Math.max(-1.1, value - 0.2))}
+            >
+              Rotate left
+            </button>
+            <button
+              type="button"
+              disabled={!enabled}
+              onClick={() => setRotation((value) => Math.min(1.1, value + 0.2))}
+            >
+              Rotate right
+            </button>
             <button
               type="button"
               onClick={() => {
-                setEnabled(false)
-                setMode('image')
-                setDrag(false)
+                setRotation(0)
+                setReset((value) => value + 1)
               }}
             >
-              View image
+              Reset view
             </button>
-          ) : (
+            {enabled && (
+              <button
+                type="button"
+                onClick={() => {
+                  setEnabled(false)
+                  setMode('image')
+                }}
+              >
+                View image
+              </button>
+            )}
+          </div>
+        )}
+        {!enabled && (
+          <div className="model-load-actions">
             <button type="button" onClick={load}>
               {mode === 'error' ? 'Retry 3D' : 'Load 3D'}
             </button>
-          )}
-          {touch && enabled && (
-            <button type="button" aria-pressed={drag} onClick={() => setDrag((value) => !value)}>
-              {drag ? 'Done rotating' : 'Rotate model'}
-            </button>
-          )}
-        </div>
+          </div>
+        )}
         <p className="model-status" role="status">
           {mode === 'error'
             ? '3D is unavailable. The selected image is shown.'
@@ -211,7 +199,6 @@ export function ModelStage({
                 ? 'Image view'
                 : 'Interactive view'}
         </p>
-        <p className="model-disclaimer">Illustrative scene.</p>
       </div>
     </section>
   )

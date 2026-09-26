@@ -12,7 +12,6 @@
   --nav-height: 88px;
   --line: rgb(243 238 228 / 0.15);
   --copy: #b8b5af;
-  color-scheme: dark;
 }
 html {
   scroll-padding-top: var(--nav-height);
@@ -1340,7 +1339,7 @@ section:focus {
   padding: clamp(50px, 7vw, 100px) clamp(20px, 5vw, 80px);
 }
 .about-principles article:first-child {
-  border-right: 1px solid #04040430;
+  border-right: 1px solid var(--border);
   padding-left: 0;
 }
 .about-principles h2,
@@ -1660,7 +1659,7 @@ section:focus {
 .position-select-panel button:hover,
 .position-select-panel button:focus {
   color: var(--accent-ink, #914508);
-  background: #ece9e2;
+  background: var(--surface-alt);
 }
 .position-select-panel [aria-selected='true'] {
   color: var(--accent-ink, #914508);
@@ -1690,7 +1689,7 @@ section:focus {
 .contact-form-panel .button {
   justify-self: start;
 }
-.legal-page > h1 {
+.legal-content > h1 {
   margin-bottom: clamp(60px, 8vw, 110px);
 }
 .legal-grid {
@@ -1755,7 +1754,7 @@ section:focus {
   }
   .about-principles article:first-child {
     border-right: 0;
-    border-bottom: 1px solid #04040430;
+    border-bottom: 1px solid var(--border);
   }
   .about-principles article {
     padding-inline: 0;
@@ -2366,8 +2365,40 @@ section:focus {
   }
 }
 
-/* Public surface system. The original base/bone tokens retain their meanings. */
-[data-theme='light'],
+/* Global mode owns public colors; graphite stages retain explicit local scopes. */
+html,
+html[data-mode='light'],
+[data-theme='light'] {
+  --surface: #f6f4ef;
+  --surface-raised: #fff;
+  --surface-alt: #ece9e2;
+  --text: #202421;
+  --text-muted: #555b57;
+  --border: #d3d5ce;
+  --accent-ink: #914508;
+  --error-ink: #a12820;
+  --success-ink: #28613b;
+  color-scheme: light;
+}
+html[data-mode='dark'],
+[data-theme='dark'],
+.intro-screen,
+.hero-section,
+.projects-section,
+.site-footer,
+.building-viewport {
+  --surface: #202629;
+  --surface-raised: #2b3337;
+  --surface-alt: #252d31;
+  --text: #f3eee4;
+  --text-muted: #bcc2c2;
+  --border: #465056;
+  --accent-ink: #eb8c24;
+  --error-ink: #ffa095;
+  --success-ink: #9bd7ad;
+  color-scheme: dark;
+}
+[data-theme],
 .inner-page,
 .site-header,
 .who-section,
@@ -2375,31 +2406,11 @@ section:focus {
 .services-section,
 .why-section,
 .certs-section,
-.clients-section {
-  --surface: #f6f4ef;
-  --surface-raised: #fff;
-  --text: #202421;
-  --text-muted: #555b57;
-  --border: #d3d5ce;
-  --accent-ink: #914508;
-  --copy: var(--text-muted);
-  --line: var(--border);
-  color-scheme: light;
-  color: var(--text);
-  background: var(--surface);
-}
-[data-theme='dark'],
+.clients-section,
 .site-footer,
 .building-viewport {
-  --surface: #202629;
-  --surface-raised: #2b3337;
-  --text: #f3eee4;
-  --text-muted: #bcc2c2;
-  --border: #465056;
-  --accent-ink: #eb8c24;
   --copy: var(--text-muted);
   --line: var(--border);
-  color-scheme: dark;
   color: var(--text);
   background: var(--surface);
 }
@@ -2458,8 +2469,8 @@ section:focus {
   color: var(--text, #f3eee4);
 }
 .site-header {
-  background: #f6f4ef;
-  border-bottom: 1px solid #d3d5ce;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
   backdrop-filter: none;
 }
 .nav-shell {
@@ -2476,23 +2487,23 @@ section:focus {
   width: 360px;
 }
 .dropdown-panel ul {
-  background: #fff;
-  color: #202421;
-  border-color: #d3d5ce;
+  background: var(--surface-raised);
+  color: var(--text);
+  border-color: var(--border);
   box-shadow: 0 12px 24px #20242118;
 }
 .dropdown-panel a:hover {
-  color: #914508;
-  background: #ece9e2;
+  color: var(--accent-ink);
+  background: var(--surface-alt);
 }
 .mobile-navigation {
-  background: #f6f4ef;
-  color: #202421;
+  background: var(--surface);
+  color: var(--text);
   max-height: calc(100dvh - var(--nav-height));
   overflow-y: auto;
 }
 .mobile-navigation details {
-  color: #202421;
+  color: var(--text);
 }
 .inner-page {
   padding-top: var(--nav-height);
@@ -2533,7 +2544,7 @@ section:focus {
 .inner-page .project-info dt,
 .inner-page .legal-grid aside p,
 .inner-page .vacancy-section h4 {
-  color: #914508;
+  color: var(--accent-ink);
 }
 .service-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2554,7 +2565,7 @@ section:focus {
   line-height: 1.25;
 }
 .inner-page .tab-pill:hover {
-  color: #914508;
+  color: var(--accent-ink);
 }
 .tabs-scroller {
   scrollbar-width: auto;
@@ -2566,16 +2577,17 @@ section:focus {
 .facts-section,
 .clients-section,
 .about-principles {
-  --surface: #ece9e2;
-  background: var(--surface);
+  background: var(--surface-alt);
+}
+.about-principles {
+  color: var(--text);
 }
 .certs-section {
-  --surface: #fff;
-  background: var(--surface);
+  background: var(--surface-raised);
 }
 .fact-number {
   font-variant-numeric: tabular-nums;
-  color: #914508;
+  color: var(--accent-ink);
 }
 .services-intro .section-heading,
 .projects-copy .section-heading {
@@ -2594,10 +2606,10 @@ section:focus {
 .service-tagline,
 .service-number,
 .cert-copy h3 {
-  color: #914508;
+  color: var(--accent-ink);
 }
 .carousel-track > span {
-  background: #d3d5ce;
+  background: var(--border);
 }
 .carousel-track > .is-active {
   background: #eb8c24;
@@ -2612,7 +2624,7 @@ section:focus {
 }
 .why-icon {
   margin-inline: 0;
-  color: #914508;
+  color: var(--accent-ink);
 }
 .why-card h3 {
   font-size: 28px;
@@ -2621,7 +2633,7 @@ section:focus {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .client-placeholder {
-  color: #555b57;
+  color: var(--text-muted);
 }
 .building-viewport {
   min-height: 420px;
@@ -2637,9 +2649,9 @@ section:focus {
 }
 .contact-form,
 .career-form {
-  background: #fff;
+  background: var(--surface-raised);
   padding: 32px;
-  border: 1px solid #d3d5ce;
+  border: 1px solid var(--border);
   border-radius: 8px;
 }
 .inner-page input:not([type='checkbox']):not([type='radio']),
@@ -2647,9 +2659,9 @@ section:focus {
 .inner-page textarea {
   min-height: 52px;
   font-size: 16px;
-  background: #fff;
-  color: #202421;
-  border: 1px solid #d3d5ce;
+  background: var(--surface-raised);
+  color: var(--text);
+  border: 1px solid var(--border);
   border-radius: 4px;
 }
 .inner-page textarea {
@@ -2657,10 +2669,10 @@ section:focus {
 }
 .inner-page input::placeholder,
 .inner-page textarea::placeholder {
-  color: #555b57;
+  color: var(--text-muted);
 }
 .field-error {
-  color: #a12820;
+  color: var(--error-ink);
 }
 .vacancy-panel {
   transition-duration: 220ms;
@@ -2852,8 +2864,7 @@ section:focus {
   min-height: 80px;
   padding-block: 16px;
 }
-.model-status,
-.model-disclaimer {
+.model-status {
   font-size: 14px;
   line-height: 1.5;
   color: #bcc2c2;
@@ -2924,8 +2935,8 @@ section:focus {
   }
 }
 .contact-form-panel {
-  background: #fff;
-  border-color: #d3d5ce;
+  background: var(--surface-raised);
+  border-color: var(--border);
   border-radius: 8px;
   padding: 32px;
 }
@@ -2933,14 +2944,14 @@ section:focus {
 .contact-form-panel .form-field > span[aria-hidden],
 .contact-details li svg,
 .milestone-year {
-  color: #914508;
+  color: var(--accent-ink);
 }
 .contact-form-panel .field-error,
 .form-error {
-  color: #a12820;
+  color: var(--error-ink);
 }
 .form-success {
-  color: #28613b;
+  color: var(--success-ink);
 }
 .contact-grid,
 .about-background {
@@ -2948,7 +2959,7 @@ section:focus {
   gap: 48px;
 }
 .service-page > .section-shell:nth-of-type(4) {
-  background: #ece9e2;
+  background: var(--surface-alt);
 }
 .error-actions {
   display: flex;
@@ -2987,5 +2998,26 @@ section:focus {
   .service-grid,
   .service-grid--compact {
     grid-template-columns: 1fr;
+  }
+}
+
+.site-header .icon-button {
+  border-color: var(--border);
+}
+.model-load-actions {
+  margin-top: 8px;
+}
+@media (max-width: 359px) {
+  .nav-actions {
+    gap: 4px;
+  }
+  .brand {
+    gap: 6px;
+  }
+  .brand-name {
+    font-size: 0.75rem;
+  }
+  .brand-name > span {
+    font-size: 0.45rem;
   }
 }

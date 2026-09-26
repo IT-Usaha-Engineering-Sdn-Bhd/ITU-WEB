@@ -18,6 +18,7 @@ import { useViewer } from './viewer-store'
 import { ModelScene } from './ModelScene'
 import { ServerRackLine } from './scenes/ServerRackLine'
 import { CompanyLogo } from './scenes/CompanyLogo'
+import { renderPolicy } from './render-policy'
 
 class SceneBoundary extends Component<
   { children: ReactNode; failed: () => void; resetKey: string },
@@ -112,27 +113,32 @@ export function GlobalCanvas() {
   }, [request, container])
   useEffect(() => () => container.remove(), [container])
   useEffect(() => {
-    if (!token || loaded === token || !visible) return
+    if (!token || loaded === token || !visible || !request?.ratio) return
     const timeout = setTimeout(failed, 12000)
     return () => clearTimeout(timeout)
-  }, [token, loaded, failed, visible])
+  }, [token, loaded, failed, visible, request?.ratio])
   if (!request) return null
   const logo = request.id === 'company-logo'
   const rack = request.id === 'server-rack'
-  const high = request.quality === 'high' && !downgraded
+  const { high, dpr, frameloop } = renderPolicy(
+    request.quality,
+    downgraded,
+    visible,
+    request.ratio,
+    reduced,
+  )
   return createPortal(
     <SceneBoundary failed={failed} resetKey={token}>
       <Canvas
-        dpr={high ? 1.5 : 1}
-        frameloop={
-          !visible || (request.ratio === 0 && loaded === token)
-            ? 'never'
-            : logo && !reduced
-              ? 'always'
-              : 'demand'
-        }
+        dpr={dpr}
+        frameloop={frameloop}
         shadows={high}
-        gl={{ antialias: high, alpha: true, localClippingEnabled: true }}
+        gl={{
+          antialias: true,
+          powerPreference: 'high-performance',
+          alpha: true,
+          localClippingEnabled: true,
+        }}
         fallback={<span className="sr-only">3D unavailable</span>}
       >
         <Suspense fallback={null}>
@@ -141,7 +147,7 @@ export function GlobalCanvas() {
           ) : logo ? (
             <CompanyLogo reducedMotion={reduced} />
           ) : (
-            <ModelScene key={request.key} request={request} high={high} />
+            <ModelScene key={request.key} request={request} high={high} reducedMotion={reduced} />
           )}
           <Health key={token} ready={ready} failed={failed} downgrade={downgrade} />
         </Suspense>

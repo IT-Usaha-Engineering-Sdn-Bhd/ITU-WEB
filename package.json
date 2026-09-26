@@ -15,6 +15,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
+    "test": "bun test",
     "knip": "knip",
     "payload": "payload",
     "migrate": "payload migrate",

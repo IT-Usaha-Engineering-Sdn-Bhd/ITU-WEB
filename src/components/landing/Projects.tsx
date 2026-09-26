@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { CaretRight } from '@phosphor-icons/react/dist/ssr'
+import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr'
 import { Reveal } from '@/components/Reveal'
 import { mediaAlt, mediaUrl } from '@/lib/media'
 import type { Landing } from '@/payload-types'
@@ -28,7 +28,7 @@ export function Projects({ data }: { data: Landing['projects'] }) {
         <p className="section-body">{data.body}</p>
         <Link href={data.ctaHref} className="button button-accent">
           {data.ctaLabel}
-          <CaretRight size={20} />
+          <ArrowUpRight size={20} />
         </Link>
       </Reveal>
     </section>

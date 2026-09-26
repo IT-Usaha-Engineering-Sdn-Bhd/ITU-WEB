@@ -7,6 +7,7 @@ import { TopNav } from '@/components/TopNav'
 import { Footer } from '@/components/Footer'
 import { getSettings } from '@/lib/site-content'
 import { mediaUrl } from '@/lib/media'
+import { themeInitializer } from '@/lib/theme'
 
 const spectral = Spectral({
   subsets: ['latin'],
@@ -59,7 +60,10 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   }
 
   return (
-    <html lang="en" className={`${spectral.variable} ${karla.variable}`}>
+    <html lang="en" className={`${spectral.variable} ${karla.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitializer }} />
+      </head>
       <body className="bg-base text-bone">
         <script
           type="application/ld+json"

@@ -1,16 +1,18 @@
 'use client'
 import { useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import type { ThreeEvent } from '@react-three/fiber'
 import { animate } from 'animejs'
 import { Group, Mesh, MeshStandardMaterial } from 'three'
 import { CameraRig } from '@/three/CameraRig'
 import { modelRegistry } from '@/three/model-registry'
+import { SceneFloat } from '../SceneFloat'
 
 export function CompanyLogo({ reducedMotion }: { reducedMotion: boolean }) {
   const { scene } = useGLTF(modelRegistry['company-logo'].url)
   const group = useRef<Group>(null)
+  const invalidate = useThree((state) => state.invalidate)
   const instance = useMemo(() => {
     const copy = scene.clone(true)
     copy.traverse((object) => {
@@ -40,7 +42,12 @@ export function CompanyLogo({ reducedMotion }: { reducedMotion: boolean }) {
   // paint at the group's default scale (1) before snapping down to .7 — a visible pop on
   // every remount (this scene unmounts/remounts each time the hero viewport re-activates).
   useLayoutEffect(() => {
-    if (!group.current || reducedMotion) return
+    if (!group.current) return
+    if (reducedMotion) {
+      group.current.scale.setScalar(1)
+      invalidate()
+      return
+    }
     group.current.scale.setScalar(0.7)
     const animation = animate(group.current.scale, {
       x: [0.7, 1],
@@ -52,7 +59,7 @@ export function CompanyLogo({ reducedMotion }: { reducedMotion: boolean }) {
     return () => {
       animation.revert()
     }
-  }, [reducedMotion])
+  }, [reducedMotion, invalidate])
   // Drag rotates the logo directly; releasing springs the drag offset back to zero (same
   // stiffness/damping pattern as the projects backdrop's pointer parallax) and the idle sway
   // resumes riding on top of it.
@@ -77,7 +84,7 @@ export function CompanyLogo({ reducedMotion }: { reducedMotion: boolean }) {
   )
 
   const onPointerDown = (event: ThreeEvent<PointerEvent>) => {
-    if (reducedMotion || dragging.current) return
+    if (dragging.current) return
     event.stopPropagation()
     dragging.current = true
     moveHandler.current = (moveEvent) => {
@@ -89,9 +96,11 @@ export function CompanyLogo({ reducedMotion }: { reducedMotion: boolean }) {
         -0.6,
         Math.min(0.6, dragOffset.current.x + moveEvent.movementY * 0.006),
       )
+      invalidate()
     }
     upHandler.current = () => {
       dragging.current = false
+      invalidate()
       if (moveHandler.current) window.removeEventListener('pointermove', moveHandler.current)
       if (upHandler.current) {
         window.removeEventListener('pointerup', upHandler.current)
@@ -105,7 +114,7 @@ export function CompanyLogo({ reducedMotion }: { reducedMotion: boolean }) {
 
   useFrame(({ clock }, delta) => {
     if (!group.current) return
-    if (!dragging.current) {
+    if (!dragging.current && !reducedMotion) {
       const step = Math.min(delta, 1 / 30)
       dragVelocity.current.x += (0 - dragOffset.current.x) * DRAG_STIFFNESS * step
       dragVelocity.current.x *= Math.max(0, 1 - DRAG_DAMPING * step)
@@ -124,9 +133,11 @@ export function CompanyLogo({ reducedMotion }: { reducedMotion: boolean }) {
       <ambientLight intensity={0.4} />
       <directionalLight position={[3, 4, 5]} intensity={1.1} />
       <directionalLight position={[-3, 1, 2]} intensity={0.7} color="#ffffff" />
-      <group ref={group} position={[0, 0.75, 0]} onPointerDown={onPointerDown}>
-        <primitive object={instance} dispose={null} />
-      </group>
+      <SceneFloat reducedMotion={reducedMotion} radius={2}>
+        <group ref={group} position={[0, 0.75, 0]} onPointerDown={onPointerDown}>
+          <primitive object={instance} dispose={null} />
+        </group>
+      </SceneFloat>
     </>
   )
 }
